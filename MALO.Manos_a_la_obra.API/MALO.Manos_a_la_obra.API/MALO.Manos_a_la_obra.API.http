@@ -1,0 +1,6 @@
+@MALO.Manos_a_la_obra.API_HostAddress = http://localhost:5167
+
+GET {{MALO.Manos_a_la_obra.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

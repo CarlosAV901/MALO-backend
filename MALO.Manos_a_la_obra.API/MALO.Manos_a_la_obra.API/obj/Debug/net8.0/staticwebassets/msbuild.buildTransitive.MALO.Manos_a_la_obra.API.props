@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\MALO.Manos_a_la_obra.API.props" />
+</Project>
