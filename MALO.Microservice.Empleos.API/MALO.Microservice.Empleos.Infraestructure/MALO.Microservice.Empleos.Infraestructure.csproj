@@ -20,8 +20,7 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataContexts\" />
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\MALO.Microservice.Empleo.Aplication\MALO.Microservice.Empleos.Aplication.csproj" />
   </ItemGroup>
 
 </Project>

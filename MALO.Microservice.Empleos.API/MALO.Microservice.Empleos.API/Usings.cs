@@ -1,6 +1,2 @@
-﻿namespace MALO.Microservice.Empleos.API
-{
-    public class Usings
-    {
-    }
-}
+﻿global using MALO.Microservice.Empleos.Aplication.Interfaces.Controllers;
+global using Microsoft.AspNetCore.Mvc;

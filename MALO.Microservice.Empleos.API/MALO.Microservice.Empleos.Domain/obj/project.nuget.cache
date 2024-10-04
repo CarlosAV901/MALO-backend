@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2IKHNCJFOdk=",
+  "dgSpecHash": "NsLohOHl4BU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\aguiv\\source\\repos\\MALO.Microservice.Empleos.API\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj",
+  "projectFilePath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.API\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aguiv\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\aguiv\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Empleos.API", "MALO.Microservice.Empleos.API\MALO.Microservice.Empleos.API.csproj", "{30CB8D5B-E25B-4D81-B483-82D54DD42CC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empleos.API", "MALO.Microservice.Empleos.API\MALO.Microservice.Empleos.API.csproj", "{30CB8D5B-E25B-4D81-B483-82D54DD42CC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Empleo.Aplication", "MALO.Microservice.Empleo.Aplication\MALO.Microservice.Empleo.Aplication.csproj", "{37C1DFC4-E8A8-4A21-AF3B-20E17D3BCA56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empleos.Aplication", "MALO.Microservice.Empleo.Aplication\MALO.Microservice.Empleos.Aplication.csproj", "{37C1DFC4-E8A8-4A21-AF3B-20E17D3BCA56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Empleos.Domain", "MALO.Microservice.Empleos.Domain\MALO.Microservice.Empleos.Domain.csproj", "{20B71477-94CF-4A21-A5A9-2B319C922C42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empleos.Domain", "MALO.Microservice.Empleos.Domain\MALO.Microservice.Empleos.Domain.csproj", "{20B71477-94CF-4A21-A5A9-2B319C922C42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Empleos.Infraestructure", "MALO.Microservice.Empleos.Infraestructure\MALO.Microservice.Empleos.Infraestructure.csproj", "{C136ED01-B50B-4636-9ECD-0C41EDE74B62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empleos.Infraestructure", "MALO.Microservice.Empleos.Infraestructure\MALO.Microservice.Empleos.Infraestructure.csproj", "{C136ED01-B50B-4636-9ECD-0C41EDE74B62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

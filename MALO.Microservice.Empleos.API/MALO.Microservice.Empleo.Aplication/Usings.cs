@@ -1,12 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿global using MALO.Microservice.Empleos.Domain.Interfaces;
+global using MALO.Microservice.Empleos.Domain.Interfaces.Services;
 
-namespace MALO.Microservice.Empleo.Aplication
-{
-    internal class Usings
-    {
-    }
-}

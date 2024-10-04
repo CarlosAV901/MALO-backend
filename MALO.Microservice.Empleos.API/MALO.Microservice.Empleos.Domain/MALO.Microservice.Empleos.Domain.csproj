@@ -13,12 +13,12 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Aggregates\" />
     <Folder Include="Constants\" />
-    <Folder Include="DTOs\" />
+    <Folder Include="DTOs\InformacionPersonal\" />
+    <Folder Include="DTOs\Habilidad\" />
+    <Folder Include="DTOs\UsuarioHabilidades\" />
+    <Folder Include="DTOs\Rol\" />
     <Folder Include="Enums\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="ValueObjects\" />
     <Folder Include="Updated\" />
   </ItemGroup>
 
