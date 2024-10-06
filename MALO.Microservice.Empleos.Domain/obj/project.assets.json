@@ -5280,11 +5280,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.API\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj",
       "projectName": "MALO.Microservice.Empleos.Domain",
-      "projectPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.API\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj",
+      "projectPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj",
       "packagesPath": "C:\\Users\\aguiv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.API\\MALO.Microservice.Empleos.Domain\\obj\\",
+      "outputPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\aguiv\\AppData\\Roaming\\NuGet\\NuGet.Config",

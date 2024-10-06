@@ -5334,11 +5334,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.API\\MALO.Microservice.Empleo.Aplication\\MALO.Microservice.Empleos.Aplication.csproj",
+      "projectUniqueName": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleo.Aplication\\MALO.Microservice.Empleos.Aplication.csproj",
       "projectName": "MALO.Microservice.Empleos.Aplication",
-      "projectPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.API\\MALO.Microservice.Empleo.Aplication\\MALO.Microservice.Empleos.Aplication.csproj",
+      "projectPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleo.Aplication\\MALO.Microservice.Empleos.Aplication.csproj",
       "packagesPath": "C:\\Users\\aguiv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.API\\MALO.Microservice.Empleo.Aplication\\obj\\",
+      "outputPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleo.Aplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\aguiv\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5356,8 +5356,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.API\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj": {
-              "projectPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.API\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj"
+            "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj": {
+              "projectPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj"
             }
           }
         }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bFSmRE5FGGg=",
+  "dgSpecHash": "64U1QxO53Ic=",
   "success": true,
-  "projectFilePath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.API\\MALO.Microservice.Empleos.Infraestructure\\MALO.Microservice.Empleos.Infraestructure.csproj",
+  "projectFilePath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.Infraestructure\\MALO.Microservice.Empleos.Infraestructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aguiv\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\aguiv\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
