@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "OLjFjCo+WOE2OVDFJXfjanUkcDCMpqwjKFUlEwytozM=",
+  "Source": "MALO.Microservice.Empleos.API",
+  "BasePath": "_content/MALO.Microservice.Empleos.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
