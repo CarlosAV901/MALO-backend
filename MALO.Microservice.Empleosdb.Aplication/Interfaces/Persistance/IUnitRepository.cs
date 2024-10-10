@@ -10,5 +10,6 @@ namespace MALO.Microservice.Empleosdb.Aplication.Interfaces.Persistance
         bool HasChanges();
 
         IEmpleoInfraestructure empleoInfraestructure { get; }
+        IMultimediaInfraestructure multimediaInfraestructure { get; }
     }
 }

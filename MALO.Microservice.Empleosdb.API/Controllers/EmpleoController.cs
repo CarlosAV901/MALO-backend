@@ -6,9 +6,6 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
     [Route("api/[controller]")]
     public class EmpleoController : ApiController
     {
-        /// <summary>
-        /// Constructor
-        /// </summary>
         /// <param name="appController"></param>
         public EmpleoController(IApiController appController) : base(appController)
         {
@@ -30,6 +27,11 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
         /// <response code="200">string</response>  
         /// <response code="400">string</response> 
         /// <response code="500">string</response> 
+        /// 
+
+        ///
+        ///------- CONSULTAS EMPLEOS
+        ///
         [HttpGet("GetEmpleos")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
@@ -41,7 +43,7 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
             return Ok(await _appController.EmpleoPresenter.GetEmpleos());
         }
 
-        [HttpGet("GetEmpleoId")]
+        [HttpGet("GetEmpleoById")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
@@ -52,7 +54,7 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
             return Ok(await _appController.EmpleoPresenter.GetEmpleoId(empleoId));
         }
 
-        [HttpGet("PostEmpleo")]
+        [HttpPost("PostEmpleo")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
@@ -68,7 +70,7 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
             ));
         }
 
-        [HttpGet("UpdateEmpleoId")]
+        [HttpPost("UpdateEmpleoById")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
@@ -85,7 +87,7 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
             ));
         }
 
-        [HttpGet("DeleteEmpleoId")]
+        [HttpGet("DeleteEmpleoById")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
@@ -95,5 +97,72 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
         {
             return Ok(await _appController.EmpleoPresenter.DeleteEmpleoId(empleoId));
         }
+
+        /// 
+        /// -------------- CONSULTAS MULTIMEDIA
+        /// 
+        [HttpGet("GetMultimedia")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async ValueTask<IActionResult> GetMultimedia()
+        {
+            return Ok(await _appController.MultimediaPresenter.GetMultimedia());
+        }
+
+        [HttpGet("GetMultimediaById")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async ValueTask<IActionResult> GetMultimediaById(Guid multimediaId)
+        {
+            return Ok(await _appController.MultimediaPresenter.GetMultimediaById(multimediaId));
+        }
+
+        [HttpPost("PostMultimedia")]
+        [Consumes("multipart/form-data")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async ValueTask<IActionResult> PostMultimedia(
+            Guid empleoId, string nombre, string tipo, IFormFile file, DateTime fechaSubida
+        )
+        {
+            return Ok(await _appController.MultimediaPresenter.PostMultimedia(
+                empleoId, nombre, tipo, file, fechaSubida
+            ));
+        }
+
+        [HttpPost("UpdateMultimediaById")]
+        [Consumes("multipart/form-data")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async ValueTask<IActionResult> UpdateMultimediaById(
+            Guid multimediaId, Guid empleoId, string nombre, string tipo, IFormFile file, DateTime fechaSubida
+        )
+        {
+            return Ok(await _appController.MultimediaPresenter.UpdateMultimediaById(
+                    multimediaId, empleoId, nombre, tipo, file, fechaSubida
+            ));
+        }
+
+        [HttpGet("DeleteMultimediaById")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async ValueTask<IActionResult> DeleteMultimediaById(Guid multimediaId)
+        {
+            return Ok(await _appController.MultimediaPresenter.DeleteMultimediaById(multimediaId));
+        }
+
     }
 }
