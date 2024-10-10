@@ -5275,19 +5275,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\aguiv\\.nuget\\packages\\": {}
+    "C:\\Users\\Donyo\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj",
+      "projectUniqueName": "C:\\MALO\\Backend\\MALO-backend\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj",
       "projectName": "MALO.Microservice.Empleos.Domain",
-      "projectPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj",
-      "packagesPath": "C:\\Users\\aguiv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleos.Domain\\obj\\",
+      "projectPath": "C:\\MALO\\Backend\\MALO-backend\\MALO.Microservice.Empleos.Domain\\MALO.Microservice.Empleos.Domain.csproj",
+      "packagesPath": "C:\\Users\\Donyo\\.nuget\\packages\\",
+      "outputPath": "C:\\MALO\\Backend\\MALO-backend\\MALO.Microservice.Empleos.Domain\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\aguiv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Donyo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

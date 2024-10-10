@@ -40,3 +40,24 @@ C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.In
 C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.pdb
 C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.genruntimeconfig.cache
 C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\ref\MALO.Microservice.Empleos.Infraestructure.dll
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\bin\Debug\net8.0\spa.proxy.json
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\bin\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.deps.json
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\bin\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.runtimeconfig.json
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\bin\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.dll
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\bin\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.pdb
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\bin\Debug\net8.0\MALO.Microservice.Empleos.Aplication.dll
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\bin\Debug\net8.0\MALO.Microservice.Empleos.Domain.dll
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\bin\Debug\net8.0\MALO.Microservice.Empleos.Aplication.pdb
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\bin\Debug\net8.0\MALO.Microservice.Empleos.Domain.pdb
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.csproj.AssemblyReference.cache
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.AssemblyInfoInputs.cache
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.AssemblyInfo.cs
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.csproj.CoreCompileInputs.cache
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.sourcelink.json
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Mic.BCD0FA12.Up2Date
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.dll
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\refint\MALO.Microservice.Empleos.Infraestructure.dll
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.pdb
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\MALO.Microservice.Empleos.Infraestructure.genruntimeconfig.cache
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empleos.Infraestructure\obj\Debug\net8.0\ref\MALO.Microservice.Empleos.Infraestructure.dll

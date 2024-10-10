@@ -3,7 +3,7 @@
 "ServerUrl": "",
 "RedirectUrl": "",
 "LaunchCommand": "",
-"WorkingDirectory": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleo.Aplication",
+"WorkingDirectory": "C:\\MALO\\Backend\\MALO-backend\\MALO.Microservice.Empleo.Aplication",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }
