@@ -11,6 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empleos.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empleos.Infraestructure", "MALO.Microservice.Empleos.Infraestructure\MALO.Microservice.Empleos.Infraestructure.csproj", "{C136ED01-B50B-4636-9ECD-0C41EDE74B62}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empleosdb.API", "MALO.Microservice.Empleosdb.API\MALO.Microservice.Empleosdb.API.csproj", "{1973C091-E6F9-4754-8F20-A004A74C4107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Empleosdb.Aplication", "MALO.Microservice.Empleosdb.Aplication\MALO.Microservice.Empleosdb.Aplication.csproj", "{BCBB38D0-DE79-461B-9E87-A843C79EF911}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Empleosdb.Domain", "MALO.Microservice.Empleosdb.Domain\MALO.Microservice.Empleosdb.Domain.csproj", "{AEC973C2-F268-4AB0-9D02-6C1030686563}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Empleosdb.Infraestructure", "MALO.Microservice.Empleosdb.Infraestructure\MALO.Microservice.Empleosdb.Infraestructure.csproj", "{8F160155-9E2D-4BCD-AA5B-BBE5CD0754DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +41,22 @@ Global
 		{C136ED01-B50B-4636-9ECD-0C41EDE74B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C136ED01-B50B-4636-9ECD-0C41EDE74B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C136ED01-B50B-4636-9ECD-0C41EDE74B62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1973C091-E6F9-4754-8F20-A004A74C4107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1973C091-E6F9-4754-8F20-A004A74C4107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1973C091-E6F9-4754-8F20-A004A74C4107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1973C091-E6F9-4754-8F20-A004A74C4107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCBB38D0-DE79-461B-9E87-A843C79EF911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCBB38D0-DE79-461B-9E87-A843C79EF911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCBB38D0-DE79-461B-9E87-A843C79EF911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCBB38D0-DE79-461B-9E87-A843C79EF911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEC973C2-F268-4AB0-9D02-6C1030686563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEC973C2-F268-4AB0-9D02-6C1030686563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEC973C2-F268-4AB0-9D02-6C1030686563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEC973C2-F268-4AB0-9D02-6C1030686563}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F160155-9E2D-4BCD-AA5B-BBE5CD0754DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F160155-9E2D-4BCD-AA5B-BBE5CD0754DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F160155-9E2D-4BCD-AA5B-BBE5CD0754DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F160155-9E2D-4BCD-AA5B-BBE5CD0754DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

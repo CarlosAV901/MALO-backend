@@ -1,0 +1,13 @@
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\bin\Debug\net8.0\MALO.Microservice.Empleosdb.Domain.deps.json
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\bin\Debug\net8.0\MALO.Microservice.Empleosdb.Domain.dll
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\bin\Debug\net8.0\MALO.Microservice.Empleosdb.Domain.pdb
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\obj\Debug\net8.0\MALO.Microservice.Empleosdb.Domain.csproj.AssemblyReference.cache
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\obj\Debug\net8.0\MALO.Microservice.Empleosdb.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\obj\Debug\net8.0\MALO.Microservice.Empleosdb.Domain.AssemblyInfoInputs.cache
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\obj\Debug\net8.0\MALO.Microservice.Empleosdb.Domain.AssemblyInfo.cs
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\obj\Debug\net8.0\MALO.Microservice.Empleosdb.Domain.csproj.CoreCompileInputs.cache
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\obj\Debug\net8.0\MALO.Microservice.Empleosdb.Domain.sourcelink.json
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\obj\Debug\net8.0\MALO.Microservice.Empleosdb.Domain.dll
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\obj\Debug\net8.0\refint\MALO.Microservice.Empleosdb.Domain.dll
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\obj\Debug\net8.0\MALO.Microservice.Empleosdb.Domain.pdb
+D:\Documentos\VSC\MALO\MALO-backend\MALO.Microservice.Empleosdb.Domain\obj\Debug\net8.0\ref\MALO.Microservice.Empleosdb.Domain.dll
