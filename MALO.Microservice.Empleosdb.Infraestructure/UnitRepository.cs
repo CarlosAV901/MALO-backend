@@ -38,6 +38,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure
         //
         public IEmpleoInfraestructure empleoInfraestructure => new EmpleoInfraestructure(_context);
         public IMultimediaInfraestructure multimediaInfraestructure => new MultimediaInfraestructure(_context);
+        public IAplicacionInfraestructure aplicacionInfraestructure => new AplicacionInfraestructure(_context);
 
 
         public async ValueTask<bool> Complete()

@@ -11,5 +11,6 @@ namespace MALO.Microservice.Empleosdb.Aplication.Interfaces.Persistance
 
         IEmpleoInfraestructure empleoInfraestructure { get; }
         IMultimediaInfraestructure multimediaInfraestructure { get; }
+        IAplicacionInfraestructure aplicacionInfraestructure { get; }
     }
 }

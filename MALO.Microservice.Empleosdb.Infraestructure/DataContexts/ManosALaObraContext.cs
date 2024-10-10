@@ -1,4 +1,5 @@
 ﻿
+using MALO.Microservice.Empleosdb.Domain.DTOs.Aplicacion;
 using MALO.Microservice.Empleosdb.Domain.DTOs.Multimedia;
 
 namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
@@ -13,6 +14,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
         public DbSet<RespuestaDB> respuestaDB { get; set; }
         public DbSet<EmpleosDto> empleoDto {get; set;}
         public DbSet<MultimediaDto> multimediaDto {get; set;}
+        public DbSet<AplicacionDto> aplicacionDto {get; set;}
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

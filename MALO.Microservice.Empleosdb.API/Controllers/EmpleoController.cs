@@ -164,5 +164,71 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
             return Ok(await _appController.MultimediaPresenter.DeleteMultimediaById(multimediaId));
         }
 
+
+        /// 
+        /// -------------- CONSULTAS APLICACION
+        /// 
+        [HttpGet("GetAplicaciones")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async ValueTask<IActionResult> GetAplicaciones()
+        {
+            return Ok(await _appController.AplicacionPresenter.GetAplicaciones());
+        }
+
+        [HttpGet("GetAplicacionById")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async ValueTask<IActionResult> GetAplicacionById(Guid aplicacionId)
+        {
+            return Ok(await _appController.AplicacionPresenter.GetAplicacionById(aplicacionId));
+        }
+
+        [HttpPost("PostAplicacion")]
+        [Consumes("multipart/form-data")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async ValueTask<IActionResult> PostAplicacion(
+            Guid usuarioId, Guid empleoId, DateTime fechaAplicacion
+        )
+        {
+            return Ok(await _appController.AplicacionPresenter.PostAplicacion(
+                usuarioId, empleoId, fechaAplicacion
+            ));
+        }
+
+        [HttpPost("UpdateAplicacionById")]
+        [Consumes("multipart/form-data")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async ValueTask<IActionResult> UpdateAplicacionById(
+            Guid aplicacionId, Guid usuarioId, Guid empleoId, DateTime fechaAplicacion
+        )
+        {
+            return Ok(await _appController.AplicacionPresenter.UpdateAplicacionById(
+                    aplicacionId, usuarioId, empleoId, fechaAplicacion
+            ));
+        }
+
+        [HttpGet("DeleteAplicacionById")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async ValueTask<IActionResult> DeleteAplicacionById(Guid aplicacionId)
+        {
+            return Ok(await _appController.AplicacionPresenter.DeleteAplicacionById(aplicacionId));
+        }
     }
 }

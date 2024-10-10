@@ -28,5 +28,6 @@ namespace MALO.Microservice.Empleosdb.Aplication.Controllers
 
         public IEmpleoPresenter EmpleoPresenter => new EmpleoPresenter(_unitRepository, _mapper);
         public IMultimediaPresenter MultimediaPresenter => new MultimediaPresenter(_unitRepository, _mapper);
+        public IAplicacionPresenter AplicacionPresenter => new AplicacionPresenter(_unitRepository, _mapper);
     }
 }
