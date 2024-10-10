@@ -23,5 +23,32 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
         {
             return await _unitRepository.empleoInfraestructure.GetEmpleos();
         }
+        public async Task<EmpleosDto> GetEmpleoId(Guid empleoId)
+        {
+            return await _unitRepository.empleoInfraestructure.GetEmpleoId(empleoId);
+        }
+        public async Task<string> PostEmpleo(
+            string titulo, string descripcion, Guid empresaId,
+            DateTime fechaPublicacion, string ubicacion, decimal salarioMinimo, decimal salarioMaximo
+        )
+        {
+            return await _unitRepository.empleoInfraestructure.PostEmpleo(
+                titulo, descripcion, empresaId, fechaPublicacion, ubicacion, salarioMinimo, salarioMaximo
+            );
+        }
+        public async Task<string> UpdateEmpleoId(
+            Guid empleoId, string titulo, string descripcion, Guid empresaId,
+            DateTime fechaPublicacion, string ubicacion, decimal salarioMinimo, decimal salarioMaximo
+        )
+        {
+            return await _unitRepository.empleoInfraestructure.UpdateEmpleoId(
+                empleoId, titulo, descripcion, empresaId, fechaPublicacion, ubicacion,
+                salarioMinimo, salarioMaximo
+            );
+        }
+        public async Task<string> DeleteEmpleoId(Guid empleoId)
+        {
+            return await _unitRepository.empleoInfraestructure.DeleteEmpleoId(empleoId);
+        }
     }
 }
