@@ -23,5 +23,10 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
         {
             return await _unitRepository.usuarioInfraestructure.GetUser();
         }
+
+        public async Task<UsuarioDto> ObtenerUsuarioPorId(Guid id)
+        {
+            return await _unitRepository.usuarioInfraestructure.ObtenerUsuarioPorId(id);
+        }
     }
 }

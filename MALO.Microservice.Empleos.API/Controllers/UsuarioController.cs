@@ -40,5 +40,33 @@ namespace MALO.Microservice.Empleos.API.Controllers
         {
             return Ok(await _appController.UserPresenter.GetUser());
         }
+
+
+
+        /// <summary>
+        /// Consulta un regsitro de la tabla GI_Persona
+        /// </summary>
+        /// <param name="">Params de entrada</param> 
+        /// <remarks>
+        /// Sample request: 
+        /// 
+        ///     POST 
+        ///       {
+        ///         "User":"SysAdmin"
+        ///       }
+        /// </remarks>   
+        /// <response code="200">string</response>  
+        /// <response code="400">string</response> 
+        /// <response code="500">string</response> 
+        [HttpGet("ObtenerUsuarioPorId/{id}")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async ValueTask<IActionResult> ObtenerUsuarioPorId(Guid id)
+        {
+            var usuario = await _appController.UserPresenter.ObtenerUsuarioPorId(id);
+
+            return Ok(usuario);
+        }
     }
 }

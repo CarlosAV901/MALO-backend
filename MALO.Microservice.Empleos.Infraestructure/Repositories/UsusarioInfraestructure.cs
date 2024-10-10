@@ -2,6 +2,7 @@
 
 
 using MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure;
+using Org.BouncyCastle.Tsp;
 
 namespace MALO.Microservice.Empleos.Infraestructure.Repositories
 {
@@ -45,6 +46,46 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 return dataSP.FirstOrDefault();
             }
             catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<UsuarioDto> ObtenerUsuarioPorId(Guid usuarioId)
+        {
+            try
+            {
+                var resultadoDB = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+                var usuarioIdParam = new SqlParameter
+                {
+                    ParameterName = "UsuarioId",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value = usuarioId
+                };
+                SqlParameter[] parameters =
+                {
+                    usuarioIdParam,
+                    resultadoDB,
+                    NumError
+                };
+                string sqlQuery = "EXEC dbo.SP_BuscarUsuarioPorId @UsuarioId, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSP = await _context.usuarioDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                return dataSP.FirstOrDefault();
+            }
+            catch(SqlException ex)
             {
                 throw;
             }
