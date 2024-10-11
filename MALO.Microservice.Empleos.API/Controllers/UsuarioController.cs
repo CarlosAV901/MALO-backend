@@ -95,5 +95,43 @@ namespace MALO.Microservice.Empleos.API.Controllers
 
             return Ok(usuario);
         }
+
+        /// <summary>
+        /// Inserta un nuevo usuario en el sistema.
+        /// </summary>
+        /// <param name="usuarioInsertarDto">Datos del usuario a insertar</param> 
+        /// <remarks>
+        /// Sample request: 
+        /// 
+        ///     POST 
+        ///     {
+        ///         "Nombre": "Carlos",
+        ///         "Apellido": "Aguilar",
+        ///         "Email": "charly@example.com",
+        ///         "Contrasena": "secreta123",
+        ///         "FechaNacimiento": "1990-05-15",
+        ///         "Telefono": "555-1234",
+        ///         "RolId": 1,
+        ///         "EstadoId": 1,
+        ///         "MunicipioId": 1,
+        ///         "LocalidadId": 1,
+        ///         "Habilidades": "1,2",
+        ///         "Descripcion": "Trabaje 5 años en una empresa de software",
+        ///         "ImagenPerfil": null
+        ///     }
+        /// </remarks>   
+        /// <response code="200">Usuario insertado con éxito</response>  
+        /// <response code="400">Error en la solicitud (datos inválidos)</response> 
+        /// <response code="500">Error interno del servidor</response>
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        [HttpPost("InsertarUsuario")]
+        public async ValueTask<IActionResult> InsertarUsuario([FromBody] UsuarioInsertarDto usuarioInsertarDto)
+        {
+                var usuario = await _appController.UserPresenter.InsertarUsuario(usuarioInsertarDto);
+                return Ok(usuario);
+
+        }
     }
 }
