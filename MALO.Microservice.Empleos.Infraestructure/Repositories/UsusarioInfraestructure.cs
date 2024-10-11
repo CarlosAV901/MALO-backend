@@ -189,5 +189,32 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 throw;
             }
         }
+
+
+        public async Task<string> EliminarUsuario(Guid usuarioId)
+        {
+            try
+            {
+                var usuarioIdParam = new SqlParameter
+                {
+                    ParameterName = "UsuarioId",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value = usuarioId
+                };
+                SqlParameter[] parameters =
+                {
+                    usuarioIdParam
+                };
+                string sqlQuery = "EXEC dbo.sp_EliminarUsuario @UsuarioId";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return "Usuario Eliminado Correctamente";
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
     }
 }

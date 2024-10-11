@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MALO.Microservice.Empleos.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fddccc1be40e17a5908ef781ce925cad672ce171")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+585abe5b5e964cd87cfbcb35cd2192130a0dc378")]
 [assembly: System.Reflection.AssemblyProductAttribute("MALO.Microservice.Empleos.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MALO.Microservice.Empleos.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -38,5 +38,10 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
         {
             return await _unitRepository.usuarioInfraestructure.InsertarUsuario(usuarioInsertarDto);
         }
+
+        public async Task<string> EliminarUsuario(Guid id)
+        {
+            return await _unitRepository.usuarioInfraestructure.EliminarUsuario(id);
+        }
     }
 }

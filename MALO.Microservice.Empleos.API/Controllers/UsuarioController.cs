@@ -133,5 +133,16 @@ namespace MALO.Microservice.Empleos.API.Controllers
                 return Ok(usuario);
 
         }
+
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        [HttpDelete("EliminarUsuario")]
+        public async ValueTask<IActionResult> EliminarUsuario([FromBody] ObtenerUsuarioPorId request)
+        {
+            var usuario = await _appController.UserPresenter.EliminarUsuario(request.Id);
+
+            return Ok(usuario);
+        }
     }
 }
