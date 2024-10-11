@@ -1,4 +1,8 @@
 using MALO.Microservice.Empresas.API.Extensions;
+using MALO.Microservice.Empresas.Application;
+using MALO.Microservice.Empresas.Domain.Interfaces.Infraestructure;
+using MALO.Microservice.Empresas.Infrastructure.DataContexts;
+using MALO.Microservice.Empresas.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,16 +19,18 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(20);
 });
 
-//Configuration Azure Key Vault
-//builder.Configuration.AzureKeyVault(builder);
-// DependencyContainers classes, it's a run time dependency
-builder.Services.AddApplicationServices(builder.Configuration);
+// Register the new ManosALaObraContextEmpresas
+builder.Services.AddSingleton<ManosALaObraContextEmpresas>();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Register the repositories and services
+builder.Services.AddScoped<IEmpresasRepository, EmpresasRepository>(); // Registro del repositorio
+builder.Services.AddScoped<EmpresasService>(); // Registro del servicio
+
+// Configuration for other services
+builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 var app = builder.Build();
 
@@ -33,10 +39,7 @@ if (Environment.GetEnvironmentVariable("ASPNETCORE_SWAGGER_UI_ACTIVE") == "On" |
 {
     app.UseSession();
     app.UseDeveloperExceptionPage();
-    // Enable middleware to serve generated Swagger as a JSON endpoint.
     app.UseSwagger();
-    // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-    // specifying the Swagger JSON endpoint.
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "GI.GestorInventarios.API");
@@ -47,7 +50,6 @@ if (Environment.GetEnvironmentVariable("ASPNETCORE_SWAGGER_UI_ACTIVE") == "On" |
     });
 }
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

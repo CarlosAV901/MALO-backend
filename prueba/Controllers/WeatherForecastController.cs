@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MALO.Microservice.Empresas.API.Controllers
+namespace prueba.Controllers
 {
     [ApiController]
     [Route("[controller]")]

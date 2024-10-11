@@ -1,4 +1,4 @@
-namespace MALO.Microservice.Empresas.API
+namespace prueba
 {
     public class WeatherForecast
     {

@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empresas.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empresas.Aplication", "MALO.Microservice.Empresas.Aplication\MALO.Microservice.Empresas.Aplication.csproj", "{AA2EB98A-3930-46E2-ACE6-BBD6145547EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Empresas.Domain", "MALO.Microservice.Empresas.Domain\MALO.Microservice.Empresas.Domain.csproj", "{3F92A506-476A-4D20-9796-22EDE04432AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empresas.Domain", "MALO.Microservice.Empresas.Domain\MALO.Microservice.Empresas.Domain.csproj", "{3F92A506-476A-4D20-9796-22EDE04432AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Empresas.Infraestructure", "MALO.Microservice.Empresas.Infraestructure\MALO.Microservice.Empresas.Infraestructure.csproj", "{A1C0A025-E2D6-4278-99DD-42521EAD8740}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empresas.Infraestructure", "MALO.Microservice.Empresas.Infraestructure\MALO.Microservice.Empresas.Infraestructure.csproj", "{A1C0A025-E2D6-4278-99DD-42521EAD8740}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

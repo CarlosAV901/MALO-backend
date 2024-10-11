@@ -1,10 +1,4 @@
-﻿
-using MALO.Microservice.Empresas.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empresas.Infraestructure.DataContexts;
-using MALO.Microservice.Empresas.Infraestructure;
-
-
-namespace MALO.Microservice.Empresas.Infraestructure
+﻿namespace MALO.Microservice.Empresas.Infraestructure
 {
     public static class DContainer
     {

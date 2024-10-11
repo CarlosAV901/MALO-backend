@@ -1,9 +1,6 @@
-﻿
-using MALO.Microservice.Empresas.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empresas.Domain.Interfaces.Infraestructure;
+﻿using MALO.Microservice.Empresas.Domain.Interfaces.Infraestructure;
 using MALO.Microservice.Empresas.Domain.ValueObjects;
 using MALO.Microservice.Empresas.Infraestructure.Repositories;
-using MALO.Microservice.Empresas.Infraestructure.DataContexts;
 
 namespace MALO.Microservice.Empresas.Infraestructure
 {
