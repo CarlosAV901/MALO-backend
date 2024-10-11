@@ -57,43 +57,25 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
             return Ok(await _appController.MultimediaPresenter.GetMultimedia());
         }
 
-        [HttpGet("GetMultimediaById")]
+        [HttpPost("GetMultimediaById")]
         public async ValueTask<IActionResult> GetMultimediaById([FromBody] MultimediaIdDto request)
         {
             return Ok(await _appController.MultimediaPresenter.GetMultimediaById(request));
         }
 
         [HttpPost("PostMultimedia")]
-        [Consumes("multipart/form-data")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async ValueTask<IActionResult> PostMultimedia(
-            Guid empleoId, string nombre, string tipo, IFormFile file, DateTime fechaSubida
-        )
+        public async ValueTask<IActionResult> PostMultimedia([FromBody] MultimediaPostDto request)
         {
-            return Ok(await _appController.MultimediaPresenter.PostMultimedia(
-                empleoId, nombre, tipo, file, fechaSubida
-            ));
+            return Ok(await _appController.MultimediaPresenter.PostMultimedia(request));
         }
 
         [HttpPost("UpdateMultimediaById")]
-        [Consumes("multipart/form-data")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async ValueTask<IActionResult> UpdateMultimediaById(
-            Guid multimediaId, Guid empleoId, string nombre, string tipo, IFormFile file, DateTime fechaSubida
-        )
+        public async ValueTask<IActionResult> UpdateMultimediaById([FromBody] MultimediaUpdateDto request)
         {
-            return Ok(await _appController.MultimediaPresenter.UpdateMultimediaById(
-                    multimediaId, empleoId, nombre, tipo, file, fechaSubida
-            ));
+            return Ok(await _appController.MultimediaPresenter.UpdateMultimediaById(request));
         }
 
-        [HttpGet("DeleteMultimediaById")]
+        [HttpPost("DeleteMultimediaById")]
         public async ValueTask<IActionResult> DeleteMultimediaById([FromBody] MultimediaIdDto request)
         {
             return Ok(await _appController.MultimediaPresenter.DeleteMultimediaById(request));

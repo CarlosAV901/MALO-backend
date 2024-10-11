@@ -26,21 +26,13 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
         {
             return await _unitRepository.multimediaInfraestructure.GetMultimediaById(request);
         }
-        public async Task<string> PostMultimedia(
-            Guid empleoId, string nombre, string tipo, IFormFile archivo, DateTime fechaSubida
-        )
+        public async Task<string> PostMultimedia([FromBody] MultimediaPostDto request)
         {
-            return await _unitRepository.multimediaInfraestructure.PostMultimedia(
-                empleoId, nombre, tipo, archivo, fechaSubida
-            );
+            return await _unitRepository.multimediaInfraestructure.PostMultimedia(request);
         }
-        public async Task<string> UpdateMultimediaById(
-            Guid multimediaId, Guid empleoId, string nombre, string tipo, IFormFile archivo, DateTime fechaSubida
-        )
+        public async Task<string> UpdateMultimediaById([FromBody] MultimediaUpdateDto request)
         {
-            return await _unitRepository.multimediaInfraestructure.UpdateMultimediaById(
-                multimediaId, empleoId, nombre, tipo, archivo, fechaSubida
-            );
+            return await _unitRepository.multimediaInfraestructure.UpdateMultimediaById(request);
         }
         public async Task<string> DeleteMultimediaById([FromBody] MultimediaIdDto request)
         {

@@ -77,18 +77,10 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-        public async Task<string> PostMultimedia(Guid empleoId, string nombre, string tipo, IFormFile archivo, DateTime fechaSubida)
+        public async Task<string> PostMultimedia([FromBody] MultimediaPostDto request)
         {
             try
             {
-                // Convertir el archivo a byte[]
-                byte[] contenido;
-                using (var memoryStream = new MemoryStream())
-                {
-                    await archivo.CopyToAsync(memoryStream);
-                    contenido = memoryStream.ToArray(); // Contenido del archivo en formato byte[]
-                }
-
                 var resultadoBD = new SqlParameter
                 {
                     ParameterName = "Resultado",
@@ -106,33 +98,33 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Empleo_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = empleoId
+                    Value = request.empleo_id
                 };
                 var Nombre = new SqlParameter
                 {
                     ParameterName = "Nombre",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 255,
-                    Value = nombre
+                    Value = request.nombre
                 };
                 var Tipo = new SqlParameter
                 {
                     ParameterName = "Tipo",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 50,
-                    Value = tipo
+                    Value = request.tipo
                 };
                 var Contenido = new SqlParameter
                 {
                     ParameterName = "Contenido",
                     SqlDbType = SqlDbType.VarBinary,
-                    Value = contenido
+                    Value = request.contenido
                 };
                 var FechaSubida = new SqlParameter
                 {
                     ParameterName = "Fecha_subida",
                     SqlDbType = SqlDbType.DateTime,
-                    Value = fechaSubida
+                    Value = request.fecha_subida
                 };
 
                 SqlParameter[] parameters = { EmpleoId, Nombre, Tipo, Contenido, FechaSubida, resultadoBD, NumError };
@@ -148,19 +140,10 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-
-        public async Task<string> UpdateMultimediaById(Guid multimediaId, Guid empleoId, string nombre, string tipo, IFormFile archivo, DateTime fechaSubida)
+        public async Task<string> UpdateMultimediaById([FromBody] MultimediaUpdateDto request)
         {
             try
             {
-                // Convertir el archivo a byte[]
-                byte[] contenido;
-                using (var memoryStream = new MemoryStream())
-                {
-                    await archivo.CopyToAsync(memoryStream);
-                    contenido = memoryStream.ToArray(); // Contenido del archivo en formato byte[]
-                }
-
                 var resultadoBD = new SqlParameter
                 {
                     ParameterName = "Resultado",
@@ -178,39 +161,39 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Multimedia_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = multimediaId
+                    Value = request.Multimedia_id
                 };
                 var EmpleoId = new SqlParameter
                 {
                     ParameterName = "Empleo_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = empleoId
+                    Value = request.empleo_id
                 };
                 var Nombre = new SqlParameter
                 {
                     ParameterName = "Nombre",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 255,
-                    Value = nombre
+                    Value = request.nombre
                 };
                 var Tipo = new SqlParameter
                 {
                     ParameterName = "Tipo",
                     SqlDbType = SqlDbType.VarChar,
-                    Size = 50,
-                    Value = tipo
+                    Size = 255,
+                    Value = request.tipo
                 };
                 var Contenido = new SqlParameter
                 {
                     ParameterName = "Contenido",
                     SqlDbType = SqlDbType.VarBinary,
-                    Value = contenido
+                    Value = request.contenido
                 };
                 var FechaSubida = new SqlParameter
                 {
                     ParameterName = "Fecha_subida",
                     SqlDbType = SqlDbType.DateTime,
-                    Value = fechaSubida
+                    Value = request.fecha_subida
                 };
 
                 SqlParameter[] parameters = { MultimediaId, EmpleoId, Nombre, Tipo, Contenido, FechaSubida, resultadoBD, NumError };

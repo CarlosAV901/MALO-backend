@@ -8,12 +8,8 @@ namespace MALO.Microservice.Empleosdb.Domain.Interfaces.Services
     {
         Task<List<MultimediaDto>> GetMultimedia();
         Task<MultimediaDto> GetMultimediaById([FromBody] MultimediaIdDto request);
-        Task<string> PostMultimedia(
-            Guid empleoId, string nombre, string tipo, IFormFile archivo, DateTime fechaSubida
-        );
-        Task<string> UpdateMultimediaById(
-            Guid multimediaId, Guid empleoId, string nombre, string tipo, IFormFile archivo, DateTime fechaSubida
-        );
+        Task<string> PostMultimedia([FromBody] MultimediaPostDto request);
+        Task<string> UpdateMultimediaById([FromBody] MultimediaUpdateDto request);
         Task<string> DeleteMultimediaById([FromBody] MultimediaIdDto request);
     }
 }
