@@ -10,6 +10,7 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
         #region Generic Dtos DB
         public DbSet<RespuestaDB> respuestaDB { get; set; }
         public DbSet<UsuarioDto>usuarioDto {get; set;}
+        public DbSet<UsuarioConDetallesDTO>usuarioDtoDetalles {get; set;}
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

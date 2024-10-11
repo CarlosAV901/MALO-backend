@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "",
+"RedirectUrl": "",
+"LaunchCommand": "",
+"WorkingDirectory": "C:\\Users\\aguiv\\Desktop\\Manos a la obra\\MALO-backend\\MALO.Microservice.Empleo.Aplication",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

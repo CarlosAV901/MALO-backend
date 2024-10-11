@@ -51,7 +51,7 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
             }
         }
 
-        public async Task<UsuarioDto> ObtenerUsuarioPorId(Guid usuarioId)
+        public async Task<UsuarioConDetallesDTO> ObtenerUsuarioPorId(Guid usuarioId)
         {
             try
             {
@@ -80,12 +80,45 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                     resultadoDB,
                     NumError
                 };
-                string sqlQuery = "EXEC dbo.SP_BuscarUsuarioPorId @UsuarioId, @Resultado OUTPUT, @NumError OUTPUT";
-                var dataSP = await _context.usuarioDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+                string sqlQuery = "EXEC dbo.ObtenerUsuarioConDetalles @UsuarioId, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSP = await _context.usuarioDtoDetalles.FromSqlRaw(sqlQuery, parameters).ToListAsync();
 
                 return dataSP.FirstOrDefault();
             }
             catch(SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<UsuarioConDetallesDTO>> ObtenerUsuarios()
+        {
+            try
+            {
+                var resultadoDb = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+                SqlParameter[] parameters =
+                {
+                    resultadoDb,
+                    NumError
+                };
+                string sqlQuery = "EXEC dbo.ObtenerUsuarios @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSP = await _context.usuarioDtoDetalles.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                return dataSP;
+            }
+            catch
             {
                 throw;
             }

@@ -34,17 +34,55 @@
   {
     "ContainingType": "MALO.Microservice.Empleos.API.Controllers.UsuarioController",
     "Method": "ObtenerUsuarioPorId",
-    "RelativePath": "api/Usuario/ObtenerUsuarioPorId/{id}",
-    "HttpMethod": "GET",
+    "RelativePath": "api/Usuario/ObtenerUsuarioPorId",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Guid",
+        "Name": "request",
+        "Type": "MALO.Microservice.Empleos.Domain.DTOs.Usuario.ObtenerUsuarioPorId",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "MALO.Microservice.Empleos.API.Controllers.UsuarioController",
+    "Method": "ObtenerUsuarios",
+    "RelativePath": "api/Usuario/ObtenerUsuarios",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": [
       {
         "Type": "System.String",

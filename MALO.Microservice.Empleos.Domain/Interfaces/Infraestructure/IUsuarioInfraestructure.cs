@@ -12,6 +12,13 @@
         /// Consulta un registro de la tabla CE_User
         /// </summary>
         /// <returns></returns>
-        Task<UsuarioDto> ObtenerUsuarioPorId(Guid id);
+        Task<UsuarioConDetallesDTO> ObtenerUsuarioPorId(Guid id);
+
+        /// <summary>
+        /// Consulta un registro de la tabla CE_User
+        /// </summary>
+        /// <returns></returns>
+        Task<List<UsuarioConDetallesDTO>> ObtenerUsuarios();
+
     }
 }

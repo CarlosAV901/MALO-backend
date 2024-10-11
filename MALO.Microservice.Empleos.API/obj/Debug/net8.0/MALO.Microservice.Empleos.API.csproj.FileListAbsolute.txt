@@ -215,3 +215,4 @@ C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.AP
 C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.API\obj\Debug\net8.0\MALO.Microservice.Empleos.API.pdb
 C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.API\obj\Debug\net8.0\MALO.Microservice.Empleos.API.genruntimeconfig.cache
 C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.API\obj\Debug\net8.0\ref\MALO.Microservice.Empleos.API.dll
+C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.API\obj\Debug\net8.0\MALO.Microservice.Empleos.API.MvcApplicationPartsAssemblyInfo.cs
