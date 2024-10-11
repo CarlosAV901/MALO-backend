@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "kv15o63YcM/oDmLrIQws09q00rW65qCxw+xSQeqDL/M=",
+  "Source": "MALO.Microservice.Empleosdb.API",
+  "BasePath": "_content/MALO.Microservice.Empleosdb.API",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

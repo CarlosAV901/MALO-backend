@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MALO.Microservice.Empleosdb.Aplication.Interfaces.Persistance;
+using MALO.Microservice.Empleosdb.Domain.DTOs.Empleos;
 using MALO.Microservice.Empleosdb.Domain.DTOs.Usuario;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MALO.Microservice.Empleosdb.Aplication.Presenters
 {
@@ -23,32 +25,21 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
         {
             return await _unitRepository.empleoInfraestructure.GetEmpleos();
         }
-        public async Task<EmpleosDto> GetEmpleoId(Guid empleoId)
+        public async Task<EmpleosDto> GetEmpleoId([FromBody] EmpleoRequestDto request)
         {
-            return await _unitRepository.empleoInfraestructure.GetEmpleoId(empleoId);
+            return await _unitRepository.empleoInfraestructure.GetEmpleoId(request);
         }
-        public async Task<string> PostEmpleo(
-            string titulo, string descripcion, Guid empresaId,
-            DateTime fechaPublicacion, string ubicacion, decimal salarioMinimo, decimal salarioMaximo
-        )
+        public async Task<string> PostEmpleo([FromBody] EmpleoPostDto request)
         {
-            return await _unitRepository.empleoInfraestructure.PostEmpleo(
-                titulo, descripcion, empresaId, fechaPublicacion, ubicacion, salarioMinimo, salarioMaximo
-            );
+            return await _unitRepository.empleoInfraestructure.PostEmpleo(request);
         }
-        public async Task<string> UpdateEmpleoId(
-            Guid empleoId, string titulo, string descripcion, Guid empresaId,
-            DateTime fechaPublicacion, string ubicacion, decimal salarioMinimo, decimal salarioMaximo
-        )
+        public async Task<string> UpdateEmpleoId([FromBody] EmpleoUpdateDto request)
         {
-            return await _unitRepository.empleoInfraestructure.UpdateEmpleoId(
-                empleoId, titulo, descripcion, empresaId, fechaPublicacion, ubicacion,
-                salarioMinimo, salarioMaximo
-            );
+            return await _unitRepository.empleoInfraestructure.UpdateEmpleoId(request);
         }
-        public async Task<string> DeleteEmpleoId(Guid empleoId)
+        public async Task<string> DeleteEmpleoId([FromBody] EmpleoRequestDto request)
         {
-            return await _unitRepository.empleoInfraestructure.DeleteEmpleoId(empleoId);
+            return await _unitRepository.empleoInfraestructure.DeleteEmpleoId(request);
         }
     }
 }

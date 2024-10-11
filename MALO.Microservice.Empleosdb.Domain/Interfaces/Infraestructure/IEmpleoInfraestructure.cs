@@ -1,4 +1,7 @@
-﻿namespace MALO.Microservice.Empleosdb.Domain.Interfaces.Infraestructure
+﻿using MALO.Microservice.Empleosdb.Domain.DTOs.Empleos;
+using Microsoft.AspNetCore.Mvc;
+
+namespace MALO.Microservice.Empleosdb.Domain.Interfaces.Infraestructure
 {
     public interface IEmpleoInfraestructure
     {
@@ -7,15 +10,9 @@
         /// </summary>
         /// <returns></returns>
         Task<List<EmpleosDto>> GetEmpleos();
-        Task<EmpleosDto> GetEmpleoId(Guid empleoId);
-        Task<string> PostEmpleo(
-            string titulo, string descripcion, Guid empresaId,
-            DateTime fechaPublicacion, string ubicacion, decimal salarioMinimo, decimal salarioMaximo
-        );
-        Task<string> UpdateEmpleoId(
-            Guid empleoId, string titulo, string descripcion, Guid empresaId,
-            DateTime fechaPublicacion, string ubicacion, decimal salarioMinimo, decimal salarioMaximo
-        );
-        Task<string> DeleteEmpleoId(Guid empleoId);
+        Task<EmpleosDto> GetEmpleoId([FromBody] EmpleoRequestDto request);
+        Task<string> PostEmpleo([FromBody] EmpleoPostDto request);
+        Task<string> UpdateEmpleoId([FromBody] EmpleoUpdateDto request);
+        Task<string> DeleteEmpleoId([FromBody] EmpleoRequestDto request);
     }
 }

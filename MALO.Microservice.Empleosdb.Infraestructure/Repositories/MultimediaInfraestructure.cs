@@ -1,6 +1,7 @@
 ﻿using MALO.Microservice.Empleosdb.Domain.DTOs.Multimedia;
 using MALO.Microservice.Empleosdb.Domain.Interfaces.Infraestructure;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
 {
@@ -41,7 +42,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-        public async Task<MultimediaDto> GetMultimediaById(Guid multimediaId)
+        public async Task<MultimediaDto> GetMultimediaById([FromBody] MultimediaIdDto request)
         {
             try
             {
@@ -62,7 +63,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Multimedia_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = multimediaId
+                    Value = request.Multimedia_id
                 };
                 SqlParameter[] parameters = { MultimediaId, resultadoBD, NumError };
 
@@ -225,7 +226,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-        public async Task<string> DeleteMultimediaById(Guid multimediaId)
+        public async Task<string> DeleteMultimediaById([FromBody] MultimediaIdDto request)
         {
             try
             {
@@ -246,7 +247,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Multimedia_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = multimediaId
+                    Value = request.Multimedia_id
                 };
 
                 SqlParameter[] parameters = { MultimediaId, resultadoBD, NumError };

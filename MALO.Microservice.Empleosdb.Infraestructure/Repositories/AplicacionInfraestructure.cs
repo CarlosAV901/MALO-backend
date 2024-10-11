@@ -1,5 +1,6 @@
 ﻿using MALO.Microservice.Empleosdb.Domain.DTOs.Aplicacion;
 using MALO.Microservice.Empleosdb.Domain.Interfaces.Infraestructure;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +51,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-        public async Task<AplicacionDto> GetAplicacionById(Guid aplicacionId)
+        public async Task<AplicacionDto> GetAplicacionById([FromBody] AplicacionIdDto request)
         {
             try
             {
@@ -72,7 +73,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Aplicacion_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = aplicacionId
+                    Value = request.Aplicacion_id
                 };
 
                 SqlParameter[] parameters =
@@ -92,7 +93,49 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-        public async Task<string> PostAplicacion(Guid usuarioId, Guid empleoId, DateTime fechaAplicacion)
+        public async Task<AplicacionDto> GetAplicacionByEmpleo([FromBody] AplicacionEmpleoId request)
+        {
+            try
+            {
+                var resultadoBD = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+                var EmpleoId = new SqlParameter
+                {
+                    ParameterName = "Empleo_id",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value = request.Empleo_id
+                };
+
+                SqlParameter[] parameters =
+                {
+            EmpleoId,
+            resultadoBD,
+            NumError
+        };
+
+                string sqlQuery = "EXEC dbo.SP_ConsultarAplicacionByEmpleo @Empleo_id, @Resultado = @Resultado OUTPUT, @NumError = @NumError OUTPUT";
+                var dataSP = await _context.aplicacionDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+                return dataSP.FirstOrDefault();
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<AplicacionDto> GetAplicacionByUsuario([FromBody] AplicacionUsuarioIdDto request)
         {
             try
             {
@@ -114,21 +157,63 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Usuario_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = usuarioId
+                    Value = request.Usuario_id
+                };
+
+                SqlParameter[] parameters =
+                {
+            UsuarioId,
+            resultadoBD,
+            NumError
+        };
+
+                string sqlQuery = "EXEC dbo.SP_ConsultarAplicacionByUsuario @Usuario_id, @Resultado = @Resultado OUTPUT, @NumError = @NumError OUTPUT";
+                var dataSP = await _context.aplicacionDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+                return dataSP.FirstOrDefault();
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<string> PostAplicacion([FromBody] AplicacionPostDto request)
+        {
+            try
+            {
+                var resultadoBD = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+                var UsuarioId = new SqlParameter
+                {
+                    ParameterName = "Usuario_id",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value = request.usuario_id
                 };
 
                 var EmpleoId = new SqlParameter
                 {
                     ParameterName = "Empleo_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = empleoId
+                    Value = request.empleo_id
                 };
 
                 var FechaAplicacion = new SqlParameter
                 {
                     ParameterName = "Fecha_aplicacion",
                     SqlDbType = SqlDbType.Date,
-                    Value = fechaAplicacion
+                    Value = request.fecha_aplicacion
                 };
 
                 SqlParameter[] parameters =
@@ -151,7 +236,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-        public async Task<string> UpdateAplicacionById(Guid aplicacionId, Guid usuarioId, Guid empleoId, DateTime fechaAplicacion)
+        public async Task<string> UpdateAplicacionById([FromBody] AplicacionUpdateDto request)
         {
             try
             {
@@ -173,28 +258,28 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Aplicacion_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = aplicacionId
+                    Value = request.Aplicacion_id
                 };
 
                 var UsuarioId = new SqlParameter
                 {
                     ParameterName = "Usuario_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = usuarioId
+                    Value = request.usuario_id
                 };
 
                 var EmpleoId = new SqlParameter
                 {
                     ParameterName = "Empleo_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = empleoId
+                    Value = request.empleo_id
                 };
 
                 var FechaAplicacion = new SqlParameter
                 {
                     ParameterName = "Fecha_aplicacion",
                     SqlDbType = SqlDbType.Date,
-                    Value = fechaAplicacion
+                    Value = request.fecha_aplicacion
                 };
 
                 SqlParameter[] parameters =
@@ -218,7 +303,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-        public async Task<string> DeleteAplicacionById(Guid aplicacionId)
+        public async Task<string> DeleteAplicacionById([FromBody] AplicacionIdDto request)
         {
             try
             {
@@ -240,7 +325,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Aplicacion_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = aplicacionId
+                    Value = request.Aplicacion_id
                 };
 
                 SqlParameter[] parameters =

@@ -1,5 +1,7 @@
 ﻿
+using MALO.Microservice.Empleosdb.Domain.DTOs.Empleos;
 using MALO.Microservice.Empleosdb.Domain.Interfaces.Infraestructure;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
 {
@@ -48,7 +50,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-        public async Task<EmpleosDto> GetEmpleoId(Guid empleoId)
+        public async Task<EmpleosDto> GetEmpleoId([FromBody] EmpleoRequestDto request)
         {
             try
             {
@@ -70,7 +72,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Empleo_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = empleoId
+                    Value = request.EmpleoId
                 };
                 SqlParameter[] parameters =
                 {
@@ -89,10 +91,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-        public async Task<string> PostEmpleo(
-            string titulo, string descripcion, Guid empresaId,
-            DateTime fechaPublicacion, string ubicacion, decimal salarioMinimo, decimal salarioMaximo
-        )
+        public async Task<string> PostEmpleo([FromBody] EmpleoPostDto request)
         {
             try
             {
@@ -114,45 +113,45 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     ParameterName = "Titulo",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 255,
-                    Value = titulo
+                    Value = request.titulo
                 };
                 var Descripcion = new SqlParameter
                 {
                     ParameterName = "Descripcion",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 255,
-                    Value = descripcion
+                    Value = request.descripcion
                 };
                 var EmpresaId = new SqlParameter
                 {
                     ParameterName = "Empresa_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = empresaId
+                    Value = request.empresa_id
                 };
                 var FechaPublicacion = new SqlParameter
                 {
                     ParameterName = "Fecha_publicacion",
                     SqlDbType = SqlDbType.Date,
-                    Value = fechaPublicacion
+                    Value = request.fecha_publicacion
                 };
                 var Ubicacion = new SqlParameter
                 {
                     ParameterName = "Ubicacion",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 255,
-                    Value = ubicacion
+                    Value = request.ubicacion
                 };
                 var SalarioMinimo = new SqlParameter
                 {
                     ParameterName = "Salario_minimo",
                     SqlDbType = SqlDbType.Money,
-                    Value = salarioMinimo
+                    Value = request.salario_minimo
                 };
                 var SalarioMaximo = new SqlParameter
                 {
                     ParameterName = "Salario_maximo",
                     SqlDbType = SqlDbType.Money,
-                    Value = salarioMaximo
+                    Value = request.salario_maximo
                 };
 
                 SqlParameter[] parameters =
@@ -181,10 +180,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-        public async Task<string> UpdateEmpleoId(
-            Guid empleoId, string titulo, string descripcion, Guid empresaId,
-            DateTime fechaPublicacion, string ubicacion, decimal salarioMinimo, decimal salarioMaximo
-        )
+        public async Task<string> UpdateEmpleoId([FromBody] EmpleoUpdateDto request)
         {
             try
             {
@@ -205,52 +201,52 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Empleo_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = empleoId
+                    Value = request.Empleo_id
                 };
                 var Titulo = new SqlParameter
                 {
                     ParameterName = "Titulo",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 255,
-                    Value = titulo
+                    Value = request.titulo
                 };
                 var Descripcion = new SqlParameter
                 {
                     ParameterName = "Descripcion",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 255,
-                    Value = descripcion
+                    Value = request.descripcion
                 };
                 var EmpresaId = new SqlParameter
                 {
                     ParameterName = "Empresa_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = empresaId
+                    Value = request.empresa_id
                 };
                 var FechaPublicacion = new SqlParameter
                 {
                     ParameterName = "Fecha_publicacion",
                     SqlDbType = SqlDbType.Date,
-                    Value = fechaPublicacion
+                    Value = request.fecha_publicacion
                 };
                 var Ubicacion = new SqlParameter
                 {
                     ParameterName = "Ubicacion",
                     SqlDbType = SqlDbType.VarChar,
                     Size = 255,
-                    Value = ubicacion
+                    Value = request.ubicacion
                 };
                 var SalarioMinimo = new SqlParameter
                 {
                     ParameterName = "Salario_minimo",
                     SqlDbType = SqlDbType.Money,
-                    Value = salarioMinimo
+                    Value = request.salario_minimo
                 };
                 var SalarioMaximo = new SqlParameter
                 {
                     ParameterName = "Salario_maximo",
                     SqlDbType = SqlDbType.Money,
-                    Value = salarioMaximo
+                    Value = request.salario_maximo
                 };
 
                 SqlParameter[] parameters =
@@ -280,7 +276,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
-        public async Task<string> DeleteEmpleoId(Guid empleoId)
+        public async Task<string> DeleteEmpleoId([FromBody] EmpleoRequestDto request)
         {
             try
             {
@@ -302,7 +298,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Empleo_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = empleoId
+                    Value = request.EmpleoId
                 };
 
                 SqlParameter[] parameters =

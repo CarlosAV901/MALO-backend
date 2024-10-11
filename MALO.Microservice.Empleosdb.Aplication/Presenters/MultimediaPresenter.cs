@@ -2,6 +2,7 @@
 using MALO.Microservice.Empleosdb.Aplication.Interfaces.Persistance;
 using MALO.Microservice.Empleosdb.Domain.DTOs.Multimedia;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace MALO.Microservice.Empleosdb.Aplication.Presenters
@@ -21,9 +22,9 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
         {
             return await _unitRepository.multimediaInfraestructure.GetMultimedia();
         }
-        public async Task<MultimediaDto> GetMultimediaById(Guid multimediaId)
+        public async Task<MultimediaDto> GetMultimediaById([FromBody] MultimediaIdDto request)
         {
-            return await _unitRepository.multimediaInfraestructure.GetMultimediaById(multimediaId);
+            return await _unitRepository.multimediaInfraestructure.GetMultimediaById(request);
         }
         public async Task<string> PostMultimedia(
             Guid empleoId, string nombre, string tipo, IFormFile archivo, DateTime fechaSubida
@@ -41,9 +42,9 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
                 multimediaId, empleoId, nombre, tipo, archivo, fechaSubida
             );
         }
-        public async Task<string> DeleteMultimediaById(Guid multimediaId)
+        public async Task<string> DeleteMultimediaById([FromBody] MultimediaIdDto request)
         {
-            return await _unitRepository.multimediaInfraestructure.DeleteMultimediaById(multimediaId);
+            return await _unitRepository.multimediaInfraestructure.DeleteMultimediaById(request);
         }
     }
 }

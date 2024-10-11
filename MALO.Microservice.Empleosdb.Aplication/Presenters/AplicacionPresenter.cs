@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MALO.Microservice.Empleosdb.Aplication.Interfaces.Persistance;
 using MALO.Microservice.Empleosdb.Domain.DTOs.Aplicacion;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MALO.Microservice.Empleosdb.Aplication.Presenters
 {
@@ -19,29 +20,29 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
         {
             return await _unitRepository.aplicacionInfraestructure.GetAplicaciones();
         }
-        public async Task<AplicacionDto> GetAplicacionById(Guid aplicacionId)
+        public async Task<AplicacionDto> GetAplicacionById([FromBody] AplicacionIdDto request)
         {
-            return await _unitRepository.aplicacionInfraestructure.GetAplicacionById(aplicacionId);
+            return await _unitRepository.aplicacionInfraestructure.GetAplicacionById(request);
         }
-        public async Task<string> PostAplicacion(
-            Guid usuarioId, Guid empleoId, DateTime fechaAplicacion
-        )
+        public async Task<AplicacionDto> GetAplicacionByEmpleo([FromBody] AplicacionEmpleoId request)
         {
-            return await _unitRepository.aplicacionInfraestructure.PostAplicacion(
-                usuarioId, empleoId, fechaAplicacion
-            );
+            return await _unitRepository.aplicacionInfraestructure.GetAplicacionByEmpleo(request);
         }
-        public async Task<string> UpdateAplicacionById(
-            Guid aplicacionId, Guid usuarioId, Guid empleoId, DateTime fechaAplicacion
-        )
+        public async Task<AplicacionDto> GetAplicacionByUsuario([FromBody] AplicacionUsuarioIdDto request)
         {
-            return await _unitRepository.aplicacionInfraestructure.UpdateAplicacionById(
-                aplicacionId, usuarioId, empleoId, fechaAplicacion
-            );
+            return await _unitRepository.aplicacionInfraestructure.GetAplicacionByUsuario(request);
         }
-        public async Task<string> DeleteAplicacionById(Guid aplicacionId)
+        public async Task<string> PostAplicacion([FromBody] AplicacionPostDto request)
         {
-            return await _unitRepository.aplicacionInfraestructure.DeleteAplicacionById(aplicacionId);
+            return await _unitRepository.aplicacionInfraestructure.PostAplicacion(request);
+        }
+        public async Task<string> UpdateAplicacionById([FromBody] AplicacionUpdateDto request)
+        {
+            return await _unitRepository.aplicacionInfraestructure.UpdateAplicacionById(request);
+        }
+        public async Task<string> DeleteAplicacionById([FromBody] AplicacionIdDto request)
+        {
+            return await _unitRepository.aplicacionInfraestructure.DeleteAplicacionById(request);
         }
     }
 }
