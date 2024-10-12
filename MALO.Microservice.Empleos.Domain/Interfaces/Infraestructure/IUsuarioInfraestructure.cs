@@ -30,7 +30,13 @@
         /// Consulta un registro de la tabla CE_User
         /// </summary>
         /// <returns></returns>
-        Task<string> EliminarUsuario(Guid id); 
+        Task<string> EliminarUsuario(Guid id);
+
+        /// <summary>
+        /// Consulta un registro de la tabla CE_User
+        /// </summary>
+        /// <returns></returns>
+        Task<UsuarioConDetallesDTO> ActualizarUsuario(Guid id, ActualizarUsuarioDTO actualizarUsuarioDTO);
 
     }
 }

@@ -2,7 +2,6 @@
 
 
 using MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure;
-using Org.BouncyCastle.Tsp;
 
 namespace MALO.Microservice.Empleos.Infraestructure.Repositories
 {
@@ -216,5 +215,62 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 throw;
             }
         }
+
+        public async Task<UsuarioConDetallesDTO> ActualizarUsuario(Guid usuarioId, ActualizarUsuarioDTO actualizarUsuarioDTO)
+        {
+            try
+            {
+                var usuarioExistene = await ObtenerUsuarioPorId(usuarioId);
+
+                if (usuarioExistene == null)
+                {
+                    throw new Exception("El usuario no existe en la base de datos");
+                }
+
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                var usuarioIdParam = new SqlParameter { ParameterName = "usuarioId", SqlDbType = SqlDbType.UniqueIdentifier, Value = usuarioId };
+                var nombre = new SqlParameter { ParameterName = "nombre", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.nombre ?? usuarioExistene.nombre };
+                var apellido = new SqlParameter { ParameterName = "apellido", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.apellido ?? usuarioExistene.apellido };
+                var email = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.email ?? usuarioExistene.email };
+                var telefono = new SqlParameter { ParameterName = "telefono", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.telefono ?? usuarioExistene.email };
+                var rol_id = new SqlParameter { ParameterName = "rol_id", SqlDbType = SqlDbType.Int, Value = actualizarUsuarioDTO.rol_id != 0 ? actualizarUsuarioDTO.rol_id : usuarioExistene.Rol};
+                var estado_id = new SqlParameter { ParameterName = "estado_id", SqlDbType = SqlDbType.Int, Value = usuarioExistene.estado_id};
+                var municipio_id = new SqlParameter { ParameterName = "municipio_id", SqlDbType = SqlDbType.Int, Value = actualizarUsuarioDTO.municipio_id != 0 ? actualizarUsuarioDTO.municipio_id : usuarioExistene.municipio_id};
+                var localidad_id = new SqlParameter { ParameterName = "localidad_id", SqlDbType = SqlDbType.Int, Value = actualizarUsuarioDTO.municipio_id != 0 ? actualizarUsuarioDTO.localidad_id : usuarioExistene.localidad_id };
+                var habilidad = new SqlParameter { ParameterName = "habilidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.Habilidades ?? usuarioExistene.Habilidades};
+                var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.Experiencias ?? usuarioExistene.Experiencias };
+                var imagen_perfil = new SqlParameter { ParameterName = "imagen_perfil", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.ImagenPerfil ?? usuarioExistene.ImagenPerfil};
+
+                SqlParameter[] parameters =
+                {
+                    usuarioIdParam,
+                    nombre,
+                    apellido,
+                    email,
+                    telefono,
+                    rol_id,
+                    estado_id,
+                    municipio_id,
+                    localidad_id,
+                    habilidad,
+                    descripcion,
+                    imagen_perfil
+                };
+
+                string sqlQuery = "EXEC sp_ActualizarUsuario @usuarioId, @nombre, @apellido, @email, @telefono, @rol_id, @estado_id, @municipio_id, @localidad_id, @habilidad, @descripcion, @imagen_perfil";
+
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return await ObtenerUsuarioPorId(usuarioId);
+
+
+            }
+            catch(SqlException ex)
+            {
+                throw;
+            }
+        } 
     }
 }

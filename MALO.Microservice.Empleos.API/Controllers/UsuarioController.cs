@@ -16,32 +16,6 @@ namespace MALO.Microservice.Empleos.API.Controllers
 
         }
 
-        /// <summary>
-        /// Consulta un regsitro de la tabla GI_Persona
-        /// </summary>
-        /// <param name="">Params de entrada</param> 
-        /// <remarks>
-        /// Sample request: 
-        /// 
-        ///     POST 
-        ///       {
-        ///         "User":"SysAdmin"
-        ///       }
-        /// </remarks>   
-        /// <response code="200">string</response>  
-        /// <response code="400">string</response> 
-        /// <response code="500">string</response> 
-        [HttpGet("GetUser")]
-        [Consumes(MediaTypeNames.Application.Json)]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async ValueTask<IActionResult> GetPersona()
-        {
-            return Ok(await _appController.UserPresenter.GetUser());
-        }
-
 
 
         /// <summary>
@@ -141,6 +115,18 @@ namespace MALO.Microservice.Empleos.API.Controllers
         public async ValueTask<IActionResult> EliminarUsuario([FromBody] ObtenerUsuarioPorId request)
         {
             var usuario = await _appController.UserPresenter.EliminarUsuario(request.Id);
+
+            return Ok(usuario);
+        }
+
+
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        [HttpPut("ActualizarUsuario")]
+        public async ValueTask<IActionResult> ActualizarUsuario([FromBody]  ActualizarUsuarioDTO request)
+        {
+            var usuario = await _appController.UserPresenter.ActualizarUsuario(request.UsuarioId, request);
 
             return Ok(usuario);
         }

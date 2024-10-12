@@ -11,6 +11,7 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
         public DbSet<RespuestaDB> respuestaDB { get; set; }
         public DbSet<UsuarioDto>usuarioDto {get; set;}
         public DbSet<UsuarioConDetallesDTO>usuarioDtoDetalles {get; set;}
+        public DbSet<ActualizarUsuarioDTO> actualizarUsuarioDto { get; set;}
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
