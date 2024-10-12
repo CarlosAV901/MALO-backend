@@ -81,6 +81,7 @@ namespace MALO.Microservice.Empresas.API.Controllers
 
         }
 
+
         [HttpDelete("eliminar-empresa")]
         public async Task<IActionResult> EliminarEmpresa([FromBody] EliminarEmpresaDto eliminarDto)
         {
@@ -94,6 +95,52 @@ namespace MALO.Microservice.Empresas.API.Controllers
                 return NotFound(new { message = ex.Message });
             }
             catch (Exception ex) // Otros errores
+            {
+                return StatusCode(500, new { message = "Error en el servidor", details = ex.Message });
+            }
+        }
+
+        [HttpDelete("eliminarEmpresa/{id}")]
+        public async Task<IActionResult> EliminarEmpresa(string id)
+        {
+            try
+            {
+                await _empresasService.EliminarEmpresaPorId(id);
+                return Ok(new { message = "Empresa eliminada correctamente." });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error en el servidor", details = ex.Message });
+            }
+        }
+
+        //actualizar empresa
+        [HttpPut("actualizar-empresa")]
+        public async Task<IActionResult> ActualizarEmpresa([FromBody] ActualizarEmpresaDto empresaDto)
+        {
+            if (string.IsNullOrEmpty(empresaDto?.Id))
+            {
+                return BadRequest("El ID de la empresa no puede estar vacío.");
+            }
+
+            try
+            {
+                await _empresasService.ActualizarEmpresa(empresaDto);
+                return Ok(new { message = "Empresa actualizada correctamente." });
+            }
+            catch (ArgumentException ex)  // GUID no válido
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (KeyNotFoundException ex)  // Empresa no encontrada
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)  // Otros errores
             {
                 return StatusCode(500, new { message = "Error en el servidor", details = ex.Message });
             }

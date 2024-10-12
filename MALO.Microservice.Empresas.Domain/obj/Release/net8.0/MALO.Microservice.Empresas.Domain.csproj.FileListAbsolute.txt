@@ -1,0 +1,12 @@
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\bin\Release\net8.0\MALO.Microservice.Empresas.Domain.deps.json
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\bin\Release\net8.0\MALO.Microservice.Empresas.Domain.dll
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\bin\Release\net8.0\MALO.Microservice.Empresas.Domain.pdb
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\obj\Release\net8.0\MALO.Microservice.Empresas.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\obj\Release\net8.0\MALO.Microservice.Empresas.Domain.AssemblyInfoInputs.cache
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\obj\Release\net8.0\MALO.Microservice.Empresas.Domain.AssemblyInfo.cs
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\obj\Release\net8.0\MALO.Microservice.Empresas.Domain.csproj.CoreCompileInputs.cache
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\obj\Release\net8.0\MALO.Microservice.Empresas.Domain.sourcelink.json
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\obj\Release\net8.0\MALO.Microservice.Empresas.Domain.dll
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\obj\Release\net8.0\refint\MALO.Microservice.Empresas.Domain.dll
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\obj\Release\net8.0\MALO.Microservice.Empresas.Domain.pdb
+C:\MALO\Backend\MALO-backend\MALO.Microservice.Empresas.Domain\obj\Release\net8.0\ref\MALO.Microservice.Empresas.Domain.dll

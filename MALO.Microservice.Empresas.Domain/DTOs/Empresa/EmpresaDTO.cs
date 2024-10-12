@@ -9,4 +9,3 @@
         public string Ubicacion { get; set; }
     }
 }
-

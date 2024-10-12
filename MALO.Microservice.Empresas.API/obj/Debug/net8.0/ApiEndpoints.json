@@ -1,5 +1,167 @@
 [
   {
+    "ContainingType": "MALO.Microservice.Empresas.API.Controllers.EmpresaController",
+    "Method": "ActualizarEmpresa",
+    "RelativePath": "api/Empresa/actualizar-empresa",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empresaDto",
+        "Type": "ActualizarEmpresaDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "MALO.Microservice.Empresas.API.Controllers.EmpresaController",
+    "Method": "AgregarEmpresa",
+    "RelativePath": "api/Empresa/agregar-empresa",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empresaDto",
+        "Type": "MALO.Microservice.Empresas.Domain.DTOs.Empresa.EmpresaDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MALO.Microservice.Empresas.API.Controllers.EmpresaController",
+    "Method": "EliminarEmpresa",
+    "RelativePath": "api/Empresa/eliminar-empresa",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empresaDto",
+        "Type": "MALO.Microservice.Empresas.Domain.DTOs.Empresa.EliminarEmpresaDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "MALO.Microservice.Empresas.API.Controllers.EmpresaController",
+    "Method": "GetEmpresa",
+    "RelativePath": "api/Empresa/GetEmpresa",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "MALO.Microservice.Empresas.Domain.DTOs.Empresa.EmpresaDto",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "MALO.Microservice.Empresas.API.Controllers.EmpresaController",
+    "Method": "GetEmpresaPorId",
+    "RelativePath": "api/Empresa/GetEmpresaPorId",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empresaId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MALO.Microservice.Empresas.Domain.DTOs.Empresa.EmpresaDto",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
     "ContainingType": "MALO.Microservice.Empresas.API.Controllers.EmpresasController",
     "Method": "Get",
     "RelativePath": "api/Empresas",
@@ -30,6 +192,22 @@
       {
         "Name": "id",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MALO.Microservice.Empresas.API.Controllers.EmpresasController",
+    "Method": "ActualizarEmpresa",
+    "RelativePath": "api/Empresas/actualizar-empresa",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empresaDto",
+        "Type": "ActualizarEmpresaDto",
         "IsRequired": true
       }
     ],
@@ -84,35 +262,19 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MALO.Microservice.Empresas.API.Controllers.UsuarioController",
-    "Method": "GetPersona",
-    "RelativePath": "api/Usuario/GetUser",
-    "HttpMethod": "GET",
+    "ContainingType": "MALO.Microservice.Empresas.API.Controllers.EmpresasController",
+    "Method": "EliminarEmpresa",
+    "RelativePath": "api/Empresas/eliminarEmpresa/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
+        "Name": "id",
         "Type": "System.String",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "System.String",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 401
-      },
-      {
-        "Type": "System.String",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 500
+        "IsRequired": true
       }
-    ]
+    ],
+    "ReturnTypes": []
   }
 ]

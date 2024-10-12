@@ -36,5 +36,12 @@ namespace MALO.Microservice.Empresas.Application
             await _empresasRepository.EliminarEmpresaPorId(id);
         }
 
+        //actualizar
+        public async Task ActualizarEmpresa(ActualizarEmpresaDto empresa)
+        {
+            await _empresasRepository.ActualizarEmpresa(empresa);
+        }
+
+
     }
 }

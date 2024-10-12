@@ -11,7 +11,7 @@
 
             services
             .Configure<ConnectionsSettings>(connectionSettingsSection)
-            .AddDbContext<ManosALaObraContext>(options =>
+            .AddDbContext<ManosALaObraContextEmpresasDos>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("DbConnection"),
                 sqlServerOptionsAction: sqlOptions =>
@@ -26,7 +26,7 @@
             //Add config cors
             //add config JWT
 
-            services.AddScoped<IUnitRepository, UnitRepository>();
+            services.AddScoped<IUnitRepositoryEmpresas, UnitRepositoryEmpresas>();
             return services;
         }
     }

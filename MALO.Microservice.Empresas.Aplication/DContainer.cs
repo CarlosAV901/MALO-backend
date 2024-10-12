@@ -9,7 +9,7 @@ namespace MALO.Microservice.Empresas.Aplication
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IApiController, ApiController>();
+            services.AddScoped<IApiControllerEmpresas, ApiController>();
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             //Add new aggregates
 

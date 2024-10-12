@@ -12,20 +12,20 @@ using System.Threading.Tasks;
 
 namespace MALO.Microservice.Empresas.Aplication.Controllers
 {
-    public class ApiController : IApiController
+    public class ApiController : IApiControllerEmpresas
     {
-        private readonly IUnitRepository _unitRepository;
+        private readonly IUnitRepositoryEmpresas _unitRepository;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
 
 
-        public ApiController(IUnitRepository unitRepository, IMapper mapper, IConfiguration configuration)
+        public ApiController(IUnitRepositoryEmpresas unitRepository, IMapper mapper, IConfiguration configuration)
         {
             _unitRepository = unitRepository;
             _mapper = mapper;
             _configuration = configuration;
         }
 
-        public IUserPresenter UserPresenter => new UserPresenter(_unitRepository, _mapper);
+        public IEmpresaPresenter EmpresaPresenter => new EmpresaPresenter(_unitRepository, _mapper);
     }
 }
