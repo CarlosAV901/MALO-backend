@@ -1,5 +1,4 @@
 ﻿using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
-using System.Net.Mime;
 
 namespace MALO.Microservice.Empleos.API.Controllers
 {
@@ -111,7 +110,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        [HttpDelete("EliminarUsuario")]
+        [HttpPost("EliminarUsuario")]
         public async ValueTask<IActionResult> EliminarUsuario([FromBody] ObtenerUsuarioPorId request)
         {
             var usuario = await _appController.UserPresenter.EliminarUsuario(request.Id);
@@ -123,7 +122,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        [HttpPut("ActualizarUsuario")]
+        [HttpPost("ActualizarUsuario")]
         public async ValueTask<IActionResult> ActualizarUsuario([FromBody]  ActualizarUsuarioDTO request)
         {
             var usuario = await _appController.UserPresenter.ActualizarUsuario(request.UsuarioId, request);
