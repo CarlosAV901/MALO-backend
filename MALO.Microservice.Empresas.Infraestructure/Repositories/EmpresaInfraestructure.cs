@@ -61,6 +61,7 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
         {
             try
             {
+                // Definir los parámetros de salida
                 var resultadoBD = new SqlParameter
                 {
                     ParameterName = "Resultado",
@@ -83,13 +84,20 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
 
                 SqlParameter[] parameters =
                 {
-                    empresaIdParam,
-                    resultadoBD,
-                    numError
-                };
+            empresaIdParam,
+            resultadoBD,
+            numError
+        };
 
+                // Ejecutar el stored procedure
                 string sqlQuery = "EXEC dbo.SP_ConsultarEmpresaPorId @EmpresaId, @Resultado OUTPUT, @NumError OUTPUT";
                 var empresas = await _context.empresasDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                // Verificar si no se devolvieron resultados
+                if (!empresas.Any())
+                {
+                    return null; // Empresa no encontrada
+                }
 
                 // Verifica el número de error
                 if (numError.Value != null && (int)numError.Value == 1)
@@ -108,6 +116,7 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
                 throw new Exception("Error al consultar la empresa por ID", ex);
             }
         }
+
 
         public async Task<string> AddEmpresa(EmpresaDto empresaDto)
         {

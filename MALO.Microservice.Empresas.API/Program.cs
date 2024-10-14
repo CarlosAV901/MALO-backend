@@ -1,8 +1,7 @@
 using MALO.Microservice.Empresas.API.Extensions;
-using MALO.Microservice.Empresas.Application;
 using MALO.Microservice.Empresas.Domain.Interfaces.Infraestructure;
-using MALO.Microservice.Empresas.Infrastructure.DataContexts;
-using MALO.Microservice.Empresas.Infrastructure.Repositories;
+using MALO.Microservice.Empresas.Infraestructure.DataContexts;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,11 +19,12 @@ builder.Services.AddSession(options =>
 });
 
 // Register the new ManosALaObraContextEmpresas
-builder.Services.AddSingleton<ManosALaObraContextEmpresas>();
+// Register the new ManosALaObraContextEmpresas
+builder.Services.AddScoped<ManosALaObraContextEmpresasDos>();
+
 
 // Register the repositories and services
-builder.Services.AddScoped<IEmpresasRepository, EmpresasRepository>(); // Registro del repositorio
-builder.Services.AddScoped<EmpresasService>(); // Registro del servicio
+
 
 // Configuration for other services
 builder.Services.AddApplicationServices(builder.Configuration);

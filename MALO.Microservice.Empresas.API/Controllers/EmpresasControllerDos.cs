@@ -16,7 +16,7 @@ namespace MALO.Microservice.Empresas.API.Controllers
         public EmpresaController(IApiControllerEmpresas appController) : base(appController)
         {
         }
-
+        //Consultar empresas
         /// <summary>
         /// Consulta un registro de la tabla Empresas
         /// </summary>
@@ -49,6 +49,7 @@ namespace MALO.Microservice.Empresas.API.Controllers
             return Ok(empresa);
         }
 
+        //Consultar empresa 
         [HttpPost("GetEmpresaPorId")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
@@ -72,7 +73,12 @@ namespace MALO.Microservice.Empresas.API.Controllers
             return Ok(empresa);
         }
 
+        //Agregar empresa empresas
         [HttpPost("agregar-empresa")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AgregarEmpresa([FromBody] EmpresaDto empresaDto)
         {
             if (empresaDto == null || string.IsNullOrEmpty(empresaDto.Nombre))
@@ -91,7 +97,9 @@ namespace MALO.Microservice.Empresas.API.Controllers
             }
         }
 
-        [HttpPut("actualizar-empresa")]
+
+        //actualizar empresa
+        [HttpPost("actualizar-empresa")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
@@ -115,12 +123,13 @@ namespace MALO.Microservice.Empresas.API.Controllers
             }
         }
 
+        //eliminar empresa
         /// <summary>
         /// Elimina un registro de la tabla Empresas
         /// </summary>
         /// <param name="empresaDto">DTO con los datos de la empresa a eliminar</param>
         /// <returns>Resultado de la eliminación</returns>
-        [HttpDelete("eliminar-empresa")]
+        [HttpPost("eliminar-empresa")]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
