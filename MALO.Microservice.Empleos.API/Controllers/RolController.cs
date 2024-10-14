@@ -62,5 +62,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
             return Ok(rol);
         }
 
+
+
     }
 }

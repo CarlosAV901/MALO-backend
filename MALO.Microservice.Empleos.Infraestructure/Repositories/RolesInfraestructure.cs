@@ -1,5 +1,7 @@
 ﻿
 
+using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
+
 namespace MALO.Microservice.Empleos.Infraestructure.Repositories
 {
     public class RolesInfraestructure : IRoleInfraestructure
@@ -76,13 +78,6 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
         {
             try
             {
-                //var usuarioExistene = await ObtenerUsuarioPorId(usuarioId);
-
-                //if (usuarioExistene == null)
-                //{
-                //    throw new Exception("El usuario no existe en la base de datos");
-                //}
-
 
                 var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
                 var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
@@ -102,6 +97,40 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 };
                 string sqlQuery = "EXEC sp_ActualizarRol @id, @nombre, @descripcion, @nivel_acceso, @Resultado OUTPUT, @NumError OUTPUT";
                 var dataSp = await _context.actualizarRolDTO.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                return dataSp.FirstOrDefault();
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+
+        public async Task<InsertarRolDTO> InsertarRol(InsertarRolDTO rolDTO)
+        {
+            try
+            {
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var nombre = new SqlParameter { ParameterName = "nombre", SqlDbType = SqlDbType.NVarChar, Value = rolDTO.nombre };
+                var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = rolDTO.descripcion };
+                var nivel_acceso = new SqlParameter { ParameterName = "nivel_acceso", SqlDbType = SqlDbType.Int, Value = rolDTO.nivel_acceso };
+                var rolId = new SqlParameter { ParameterName = "rol_id", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    resultadoDb,
+                    NumError,
+                    nombre,
+                    descripcion,
+                    nivel_acceso,
+                    rolId
+                };
+
+                string sqlQuery = "EXEC sp_InsertarRol @nombre, @descripcion, @nivel_acceso, @rol_id OUTPUT, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSp = await _context.insertarRolDTOs.FromSqlRaw(sqlQuery, parameters).ToListAsync();
 
                 return dataSp.FirstOrDefault();
 

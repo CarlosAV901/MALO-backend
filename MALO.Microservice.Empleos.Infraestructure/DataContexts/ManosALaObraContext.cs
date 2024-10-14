@@ -1,6 +1,4 @@
 ﻿
-using MALO.Microservice.Empleos.Domain.DTOs.Rol;
-
 namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
 {
     public class ManosALaObraContext : DbContext
@@ -15,6 +13,8 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
         public DbSet<UsuarioConDetallesDTO>usuarioDtoDetalles {get; set;}
         public DbSet<ActualizarUsuarioDTO> actualizarUsuarioDto { get; set;}
 
+        public DbSet<InsertarRolDTO> insertarRolDTOs {get; set;}
+
         public DbSet<ObtenerRolesDTO> obtenerRolesDTO {get; set;}
         public DbSet<ActualizarRolDTO> actualizarRolDTO {get; set;}
         #endregion
@@ -25,6 +25,8 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
 
             // Configurar UsuarioInsertarDto como una entidad sin clave
             modelBuilder.Entity<UsuarioInsertarDto>().HasNoKey();
+
+            modelBuilder.Entity<InsertarRolDTO>().HasNoKey();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
