@@ -1,5 +1,7 @@
 ﻿
 
+using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
+
 namespace MALO.Microservice.Empleos.Aplication.Presenters
 {
     public class RolPresenters : IRolPresenter
@@ -47,6 +49,15 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
         public async Task<InsertarRolDTO> InsertarRol(InsertarRolDTO insertarRolDTO)
         {
             return await _unitRepository.roleInfraestructure.InsertarRol(insertarRolDTO);
+        }
+
+        /// <summary>
+        /// Eliminar un rol
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> EliminarRol(int id)
+        {
+            return await _unitRepository.roleInfraestructure.EliminarRol(id);
         }
     }
 }

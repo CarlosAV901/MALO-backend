@@ -45,6 +45,50 @@
   },
   {
     "ContainingType": "MALO.Microservice.Empleos.API.Controllers.RolController",
+    "Method": "EliminarRol",
+    "RelativePath": "api/Rol/EliminarRol",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "MALO.Microservice.Empleos.Domain.DTOs.Rol.ObtenerRolPorIdDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "MALO.Microservice.Empleos.API.Controllers.RolController",
     "Method": "InsertarRol",
     "RelativePath": "api/Rol/InsertarRol",
     "HttpMethod": "POST",

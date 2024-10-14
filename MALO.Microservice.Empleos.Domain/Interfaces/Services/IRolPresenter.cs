@@ -25,5 +25,11 @@
         /// </summary>
         /// <returns></returns>
         Task<InsertarRolDTO> InsertarRol(InsertarRolDTO insertarRolDTO);
+
+        /// <summary>
+        /// Eliminar un rol
+        /// </summary>
+        /// <returns></returns>
+        Task<string> EliminarRol(int id);
     }
 }

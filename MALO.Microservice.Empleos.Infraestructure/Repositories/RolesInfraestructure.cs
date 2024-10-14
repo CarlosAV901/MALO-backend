@@ -140,5 +140,30 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 throw;
             }
         }
+
+        public async Task<string> EliminarRol(int id)
+        {
+            try
+            {
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var rolId = new SqlParameter { ParameterName = "id", SqlDbType = SqlDbType.Int, Value = id};
+
+                SqlParameter[] parameters =
+                {
+                    rolId
+                };
+
+                string sqlQuery = "EXEC sp_EliminarRol @id";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return "Rol eliminado correctamente";
+
+            }
+            catch(SqlException ex)
+            {
+                throw;
+            }
+        }
     }
 }

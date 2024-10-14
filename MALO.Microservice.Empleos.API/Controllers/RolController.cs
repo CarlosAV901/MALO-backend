@@ -78,5 +78,22 @@ namespace MALO.Microservice.Empleos.API.Controllers
 
             return Ok(rol);
         }
+
+        /// <summary>
+        /// Eliminar rol
+        /// </summary> 
+        /// <response code="200">string</response>  
+        /// <response code="400">string</response> 
+        /// <response code="500">string</response> 
+        [HttpPost("EliminarRol")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> EliminarRol([FromBody] ObtenerRolPorIdDTO request)
+        {
+            var rol = await _appController.RolPresenter.EliminarRol(request.id);
+
+            return Ok(rol);
+        }
     }
 }
