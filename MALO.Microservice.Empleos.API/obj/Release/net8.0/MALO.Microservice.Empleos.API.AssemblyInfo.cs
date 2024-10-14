@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MALO.Microservice.Empleos.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2350dab5a3c6f22050ebdf447cf712c46f3d2f63")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f40f864d53274ea0c37090e247ac5d4c64c0a36")]
 [assembly: System.Reflection.AssemblyProductAttribute("MALO.Microservice.Empleos.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MALO.Microservice.Empleos.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
