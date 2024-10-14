@@ -23,5 +23,30 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
         {
             return await _unitRepository.usuarioInfraestructure.GetUser();
         }
+
+        public async Task<UsuarioConDetallesDTO> ObtenerUsuarioPorId(Guid id)
+        {
+            return await _unitRepository.usuarioInfraestructure.ObtenerUsuarioPorId(id);
+        }
+
+        public async Task<List<UsuarioConDetallesDTO>> ObtenerUsuarios()
+        {
+            return await _unitRepository.usuarioInfraestructure.ObtenerUsuarios();
+        }
+
+        public async Task<UsuarioConDetallesDTO> InsertarUsuario(UsuarioInsertarDto usuarioInsertarDto)
+        {
+            return await _unitRepository.usuarioInfraestructure.InsertarUsuario(usuarioInsertarDto);
+        }
+
+        public async Task<string> EliminarUsuario(Guid id)
+        {
+            return await _unitRepository.usuarioInfraestructure.EliminarUsuario(id);
+        }
+
+        public async Task<ActualizarUsuarioDTO> ActualizarUsuario(Guid id, ActualizarUsuarioDTO actualizarUsuarioDTO)
+        {
+            return await _unitRepository.usuarioInfraestructure.ActualizarUsuario(id, actualizarUsuarioDTO);
+        }
     }
 }

@@ -49,5 +49,228 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 throw;
             }
         }
+
+        public async Task<UsuarioConDetallesDTO> ObtenerUsuarioPorId(Guid usuarioId)
+        {
+            try
+            {
+                var resultadoDB = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+                var usuarioIdParam = new SqlParameter
+                {
+                    ParameterName = "UsuarioId",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value = usuarioId
+                };
+                SqlParameter[] parameters =
+                {
+                    usuarioIdParam,
+                    resultadoDB,
+                    NumError
+                };
+                string sqlQuery = "EXEC dbo.ObtenerUsuarioConDetalles @UsuarioId, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSP = await _context.usuarioDtoDetalles.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                return dataSP.FirstOrDefault();
+            }
+            catch(SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<UsuarioConDetallesDTO>> ObtenerUsuarios()
+        {
+            try
+            {
+                var resultadoDb = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+                SqlParameter[] parameters =
+                {
+                    resultadoDb,
+                    NumError
+                };
+                string sqlQuery = "EXEC dbo.ObtenerUsuarios @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSP = await _context.usuarioDtoDetalles.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                return dataSP;
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<UsuarioConDetallesDTO> InsertarUsuario(UsuarioInsertarDto usuarioInsertarDto)
+        {
+            try
+            {
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var nombre = new SqlParameter { ParameterName = "nombre", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.nombre };
+                var apellido = new SqlParameter { ParameterName = "apellido", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.apellido };
+                var email = new SqlParameter { ParameterName = "email" ,SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.email };
+                var contrasena = new SqlParameter { ParameterName = "contrasena", SqlDbType= SqlDbType.NVarChar, Value = usuarioInsertarDto.contrasena };
+                var fecha_nacimiento = new SqlParameter { ParameterName = "fecha_nacimiento" ,SqlDbType = SqlDbType.Date, Value = usuarioInsertarDto.fecha_nacimiento};
+                var telefono = new SqlParameter { ParameterName = "telefono", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.telefono };
+                var rol_id = new SqlParameter {ParameterName = "rol_id" ,SqlDbType = SqlDbType.Int, Value = usuarioInsertarDto.rol_id };
+                var estado_id = new SqlParameter { ParameterName = "estado_id" , SqlDbType = SqlDbType.Int, Value = usuarioInsertarDto.estado_id };
+                var municipio_id = new SqlParameter { ParameterName = "municipio_id", SqlDbType = SqlDbType.Int, Value = usuarioInsertarDto.municipio_id };
+                var localidad_id = new SqlParameter { ParameterName = "localidad_id", SqlDbType = SqlDbType.Int, Value = usuarioInsertarDto.localidad_id };
+                var Usuario_id = new SqlParameter { ParameterName = "Usuario_id", SqlDbType = SqlDbType.UniqueIdentifier, Direction = ParameterDirection.Output };
+                var habilidad = new SqlParameter { ParameterName = "habilidad", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.habilidades };
+                var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.descripcion };
+                var imagen_perfil = new SqlParameter { ParameterName = "imagen_perfil", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.imagen_perfil };
+
+                SqlParameter[] parameters =
+                {
+                    nombre,
+                    apellido,
+                    email,
+                    contrasena,
+                    fecha_nacimiento,
+                    telefono,
+                    rol_id,
+                    estado_id,
+                    municipio_id,
+                    localidad_id,
+                    Usuario_id,
+                    habilidad,
+                    descripcion,
+                    imagen_perfil
+                };
+
+                string sqlQuery = "EXEC dbo.sp_InsertarUsuario @nombre," +
+                    "@apellido, " +
+                    "@email, " +
+                    "@contrasena, " +
+                    "@fecha_nacimiento," +
+                    "@telefono, " +
+                    "@rol_id, " +
+                    "@estado_id," +
+                    "@municipio_id," +
+                    "@localidad_id," +
+                    "@Usuario_id OUTPUT," +
+                    "@habilidad," +
+                    "@descripcion," +
+                    "@imagen_perfil";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                // Recuperar el ID generado desde el parámetro de salida
+                var idGenerado = (Guid)Usuario_id.Value;
+
+                return await ObtenerUsuarioPorId(idGenerado);
+
+            }
+            catch(SqlException ex){
+                throw;
+            }
+        }
+
+
+        public async Task<string> EliminarUsuario(Guid usuarioId)
+        {
+            try
+            {
+                var usuarioIdParam = new SqlParameter
+                {
+                    ParameterName = "UsuarioId",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value = usuarioId
+                };
+                SqlParameter[] parameters =
+                {
+                    usuarioIdParam
+                };
+                string sqlQuery = "EXEC dbo.sp_EliminarUsuario @UsuarioId";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return "Usuario Eliminado Correctamente";
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<ActualizarUsuarioDTO> ActualizarUsuario(Guid UsuarioId, ActualizarUsuarioDTO actualizarUsuarioDTO)
+        {
+            try
+            {
+                var usuarioExistene = await ObtenerUsuarioPorId(UsuarioId);
+
+                if (usuarioExistene == null)
+                {
+                    throw new Exception("El usuario no existe en la base de datos");
+                }
+
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                var usuarioIdParam = new SqlParameter { ParameterName = "UsuarioId", SqlDbType = SqlDbType.UniqueIdentifier, Value = UsuarioId };
+                var nombre = new SqlParameter { ParameterName = "nombre", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.nombre ?? usuarioExistene.nombre };
+                var apellido = new SqlParameter { ParameterName = "apellido", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.apellido ?? usuarioExistene.apellido };
+                var email = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.email ?? usuarioExistene.email };
+                var telefono = new SqlParameter { ParameterName = "telefono", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.telefono ?? usuarioExistene.email };
+                var rol_id = new SqlParameter { ParameterName = "rol_id", SqlDbType = SqlDbType.Int, Value = actualizarUsuarioDTO.rol_id != 0 ? actualizarUsuarioDTO.rol_id : usuarioExistene.Rol};
+                var estado_id = new SqlParameter { ParameterName = "estado_id", SqlDbType = SqlDbType.Int, Value = usuarioExistene.estado_id};
+                var municipio_id = new SqlParameter { ParameterName = "municipio_id", SqlDbType = SqlDbType.Int, Value = actualizarUsuarioDTO.municipio_id != 0 ? actualizarUsuarioDTO.municipio_id : usuarioExistene.municipio_id};
+                var localidad_id = new SqlParameter { ParameterName = "localidad_id", SqlDbType = SqlDbType.Int, Value = actualizarUsuarioDTO.municipio_id != 0 ? actualizarUsuarioDTO.localidad_id : usuarioExistene.localidad_id };
+                var habilidad = new SqlParameter { ParameterName = "habilidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.habilidades ?? usuarioExistene.Habilidades};
+                var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.descripcion ?? usuarioExistene.Experiencias };
+                var imagen_perfil = new SqlParameter { ParameterName = "imagen_perfil", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.imagen_perfil ?? usuarioExistene.ImagenPerfil};
+
+                SqlParameter[] parameters =
+                {
+                    usuarioIdParam,
+                    nombre,
+                    apellido,
+                    email,
+                    telefono,
+                    rol_id,
+                    estado_id,
+                    municipio_id,
+                    localidad_id,
+                    habilidad,
+                    descripcion,
+                    imagen_perfil
+                };
+
+                string sqlQuery = "EXEC sp_ActualizarUsuario @UsuarioId, @nombre, @apellido, @email, @telefono, @rol_id, @estado_id, @municipio_id, @localidad_id, @habilidad, @descripcion, @imagen_perfil";
+
+                var dataSp = await _context.actualizarUsuarioDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                return dataSp.FirstOrDefault();
+
+
+            }
+            catch(SqlException ex)
+            {
+                throw;
+            }
+        } 
     }
 }
