@@ -62,7 +62,21 @@ namespace MALO.Microservice.Empleos.API.Controllers
             return Ok(rol);
         }
 
+        /// <summary>
+        /// Insertar en la tabla de roles
+        /// </summary> 
+        /// <response code="200">string</response>  
+        /// <response code="400">string</response> 
+        /// <response code="500">string</response> 
+        [HttpPost("InsertarRol")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> InsertarRol([FromBody] InsertarRolDTO request)
+        {
+            var rol = await _appController.RolPresenter.InsertarRol(request);
 
-
+            return Ok(rol);
+        }
     }
 }

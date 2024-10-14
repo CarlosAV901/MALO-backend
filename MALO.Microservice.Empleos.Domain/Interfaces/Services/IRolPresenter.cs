@@ -19,5 +19,11 @@
         /// </summary>
         /// <returns></returns>
         Task<ActualizarRolDTO> ActualizarRol(int id, ActualizarRolDTO actualizarRolDTO);
+
+        /// <summary>
+        /// Inserta en la tabla de roles
+        /// </summary>
+        /// <returns></returns>
+        Task<InsertarRolDTO> InsertarRol(InsertarRolDTO insertarRolDTO);
     }
 }

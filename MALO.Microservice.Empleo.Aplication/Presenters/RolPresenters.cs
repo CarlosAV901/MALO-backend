@@ -40,5 +40,13 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
             return await _unitRepository.roleInfraestructure.ActualizarRol(id, actualizarRolDTO);
         }
 
+        /// <summary>
+        /// Inserta en la tabla de roles
+        /// </summary>
+        /// <returns></returns>
+        public async Task<InsertarRolDTO> InsertarRol(InsertarRolDTO insertarRolDTO)
+        {
+            return await _unitRepository.roleInfraestructure.InsertarRol(insertarRolDTO);
+        }
     }
 }
