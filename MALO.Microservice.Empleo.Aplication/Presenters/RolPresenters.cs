@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using MALO.Microservice.Empleos.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empleos.Domain.DTOs.Rol;
+﻿
 
 namespace MALO.Microservice.Empleos.Aplication.Presenters
 {
@@ -16,12 +14,31 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
         }
 
         /// <summary>
-        /// Consulta un registro de la tabla CE_Users
+        /// Consulta los registros de la tabla roles
         /// </summary>
         /// <returns></returns>
         public async Task<List<ObtenerRolesDTO>> ObtenerRoles()
         {
             return await _unitRepository.roleInfraestructure.ObtenerRoles();
         }
+
+        /// <summary>
+        /// Consulta registro por id de la tabla roles
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ObtenerRolesDTO> ObtenerRolPorId(int id)
+        {
+            return await _unitRepository.roleInfraestructure.ObtenerRolPorId(id);
+        }
+
+        /// <summary>
+        /// Consulta registro por id de la tabla roles
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ActualizarRolDTO> ActualizarRol(int id, ActualizarRolDTO actualizarRolDTO)
+        {
+            return await _unitRepository.roleInfraestructure.ActualizarRol(id, actualizarRolDTO);
+        }
+
     }
 }

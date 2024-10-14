@@ -44,7 +44,7 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
             return await _unitRepository.usuarioInfraestructure.EliminarUsuario(id);
         }
 
-        public async Task<UsuarioConDetallesDTO> ActualizarUsuario(Guid id, ActualizarUsuarioDTO actualizarUsuarioDTO)
+        public async Task<ActualizarUsuarioDTO> ActualizarUsuario(Guid id, ActualizarUsuarioDTO actualizarUsuarioDTO)
         {
             return await _unitRepository.usuarioInfraestructure.ActualizarUsuario(id, actualizarUsuarioDTO);
         }

@@ -12,8 +12,8 @@
         public int? estado_id { get; set; }
         public int? municipio_id { get; set; }
         public int? localidad_id { get; set; }
-        public string? Habilidades { get; set; }
-        public string? Experiencias { get; set; }
-        public string? ImagenPerfil { get; set; }
+        public string? habilidades { get; set; }
+        public string? descripcion { get; set; }
+        public string? imagen_perfil { get; set; }
     }
 }

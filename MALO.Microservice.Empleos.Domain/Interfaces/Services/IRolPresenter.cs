@@ -1,6 +1,4 @@
-﻿using MALO.Microservice.Empleos.Domain.DTOs.Rol;
-
-namespace MALO.Microservice.Empleos.Domain.Interfaces.Services
+﻿namespace MALO.Microservice.Empleos.Domain.Interfaces.Services
 {
     public interface IRolPresenter
     {
@@ -9,5 +7,17 @@ namespace MALO.Microservice.Empleos.Domain.Interfaces.Services
         /// </summary>
         /// <returns></returns>
         Task<List<ObtenerRolesDTO>> ObtenerRoles();
+
+        /// <summary>
+        /// Consulta registro por id de la tabla rol 
+        /// </summary>
+        /// <returns></returns>
+        Task<ObtenerRolesDTO> ObtenerRolPorId(int id);
+
+        /// <summary>
+        /// Actualizar Rol
+        /// </summary>
+        /// <returns></returns>
+        Task<ActualizarRolDTO> ActualizarRol(int id, ActualizarRolDTO actualizarRolDTO);
     }
 }

@@ -37,6 +37,6 @@ namespace MALO.Microservice.Empleos.Domain.Interfaces.Services
         /// Consulta un registro de la tabla CE_User
         /// </summary>
         /// <returns></returns>
-        Task<UsuarioConDetallesDTO> ActualizarUsuario(Guid id, ActualizarUsuarioDTO actualizarUsuarioDTO);
+        Task<ActualizarUsuarioDTO> ActualizarUsuario(Guid id, ActualizarUsuarioDTO actualizarUsuarioDTO);
     }
 }

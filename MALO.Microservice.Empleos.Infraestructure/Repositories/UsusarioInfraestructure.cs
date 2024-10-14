@@ -216,11 +216,11 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
             }
         }
 
-        public async Task<UsuarioConDetallesDTO> ActualizarUsuario(Guid usuarioId, ActualizarUsuarioDTO actualizarUsuarioDTO)
+        public async Task<ActualizarUsuarioDTO> ActualizarUsuario(Guid UsuarioId, ActualizarUsuarioDTO actualizarUsuarioDTO)
         {
             try
             {
-                var usuarioExistene = await ObtenerUsuarioPorId(usuarioId);
+                var usuarioExistene = await ObtenerUsuarioPorId(UsuarioId);
 
                 if (usuarioExistene == null)
                 {
@@ -230,7 +230,7 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
                 var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
 
-                var usuarioIdParam = new SqlParameter { ParameterName = "usuarioId", SqlDbType = SqlDbType.UniqueIdentifier, Value = usuarioId };
+                var usuarioIdParam = new SqlParameter { ParameterName = "UsuarioId", SqlDbType = SqlDbType.UniqueIdentifier, Value = UsuarioId };
                 var nombre = new SqlParameter { ParameterName = "nombre", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.nombre ?? usuarioExistene.nombre };
                 var apellido = new SqlParameter { ParameterName = "apellido", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.apellido ?? usuarioExistene.apellido };
                 var email = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.email ?? usuarioExistene.email };
@@ -239,9 +239,9 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 var estado_id = new SqlParameter { ParameterName = "estado_id", SqlDbType = SqlDbType.Int, Value = usuarioExistene.estado_id};
                 var municipio_id = new SqlParameter { ParameterName = "municipio_id", SqlDbType = SqlDbType.Int, Value = actualizarUsuarioDTO.municipio_id != 0 ? actualizarUsuarioDTO.municipio_id : usuarioExistene.municipio_id};
                 var localidad_id = new SqlParameter { ParameterName = "localidad_id", SqlDbType = SqlDbType.Int, Value = actualizarUsuarioDTO.municipio_id != 0 ? actualizarUsuarioDTO.localidad_id : usuarioExistene.localidad_id };
-                var habilidad = new SqlParameter { ParameterName = "habilidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.Habilidades ?? usuarioExistene.Habilidades};
-                var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.Experiencias ?? usuarioExistene.Experiencias };
-                var imagen_perfil = new SqlParameter { ParameterName = "imagen_perfil", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.ImagenPerfil ?? usuarioExistene.ImagenPerfil};
+                var habilidad = new SqlParameter { ParameterName = "habilidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.habilidades ?? usuarioExistene.Habilidades};
+                var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.descripcion ?? usuarioExistene.Experiencias };
+                var imagen_perfil = new SqlParameter { ParameterName = "imagen_perfil", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.imagen_perfil ?? usuarioExistene.ImagenPerfil};
 
                 SqlParameter[] parameters =
                 {
@@ -259,11 +259,11 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                     imagen_perfil
                 };
 
-                string sqlQuery = "EXEC sp_ActualizarUsuario @usuarioId, @nombre, @apellido, @email, @telefono, @rol_id, @estado_id, @municipio_id, @localidad_id, @habilidad, @descripcion, @imagen_perfil";
+                string sqlQuery = "EXEC sp_ActualizarUsuario @UsuarioId, @nombre, @apellido, @email, @telefono, @rol_id, @estado_id, @municipio_id, @localidad_id, @habilidad, @descripcion, @imagen_perfil";
 
-                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+                var dataSp = await _context.actualizarUsuarioDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
 
-                return await ObtenerUsuarioPorId(usuarioId);
+                return dataSp.FirstOrDefault();
 
 
             }
