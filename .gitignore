@@ -4,3 +4,10 @@
 .vs/
 *.user
 *.suo
+bin/
+obj/
+*.dll
+*.pdb
+*.exe
+*.cache
+*.csproj.user
