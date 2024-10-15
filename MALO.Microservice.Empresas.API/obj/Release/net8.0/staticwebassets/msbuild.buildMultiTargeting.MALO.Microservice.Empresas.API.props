@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\MALO.Microservice.Empresas.API.props" />
-</Project>
