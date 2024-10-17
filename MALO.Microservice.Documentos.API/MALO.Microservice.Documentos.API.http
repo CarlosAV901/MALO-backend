@@ -1,0 +1,6 @@
+@MALO.Microservice.Documentos.API_HostAddress = http://localhost:5124
+
+GET {{MALO.Microservice.Documentos.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
