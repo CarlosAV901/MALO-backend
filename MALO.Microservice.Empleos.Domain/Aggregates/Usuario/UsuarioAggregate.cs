@@ -11,6 +11,7 @@ namespace MALO.Microservice.Empleos.Domain.Aggregates.Usuario
         public DateTime FechaNacimiento { get; set; }
         public string Apellido { get; set; }
         public string Telefono { get; set; }
+        public bool correo_confirmado { get; set; }
         public int EstadoId { get; set; }
         public int MunicipioId { get; set; }
         public int LocalidadId { get; set; }

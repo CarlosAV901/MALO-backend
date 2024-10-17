@@ -1,0 +1,10 @@
+﻿global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Data;
+global using Microsoft.Data.SqlClient;
+global using MALO.Microservice.Empresas.Aplication.Commons;
+global using MALO.Microservice.Empresas.Infraestructure.DataContexts;
+global using MALO.Microservice.Empresas.Domain.DTOs;
+global using MALO.Microservice.Empresas.Aplication.Interfaces.Persistance;
+global using MALO.Microservice.Empresas.Domain.DTOs.Empresa;

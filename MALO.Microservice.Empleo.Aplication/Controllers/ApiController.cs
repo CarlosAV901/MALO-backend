@@ -4,11 +4,7 @@ using MALO.Microservice.Empleos.Aplication.Interfaces.Persistance;
 using MALO.Microservice.Empleos.Aplication.Presenters;
 using MALO.Microservice.Empleos.Domain.Interfaces.Services;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MALO.Microservice.Empleos.Aplication.Controllers
 {
@@ -27,5 +23,7 @@ namespace MALO.Microservice.Empleos.Aplication.Controllers
         }
 
         public IUserPresenter UserPresenter => new UserPresenter(_unitRepository, _mapper);
+
+        public IRolPresenter RolPresenter => new RolPresenters(_unitRepository, _mapper);
     }
 }
