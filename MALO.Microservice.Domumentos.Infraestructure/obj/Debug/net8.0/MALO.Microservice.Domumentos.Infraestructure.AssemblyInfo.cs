@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MALO.Microservice.Domumentos.Infraestructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2350dab5a3c6f22050ebdf447cf712c46f3d2f63")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae71bea979a32d294e71839fa191d79e94f1c77b")]
 [assembly: System.Reflection.AssemblyProductAttribute("MALO.Microservice.Domumentos.Infraestructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MALO.Microservice.Domumentos.Infraestructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

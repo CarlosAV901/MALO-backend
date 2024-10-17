@@ -36,7 +36,7 @@ namespace MALO.Microservice.Documentos.Infraestructure
             }
         }
         //
-        public IUsuarioInfraestructure usuarioInfraestructure => new UsusarioInfraestructure(_context);
+        public IDocumentoInfraestructure documentoInfraestructure => new DocumentoInfraestructure(_context);
 
 
         public async ValueTask<bool> Complete()

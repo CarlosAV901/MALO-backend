@@ -9,6 +9,6 @@ namespace MALO.Microservice.Documentos.Aplication.Interfaces.Persistance
         ValueTask<bool> Complete();
         bool HasChanges();
 
-        IUsuarioInfraestructure usuarioInfraestructure { get; }
+        IDocumentoInfraestructure documentoInfraestructure { get; }
     }
 }

@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using MALO.Microservice.Documentos.Aplication.Interfaces.Controllers;
 using MALO.Microservice.Documentos.Aplication.Interfaces.Persistance;
+using MALO.Microservice.Documentos.Aplication.Presenters;
 using MALO.Microservice.Documentos.Domain.Interfaces.Services;
-using MALO.Microservice.Empleos.Aplication.Interfaces.Controllers;
-using MALO.Microservice.Empleos.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empleos.Aplication.Presenters;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -28,6 +26,6 @@ namespace MALO.Microservice.Documentos.Aplication.Controllers
             _configuration = configuration;
         }
 
-        public IUserPresenter UserPresenter => new UserPresenter(_unitRepository, _mapper);
+        public IDocumentoPresenter DocumentoPresenter => new DocumentoPresenter(_unitRepository, _mapper);
     }
 }

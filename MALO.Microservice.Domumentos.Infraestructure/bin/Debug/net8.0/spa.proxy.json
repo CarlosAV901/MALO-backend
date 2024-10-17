@@ -3,7 +3,7 @@
 "ServerUrl": "",
 "RedirectUrl": "",
 "LaunchCommand": "",
-"WorkingDirectory": "C:\\Users\\ccpam\\Desktop\\Repositorios\\backend\\MALO-backend\\MALO.Microservice.Empleo.Aplication",
+"WorkingDirectory": "C:\\Users\\ccpam\\Desktop\\Repositorios\\backend\\MALO-backend\\MALO.Microservice.Documentos.Aplication",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

@@ -1,0 +1,13 @@
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\bin\Debug\net8.0\MALO.Microservice.Documentos.Domain.deps.json
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\bin\Debug\net8.0\MALO.Microservice.Documentos.Domain.dll
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\bin\Debug\net8.0\MALO.Microservice.Documentos.Domain.pdb
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\obj\Debug\net8.0\MALO.Microservice.Documentos.Domain.csproj.AssemblyReference.cache
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\obj\Debug\net8.0\MALO.Microservice.Documentos.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\obj\Debug\net8.0\MALO.Microservice.Documentos.Domain.AssemblyInfoInputs.cache
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\obj\Debug\net8.0\MALO.Microservice.Documentos.Domain.AssemblyInfo.cs
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\obj\Debug\net8.0\MALO.Microservice.Documentos.Domain.csproj.CoreCompileInputs.cache
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\obj\Debug\net8.0\MALO.Microservice.Documentos.Domain.sourcelink.json
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\obj\Debug\net8.0\MALO.Microservice.Documentos.Domain.dll
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\obj\Debug\net8.0\refint\MALO.Microservice.Documentos.Domain.dll
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\obj\Debug\net8.0\MALO.Microservice.Documentos.Domain.pdb
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Documentos.Domain\obj\Debug\net8.0\ref\MALO.Microservice.Documentos.Domain.dll

@@ -3,7 +3,7 @@ using MALO.Microservice.Documentos.Aplication.Interfaces.Controllers;
 using MALO.Microservice.Documentos.Aplication.Mapping;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MALO.Microservice.Empleo.Aplication
+namespace MALO.Microservice.Documentos.Aplication
 {
     public static class DContainer
     {

@@ -1,4 +1,6 @@
 ﻿
+using MALO.Microservice.Documentos.Domain.DTOs.Documentos;
+
 namespace MALO.Microservice.Documentos.Infraestructure.DataContexts
 {
     public class ManosALaObraContext : DbContext
@@ -9,7 +11,9 @@ namespace MALO.Microservice.Documentos.Infraestructure.DataContexts
 
         #region Generic Dtos DB
         public DbSet<RespuestaDB> respuestaDB { get; set; }
-        public DbSet<UsuarioDto>usuarioDto {get; set;}
+        public DbSet<DocumentosDto>documentoDto {get; set;}
+
+      
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
