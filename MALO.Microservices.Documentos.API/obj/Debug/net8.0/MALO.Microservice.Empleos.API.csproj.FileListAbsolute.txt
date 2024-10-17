@@ -216,8 +216,8 @@ C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.AP
 C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.API\obj\Debug\net8.0\MALO.Microservice.Empleos.API.pdb
 C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.API\obj\Debug\net8.0\MALO.Microservice.Empleos.API.genruntimeconfig.cache
 C:\Users\aguiv\Desktop\Manos a la obra\MALO-backend\MALO.Microservice.Empleos.API\obj\Debug\net8.0\ref\MALO.Microservice.Empleos.API.dll
-C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Empleos.API\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Empleos.API\bin\Debug\net8.0\spa.proxy.json
+C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Empleos.API\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Empleos.API\bin\Debug\net8.0\appsettings.json
 C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Empleos.API\bin\Debug\net8.0\MALO.Microservice.Empleos.API.exe
 C:\Users\ccpam\Desktop\Repositorios\backend\MALO-backend\MALO.Microservice.Empleos.API\bin\Debug\net8.0\MALO.Microservice.Empleos.API.deps.json

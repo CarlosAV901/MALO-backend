@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace MALO.Microservice.Empleos.API.Swagger.Filters
+namespace MALO.Microservice.Documentos.API.Swagger.Filters
 {
     public class AuthenticationLogFilter: Attribute, IAuthorizationFilter
     {

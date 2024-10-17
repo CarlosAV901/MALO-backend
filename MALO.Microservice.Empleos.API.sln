@@ -11,13 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empleos.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Empleos.Infraestructure", "MALO.Microservice.Empleos.Infraestructure\MALO.Microservice.Empleos.Infraestructure.csproj", "{C136ED01-B50B-4636-9ECD-0C41EDE74B62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservices.Documentos.API", "MALO.Microservices.Documentos.API\MALO.Microservices.Documentos.API.csproj", "{A0FE5352-B9C1-4ED8-A1D6-7A34FB2361A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MALO.Microservice.Documentos.Domain", "MALO.Microservice.Documentos.Domain\MALO.Microservice.Documentos.Domain.csproj", "{7B0369CA-E83B-49AD-A49E-20BC9EF34AAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Documentos.Aplication", "MALO.Microservice.Documentos.Aplication\MALO.Microservice.Documentos.Aplication.csproj", "{560C6BB8-074C-4D2F-8467-BF02BA279616}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Documentos.API", "MALO.Microservice.Documentos.API\MALO.Microservice.Documentos.API.csproj", "{E282EF95-D84D-4449-88F3-A7B174831C43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Documentos.Domain", "MALO.Microservice.Documentos.Domain\MALO.Microservice.Documentos.Domain.csproj", "{7B0369CA-E83B-49AD-A49E-20BC9EF34AAA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Documentos.Aplication", "MALO.Microservice.Documentos.Aplication\MALO.Microservice.Documentos.Aplication.csproj", "{1118E2B4-BDFC-4F20-9712-035DDDCA9702}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Domumentos.Infraestructure", "MALO.Microservice.Domumentos.Infraestructure\MALO.Microservice.Domumentos.Infraestructure.csproj", "{9F5FFC94-DF3C-4CE2-94F9-00D54983A0D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALO.Microservice.Domumentos.Infraestructure", "MALO.Microservice.Domumentos.Infraestructure\MALO.Microservice.Domumentos.Infraestructure.csproj", "{FC08B497-1FDE-4D73-9EB9-F2A5547CD66B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,22 +41,22 @@ Global
 		{C136ED01-B50B-4636-9ECD-0C41EDE74B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C136ED01-B50B-4636-9ECD-0C41EDE74B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C136ED01-B50B-4636-9ECD-0C41EDE74B62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0FE5352-B9C1-4ED8-A1D6-7A34FB2361A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0FE5352-B9C1-4ED8-A1D6-7A34FB2361A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0FE5352-B9C1-4ED8-A1D6-7A34FB2361A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0FE5352-B9C1-4ED8-A1D6-7A34FB2361A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{560C6BB8-074C-4D2F-8467-BF02BA279616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{560C6BB8-074C-4D2F-8467-BF02BA279616}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{560C6BB8-074C-4D2F-8467-BF02BA279616}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{560C6BB8-074C-4D2F-8467-BF02BA279616}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B0369CA-E83B-49AD-A49E-20BC9EF34AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B0369CA-E83B-49AD-A49E-20BC9EF34AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B0369CA-E83B-49AD-A49E-20BC9EF34AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B0369CA-E83B-49AD-A49E-20BC9EF34AAA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F5FFC94-DF3C-4CE2-94F9-00D54983A0D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F5FFC94-DF3C-4CE2-94F9-00D54983A0D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F5FFC94-DF3C-4CE2-94F9-00D54983A0D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F5FFC94-DF3C-4CE2-94F9-00D54983A0D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E282EF95-D84D-4449-88F3-A7B174831C43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E282EF95-D84D-4449-88F3-A7B174831C43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E282EF95-D84D-4449-88F3-A7B174831C43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E282EF95-D84D-4449-88F3-A7B174831C43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1118E2B4-BDFC-4F20-9712-035DDDCA9702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1118E2B4-BDFC-4F20-9712-035DDDCA9702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1118E2B4-BDFC-4F20-9712-035DDDCA9702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1118E2B4-BDFC-4F20-9712-035DDDCA9702}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC08B497-1FDE-4D73-9EB9-F2A5547CD66B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC08B497-1FDE-4D73-9EB9-F2A5547CD66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC08B497-1FDE-4D73-9EB9-F2A5547CD66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC08B497-1FDE-4D73-9EB9-F2A5547CD66B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
