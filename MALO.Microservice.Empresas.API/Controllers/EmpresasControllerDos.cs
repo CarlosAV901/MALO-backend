@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MALO.Microservice.Empresas.Domain.DTOs.Empresa;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MALO.Microservice.Empresas.API.Controllers
 {
@@ -37,6 +38,7 @@ namespace MALO.Microservice.Empresas.API.Controllers
         [ProducesResponseType(typeof(EmpresaDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public async ValueTask<IActionResult> GetEmpresa()
         {
             var empresa = await _appController.EmpresaPresenter.GetEmpresa();

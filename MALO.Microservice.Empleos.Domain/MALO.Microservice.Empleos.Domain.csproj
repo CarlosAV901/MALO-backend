@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Constants\" />
-    <Folder Include="DTOs\InformacionPersonal\" />
     <Folder Include="DTOs\Habilidad\" />
     <Folder Include="DTOs\UsuarioHabilidades\" />
     <Folder Include="Enums\" />

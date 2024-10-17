@@ -1,4 +1,5 @@
 ﻿using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MALO.Microservice.Empleos.API.Controllers
 {
@@ -36,6 +37,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public async ValueTask<IActionResult> ObtenerUsuarioPorId([FromBody] ObtenerUsuarioPorId request)
         {
             var usuario = await _appController.UserPresenter.ObtenerUsuarioPorId(request.Id);
@@ -123,6 +125,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpPost("ActualizarUsuario")]
+        [Authorize]
         public async ValueTask<IActionResult> ActualizarUsuario([FromBody]  ActualizarUsuarioDTO request)
         {
             var usuario = await _appController.UserPresenter.ActualizarUsuario(request.UsuarioId, request);

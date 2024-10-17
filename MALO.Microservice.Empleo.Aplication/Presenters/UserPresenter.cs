@@ -48,5 +48,10 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
         {
             return await _unitRepository.usuarioInfraestructure.ActualizarUsuario(id, actualizarUsuarioDTO);
         }
+
+        public async Task<UsuarioConDetallesDTO> ValidarUsuario(string email, string contrasena)
+        {
+            return await _unitRepository.usuarioInfraestructure.ValidarUsuario(email, contrasena);
+        }
     }
 }
