@@ -35,7 +35,12 @@ namespace MALO.Microservice.Empleos.API.Controllers
             // Generar JWT
             var token = GenerarTokenJWT(usuario);
 
-            return Ok(new { token });
+            return Ok(new
+            {
+                message = "Login correcto",
+                result = true,
+                token
+            });
         }
 
         // Método para generar el token JWT
