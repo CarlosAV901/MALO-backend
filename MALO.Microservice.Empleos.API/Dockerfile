@@ -4,8 +4,6 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
 
 ENV DB_CONNECTION_STRING="Server=104.198.255.228;Database=Usuarios_db;User Id=sqlserver;Password='a;6u{EN1XfeqX(lb';TrustServerCertificate=True;"
 
@@ -31,4 +29,5 @@ RUN dotnet publish "./MALO.Microservice.Empleos.API.csproj" -c $BUILD_CONFIGURAT
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_URLS=http://*:$PORT
 ENTRYPOINT ["dotnet", "MALO.Microservice.Empleos.API.dll"]
