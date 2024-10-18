@@ -67,7 +67,8 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (Environment.GetEnvironmentVariable("ASPNETCORE_SWAGGER_UI_ACTIVE") == "On" || app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Environment.IsProduction())
+if (Environment.GetEnvironmentVariable("ASPNETCORE_SWAGGER_UI_ACTIVE") == "On"
+    || app.Environment.IsDevelopment())
 {
     app.UseSession();
     app.UseDeveloperExceptionPage();
@@ -89,7 +90,14 @@ if (Environment.GetEnvironmentVariable("ASPNETCORE_SWAGGER_UI_ACTIVE") == "On" |
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "GI.GestorInventarios.API");
+        c.DefaultModelsExpandDepth(-1);
+        c.InjectStylesheet("./swagger/ui/custom.css");
+        c.DisplayRequestDuration();
+        c.RoutePrefix = string.Empty;
+    });
 }
 
 app.UseCors("AllowOrigins");
