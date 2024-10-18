@@ -7,7 +7,7 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-ENV DB_CONNECTION_STRING="Server=192.168.1.78,1433;Database=USUARIOS_DB_DEV;User Id=sa;Password=1234;Encrypt=True;TrustServerCertificate=True;"
+ENV DB_CONNECTION_STRING="Server=104.198.255.228;Database=Usuarios_db;User Id=sqlserver;Password='a;6u{EN1XfeqX(lb';TrustServerCertificate=True;"
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
