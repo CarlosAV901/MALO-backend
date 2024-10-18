@@ -1,5 +1,6 @@
 ﻿using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace MALO.Microservice.Empleos.API.Controllers
 {
@@ -104,8 +105,8 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [HttpPost("InsertarUsuario")]
         public async ValueTask<IActionResult> InsertarUsuario([FromBody] UsuarioInsertarDto usuarioInsertarDto)
         {
-                var usuario = await _appController.UserPresenter.InsertarUsuario(usuarioInsertarDto);
-                return Ok(usuario);
+            var usuario = await _appController.UserPresenter.InsertarUsuario(usuarioInsertarDto);
+            return Ok(usuario);
 
         }
 
@@ -126,11 +127,13 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpPost("ActualizarUsuario")]
         [Authorize]
-        public async ValueTask<IActionResult> ActualizarUsuario([FromBody]  ActualizarUsuarioDTO request)
+        public async ValueTask<IActionResult> ActualizarUsuario([FromBody] ActualizarUsuarioDTO request)
         {
             var usuario = await _appController.UserPresenter.ActualizarUsuario(request.UsuarioId, request);
 
             return Ok(usuario);
         }
+
+
     }
 }

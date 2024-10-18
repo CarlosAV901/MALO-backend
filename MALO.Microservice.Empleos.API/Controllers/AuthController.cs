@@ -1,6 +1,5 @@
 ﻿
 using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
-using MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
