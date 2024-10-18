@@ -55,7 +55,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowOrigins",
         builder =>
         {
-            builder.WithOrigins("https://malo-backend.onrender.com", "https://localhost:4200")
+            builder
             .AllowCredentials()
             .AllowAnyHeader()
             .AllowAnyMethod();
@@ -92,7 +92,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowedOrigins");
+app.UseCors("AllowOrigins");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
