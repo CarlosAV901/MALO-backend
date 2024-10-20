@@ -1,6 +1,4 @@
 ﻿
-
-
 namespace MALO.Microservice.Empleos.API.Controllers
 {
     [ApiController]
@@ -44,8 +42,8 @@ namespace MALO.Microservice.Empleos.API.Controllers
         {
             var claims = new[]
             {
-            new Claim(JwtRegisteredClaimNames.Sub, usuarioConDetallesDTO.UsuarioId.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, usuarioConDetallesDTO.email),
+            new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub, usuarioConDetallesDTO.UsuarioId.ToString()),
+            new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email, usuarioConDetallesDTO.email),
             new Claim("rol", usuarioConDetallesDTO.Rol.ToString())
         };
 
