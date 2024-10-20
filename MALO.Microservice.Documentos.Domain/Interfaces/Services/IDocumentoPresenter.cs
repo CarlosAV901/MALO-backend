@@ -1,8 +1,4 @@
-﻿
-using MALO.Microservice.Documentos.Domain.DTOs.Documentos;
-using Microsoft.AspNetCore.Mvc;
-
-namespace MALO.Microservice.Documentos.Domain.Interfaces.Services
+﻿namespace MALO.Microservice.Documentos.Domain.Interfaces.Services
 {
     public interface IDocumentoPresenter
     {

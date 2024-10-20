@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-
-
-namespace MALO.Microservice.Empresas.Aplication.Mapping
+﻿namespace MALO.Microservice.Empresas.Aplication.Mapping
 {
     public class AutoMapperProfile : Profile
     {

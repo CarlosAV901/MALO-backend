@@ -1,5 +1,5 @@
 ﻿
-using MALO.Microservice.Documentos.Aplication.Interfaces.Persistance;
+
 
 namespace MALO.Microservice.Documentos.Infraestructure
 {

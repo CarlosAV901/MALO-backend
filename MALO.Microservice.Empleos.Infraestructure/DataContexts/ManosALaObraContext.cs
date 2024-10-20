@@ -13,6 +13,8 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
         public DbSet<UsuarioConDetallesDTO>usuarioDtoDetalles {get; set;}
         public DbSet<ActualizarUsuarioDTO> actualizarUsuarioDto { get; set;}
 
+        public DbSet<LoginDTO> loginDto { get; set; }
+
         public DbSet<InsertarRolDTO> insertarRolDTOs {get; set;}
 
         public DbSet<ObtenerRolesDTO> obtenerRolesDTO {get; set;}
@@ -27,6 +29,8 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
             modelBuilder.Entity<UsuarioInsertarDto>().HasNoKey();
 
             modelBuilder.Entity<InsertarRolDTO>().HasNoKey();
+
+            modelBuilder.Entity<LoginDTO>().HasNoKey();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

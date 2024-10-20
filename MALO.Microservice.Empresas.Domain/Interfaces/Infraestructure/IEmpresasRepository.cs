@@ -1,6 +1,4 @@
-﻿using MALO.Microservice.Empresas.Domain.DTOs.Empresa;
-
-namespace MALO.Microservice.Empresas.Domain.Interfaces.Infraestructure
+﻿namespace MALO.Microservice.Empresas.Domain.Interfaces.Infraestructure
 {
     public interface IEmpresasRepository
     {

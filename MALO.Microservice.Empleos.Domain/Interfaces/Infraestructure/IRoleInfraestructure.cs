@@ -1,8 +1,4 @@
-﻿
-
-
-
-namespace MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure
+﻿namespace MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure
 {
     public interface IRoleInfraestructure
     {

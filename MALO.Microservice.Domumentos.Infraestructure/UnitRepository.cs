@@ -1,8 +1,4 @@
 ﻿
-using MALO.Microservice.Documentos.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Documentos.Domain.Interfaces.Infraestructure;
-using MALO.Microservice.Documentos.Domain.ValueObjects;
-using MALO.Microservice.Documentos.Infraestructure.Repositories;
 
 namespace MALO.Microservice.Documentos.Infraestructure
 {

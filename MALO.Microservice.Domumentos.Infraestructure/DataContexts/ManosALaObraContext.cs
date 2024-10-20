@@ -1,7 +1,4 @@
-﻿
-using MALO.Microservice.Documentos.Domain.DTOs.Documentos;
-
-namespace MALO.Microservice.Documentos.Infraestructure.DataContexts
+﻿namespace MALO.Microservice.Documentos.Infraestructure.DataContexts
 {
     public class ManosALaObraContext : DbContext
     {

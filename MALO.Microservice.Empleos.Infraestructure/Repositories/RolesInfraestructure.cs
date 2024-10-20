@@ -1,8 +1,4 @@
-﻿
-
-using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
-
-namespace MALO.Microservice.Empleos.Infraestructure.Repositories
+﻿namespace MALO.Microservice.Empleos.Infraestructure.Repositories
 {
     public class RolesInfraestructure : IRoleInfraestructure
     {

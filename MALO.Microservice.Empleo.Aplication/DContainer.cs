@@ -1,7 +1,4 @@
-﻿using MALO.Microservice.Empleos.Aplication.Controllers;
-using MALO.Microservice.Empleos.Aplication.Interfaces.Controllers;
-using MALO.Microservice.Empleos.Aplication.Mapping;
-using Microsoft.Extensions.DependencyInjection;
+﻿
 
 namespace MALO.Microservice.Empleo.Aplication
 {

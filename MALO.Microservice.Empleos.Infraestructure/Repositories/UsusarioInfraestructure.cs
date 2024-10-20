@@ -1,9 +1,4 @@
-﻿
-
-
-using MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure;
-
-namespace MALO.Microservice.Empleos.Infraestructure.Repositories
+﻿namespace MALO.Microservice.Empleos.Infraestructure.Repositories
 {
     public class UsusarioInfraestructure: IUsuarioInfraestructure
     {
@@ -272,5 +267,38 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 throw;
             }
         } 
+
+        public async Task<UsuarioConDetallesDTO> ValidarUsuario(string email, string contrasena)
+        {
+            try
+            {
+                var resultadoDb = new SqlParameter {ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output};
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var contrasenaUS = new SqlParameter { ParameterName = "contrasena", SqlDbType = SqlDbType.NVarChar, Value = contrasena };
+                var emailUS = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value= email };
+
+                SqlParameter[] parameters =
+                {
+                    emailUS, 
+                    contrasenaUS,
+                    resultadoDb,
+                    NumError
+                };
+                string sqlQuery = "EXEC dbo.SP_ValidarUsuario @email, @contrasena, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSP = await _context.usuarioDtoDetalles.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                if((int)NumError.Value != 1)
+                {
+                    throw new Exception((string)resultadoDb.Value);
+                }
+
+                return dataSP.FirstOrDefault();
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
     }
 }

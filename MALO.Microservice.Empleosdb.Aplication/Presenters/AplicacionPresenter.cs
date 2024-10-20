@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using MALO.Microservice.Empleosdb.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empleosdb.Domain.DTOs.Aplicacion;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace MALO.Microservice.Empleosdb.Aplication.Presenters
 {
     internal class AplicacionPresenter: IAplicacionPresenter

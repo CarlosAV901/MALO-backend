@@ -1,8 +1,4 @@
 ﻿
-using MALO.Microservice.Empleos.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure;
-using MALO.Microservice.Empleos.Domain.ValueObjects;
-using MALO.Microservice.Empleos.Infraestructure.Repositories;
 
 namespace MALO.Microservice.Empleos.Infraestructure
 {

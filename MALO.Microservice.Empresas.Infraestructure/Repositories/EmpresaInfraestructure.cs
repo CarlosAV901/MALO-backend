@@ -1,5 +1,4 @@
-﻿using MALO.Microservice.Empresas.Domain.Interfaces.Infraestructure;
-
+﻿
 namespace MALO.Microservice.Empresas.Infraestructure.Repositories
 {
     public class EmpresaInfraestructure : IEmpresaInfraestructure

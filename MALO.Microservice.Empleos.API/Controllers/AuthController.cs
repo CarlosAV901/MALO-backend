@@ -5,6 +5,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
     [Route("api/[controller]")]
     public class AuthController : ApiController
     {
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -13,63 +14,51 @@ namespace MALO.Microservice.Empleos.API.Controllers
         {
 
         }
-        /*
-        /// <summary>
-        /// Consulta un regsitro de la tabla GI_Persona
-        /// </summary>
-        /// <param name="">Params de entrada</param> 
-        /// <remarks>
-        /// Sample request: 
-        /// 
-        ///     POST 
-        ///       {
-        ///         "User":"SysAdmin"
-        ///       }
-        /// </remarks>   
-        /// <response code="200">string</response>  
-        /// <response code="400">string</response> 
-        /// <response code="500">string</response> 
-        [HttpPost("GetPersona")]
-        [Consumes(MediaTypeNames.Application.Json)]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async ValueTask<IActionResult> GetPersona()
+
+        // Login y generación del JWT
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO request)
         {
-            return Ok(await _appController.PersonaPresenter.GetPersona());
+            var usuario = await _appController.UserPresenter.ValidarUsuario(request.email, request.contrasena);
+
+            if(usuario == null)
+            {
+                return Unauthorized(new { message = "Correo o contraseña incorrectos" });
+            }
+
+            // Generar JWT
+            var token = GenerarTokenJWT(usuario);
+
+            return Ok(new
+            {
+                message = "Login correcto",
+                result = true,
+                token
+            });
         }
 
-
-        /// <summary>
-        /// Agrega un regsitro a la tabla GI_Persona
-        /// </summary>
-        /// <param name="">Params de entrada</param> 
-        /// <remarks>
-        /// Sample request: 
-        /// 
-        ///     POST 
-        ///       {
-        ///         "nombre":"Joel",
-        ///         "apellidoPaterno":"Lopez",
-        ///         "apellidoMaterno":"Martinez",
-        ///         "edad":25
-        ///       }
-        /// </remarks>   
-        /// <response code="200">string</response>  
-        /// <response code="400">string</response> 
-        /// <response code="500">string</response> 
-        [HttpPost("AddPersona")]
-        [Consumes(MediaTypeNames.Application.Json)]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async ValueTask<IActionResult> AddPersona([FromBody] PersonaAggregate aggregate)
+        // Método para generar el token JWT
+        private string GenerarTokenJWT(UsuarioConDetallesDTO usuarioConDetallesDTO)
         {
-            return Ok(await _appController.PersonaPresenter.AddPersona(aggregate));
+            var claims = new[]
+            {
+            new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub, usuarioConDetallesDTO.UsuarioId.ToString()),
+            new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email, usuarioConDetallesDTO.email),
+            new Claim("rol", usuarioConDetallesDTO.Rol.ToString())
+        };
 
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appController.GetJwtConfigValue("Key")));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: _appController.GetJwtConfigValue("Issuer"),
+                audience: _appController.GetJwtConfigValue("Audience"),
+                claims: claims,
+                expires: DateTime.Now.AddHours(1),
+                signingCredentials: creds);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        */
+
     }
 }

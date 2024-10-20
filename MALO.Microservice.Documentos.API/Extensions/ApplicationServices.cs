@@ -1,9 +1,5 @@
-﻿using MALO.Microservice.Documentos.Aplication;
-using MALO.Microservice.Documentos.API.Swagger.Filters;
-using MALO.Microservice.Documentos.Infraestructure;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using MALO.Microservice.Documentsos.API.Swagger.Filters;
+﻿
+
 
 namespace MALO.Microservice.Documentos.API.Extensions
 {
