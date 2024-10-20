@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-using MALO.Microservice.Empleos.Aplication.Interfaces.Controllers;
-using MALO.Microservice.Empleos.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empleos.Aplication.Presenters;
-using MALO.Microservice.Empleos.Domain.Interfaces.Services;
-using Microsoft.Extensions.Configuration;
+﻿
 
 
 namespace MALO.Microservice.Empleos.Aplication.Controllers

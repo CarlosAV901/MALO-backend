@@ -1,7 +1,4 @@
-﻿using MALO.Microservice.Documentos.Aplication.Controllers;
-using MALO.Microservice.Documentos.Aplication.Interfaces.Controllers;
-using MALO.Microservice.Documentos.Aplication.Mapping;
-using Microsoft.Extensions.DependencyInjection;
+﻿
 
 namespace MALO.Microservice.Documentos.Aplication
 {

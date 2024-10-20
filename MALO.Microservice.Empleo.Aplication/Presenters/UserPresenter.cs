@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using MALO.Microservice.Empleos.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
+﻿
 
 namespace MALO.Microservice.Empleos.Aplication.Presenters
 {

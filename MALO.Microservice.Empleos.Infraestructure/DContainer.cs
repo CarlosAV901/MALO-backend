@@ -1,6 +1,4 @@
 ﻿
-using MALO.Microservice.Empleos.Aplication.Interfaces.Persistance;
-
 namespace MALO.Microservice.Empleos.Infraestructure
 {
     public static class DContainer

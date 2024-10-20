@@ -1,9 +1,4 @@
-﻿using System.Net.Mime;
-using Microsoft.AspNetCore.Mvc;
-using MALO.Microservice.Empresas.Domain.DTOs.Empresa;
-using System;
-using Microsoft.AspNetCore.Authorization;
-
+﻿
 namespace MALO.Microservice.Empresas.API.Controllers
 {
     [ApiController]

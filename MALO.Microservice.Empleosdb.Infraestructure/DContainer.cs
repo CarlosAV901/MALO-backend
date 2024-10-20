@@ -1,5 +1,4 @@
 ﻿
-using MALO.Microservice.Empleosdb.Aplication.Interfaces.Persistance;
 
 namespace MALO.Microservice.Empleosdb.Infraestructure
 {

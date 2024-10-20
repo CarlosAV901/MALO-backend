@@ -1,7 +1,4 @@
-﻿using MALO.Microservice.Empleosdb.Domain.DTOs.Multimedia;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace MALO.Microservice.Empleosdb.Domain.Interfaces.Services
 {
     public interface IMultimediaPresenter

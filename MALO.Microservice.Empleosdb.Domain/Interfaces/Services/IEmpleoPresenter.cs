@@ -1,7 +1,4 @@
 ﻿
-using MALO.Microservice.Empleosdb.Domain.DTOs.Empleos;
-using Microsoft.AspNetCore.Mvc;
-
 namespace MALO.Microservice.Empleosdb.Domain.Interfaces.Services
 {
     public interface IEmpleoPresenter

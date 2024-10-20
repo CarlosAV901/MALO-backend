@@ -1,5 +1,4 @@
-﻿using MALO.Microservice.Documentos.Domain.DTOs.Documentos;
-using Microsoft.AspNetCore.Mvc;
+﻿
 
 namespace MALO.Microservice.Documentos.Domain.Interfaces.Infraestructure
 {

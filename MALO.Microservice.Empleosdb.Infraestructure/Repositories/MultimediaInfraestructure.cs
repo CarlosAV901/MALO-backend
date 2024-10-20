@@ -1,7 +1,4 @@
-﻿using MALO.Microservice.Empleosdb.Domain.DTOs.Multimedia;
-using MALO.Microservice.Empleosdb.Domain.Interfaces.Infraestructure;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿
 
 namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
 {

@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-using MALO.Microservice.Documentos.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Documentos.Domain.DTOs.Documentos;
-using MALO.Microservice.Documentos.Domain.DTOs.Usuario;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace MALO.Microservice.Documentos.Aplication.Presenters
 {
     public class DocumentoPresenter : IDocumentoPresenter

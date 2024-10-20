@@ -1,15 +1,4 @@
-﻿using AutoMapper;
-using MALO.Microservice.Empleosdb.Aplication.Interfaces.Controllers;
-using MALO.Microservice.Empleosdb.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empleosdb.Aplication.Presenters;
-using MALO.Microservice.Empleosdb.Domain.Interfaces.Services;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MALO.Microservice.Empleosdb.Aplication.Controllers
 {
     public class ApiController : IApiController

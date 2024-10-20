@@ -1,8 +1,4 @@
-﻿using MALO.Microservice.Empleosdb.Domain.DTOs.Aplicacion;
-using MALO.Microservice.Empleosdb.Domain.DTOs.Empleos;
-using MALO.Microservice.Empleosdb.Domain.DTOs.Multimedia;
-using System.Net.Mime;
-
+﻿
 namespace MALO.Microservice.Empleosdb.API.Controllers
 {
     [ApiController]

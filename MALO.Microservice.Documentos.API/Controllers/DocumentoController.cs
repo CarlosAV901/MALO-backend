@@ -1,6 +1,4 @@
-﻿using MALO.Microservice.Documentos.Domain.DTOs.Documentos;
-using System.Net.Mime;
-
+﻿
 namespace MALO.Microservice.Documentos.API.Controllers
 {
     [ApiController]

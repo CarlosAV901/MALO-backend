@@ -1,6 +1,4 @@
-﻿using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.JsonWebTokens;
+﻿
 
 namespace MALO.Microservice.Empleos.API.Controllers
 {

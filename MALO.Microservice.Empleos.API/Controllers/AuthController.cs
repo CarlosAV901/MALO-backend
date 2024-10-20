@@ -1,9 +1,5 @@
 ﻿
-using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+
 
 namespace MALO.Microservice.Empleos.API.Controllers
 {

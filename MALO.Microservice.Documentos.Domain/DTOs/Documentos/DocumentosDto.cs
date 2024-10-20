@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿
 
 namespace MALO.Microservice.Documentos.Domain.DTOs.Usuario
 {

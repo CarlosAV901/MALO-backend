@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using MALO.Microservice.Empleosdb.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empleosdb.Domain.DTOs.Multimedia;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿
 
 
 namespace MALO.Microservice.Empleosdb.Aplication.Presenters

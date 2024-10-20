@@ -1,14 +1,4 @@
-﻿using AutoMapper;
-using MALO.Microservice.Documentos.Aplication.Interfaces.Controllers;
-using MALO.Microservice.Documentos.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Documentos.Aplication.Presenters;
-using MALO.Microservice.Documentos.Domain.Interfaces.Services;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace MALO.Microservice.Documentos.Aplication.Controllers
 {
