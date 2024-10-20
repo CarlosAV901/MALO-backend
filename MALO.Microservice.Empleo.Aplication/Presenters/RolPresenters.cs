@@ -1,8 +1,4 @@
-﻿
-
-using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
-
-namespace MALO.Microservice.Empleos.Aplication.Presenters
+﻿namespace MALO.Microservice.Empleos.Aplication.Presenters
 {
     public class RolPresenters : IRolPresenter
     {

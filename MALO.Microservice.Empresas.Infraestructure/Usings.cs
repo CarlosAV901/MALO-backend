@@ -8,3 +8,6 @@ global using MALO.Microservice.Empresas.Infraestructure.DataContexts;
 global using MALO.Microservice.Empresas.Domain.DTOs;
 global using MALO.Microservice.Empresas.Aplication.Interfaces.Persistance;
 global using MALO.Microservice.Empresas.Domain.DTOs.Empresa;
+global using MALO.Microservice.Empresas.Domain.Interfaces.Infraestructure;
+global using MALO.Microservice.Empresas.Domain.ValueObjects;
+global using MALO.Microservice.Empresas.Infraestructure.Repositories;

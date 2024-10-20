@@ -1,8 +1,4 @@
-﻿using MALO.Microservice.Empresas.Aplication;
-using MALO.Microservice.Empresas.Infraestructure;
-using MALO.Microservice.Empresas.API.Swagger.Filters;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
+﻿
 
 namespace MALO.Microservice.Empresas.API.Extensions
 {

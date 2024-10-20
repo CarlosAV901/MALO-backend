@@ -7,5 +7,7 @@ namespace MALO.Microservice.Empleos.Aplication.Interfaces.Controllers
         IUserPresenter UserPresenter { get; }
         
         IRolPresenter RolPresenter { get; }
+        string GetJwtConfigValue(string key);
+
     }
 }

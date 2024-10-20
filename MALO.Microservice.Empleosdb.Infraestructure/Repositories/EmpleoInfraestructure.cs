@@ -1,7 +1,5 @@
 ﻿
-using MALO.Microservice.Empleosdb.Domain.DTOs.Empleos;
-using MALO.Microservice.Empleosdb.Domain.Interfaces.Infraestructure;
-using Microsoft.AspNetCore.Mvc;
+
 
 namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
 {

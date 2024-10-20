@@ -1,4 +1,4 @@
-using MALO.Microservice.Empleosdb.API.Extensions;
+;
 
 var builder = WebApplication.CreateBuilder(args);
 

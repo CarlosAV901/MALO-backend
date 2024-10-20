@@ -1,12 +1,4 @@
 ﻿
-
-
-using Azure.Core;
-using MALO.Microservice.Documentos.Domain.DTOs.Documentos;
-using MALO.Microservice.Documentos.Domain.Interfaces.Infraestructure;
-using Microsoft.AspNetCore.Mvc;
-using Org.BouncyCastle.Asn1.Ocsp;
-
 namespace MALO.Microservice.Documentos.Infraestructure.Repositories
 {
     public class DocumentoInfraestructure : IDocumentoInfraestructure

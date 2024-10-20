@@ -1,6 +1,4 @@
 ﻿
-using MALO.Microservice.Empleosdb.Domain.DTOs.Aplicacion;
-using MALO.Microservice.Empleosdb.Domain.DTOs.Multimedia;
 
 namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
 {

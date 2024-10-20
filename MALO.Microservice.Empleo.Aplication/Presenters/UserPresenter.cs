@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using MALO.Microservice.Empleos.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
+﻿
 
 namespace MALO.Microservice.Empleos.Aplication.Presenters
 {
@@ -47,6 +45,11 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
         public async Task<ActualizarUsuarioDTO> ActualizarUsuario(Guid id, ActualizarUsuarioDTO actualizarUsuarioDTO)
         {
             return await _unitRepository.usuarioInfraestructure.ActualizarUsuario(id, actualizarUsuarioDTO);
+        }
+
+        public async Task<UsuarioConDetallesDTO> ValidarUsuario(string email, string contrasena)
+        {
+            return await _unitRepository.usuarioInfraestructure.ValidarUsuario(email, contrasena);
         }
     }
 }

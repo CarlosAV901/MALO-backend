@@ -1,8 +1,4 @@
 ﻿
-using MALO.Microservice.Empleosdb.Aplication.Interfaces.Persistance;
-using MALO.Microservice.Empleosdb.Domain.Interfaces.Infraestructure;
-using MALO.Microservice.Empleosdb.Domain.ValueObjects;
-using MALO.Microservice.Empleosdb.Infraestructure.Repositories;
 
 namespace MALO.Microservice.Empleosdb.Infraestructure
 {

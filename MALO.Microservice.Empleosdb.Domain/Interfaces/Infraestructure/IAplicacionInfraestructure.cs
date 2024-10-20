@@ -1,10 +1,4 @@
-﻿using MALO.Microservice.Empleosdb.Domain.DTOs.Aplicacion;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace MALO.Microservice.Empleosdb.Domain.Interfaces.Infraestructure
 {

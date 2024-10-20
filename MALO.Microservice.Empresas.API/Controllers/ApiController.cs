@@ -1,8 +1,4 @@
-﻿
-
-using MALO.Microservice.Empresas.Domain.Interfaces.Services;
-
-namespace MALO.Microservice.Empresas.API.Controllers
+﻿namespace MALO.Microservice.Empresas.API.Controllers
 {
     public class ApiController : ControllerBase
     {
