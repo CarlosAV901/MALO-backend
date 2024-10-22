@@ -96,7 +96,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowedOrigins");
+app.UseCors("AllowOrigins");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
