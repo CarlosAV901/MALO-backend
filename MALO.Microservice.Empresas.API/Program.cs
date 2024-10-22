@@ -52,9 +52,25 @@ builder.Services.AddAuthentication(options =>
     });
 
 builder.Services.AddAuthorization();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigins",
+        builder =>
+        {
+            builder
+            .AllowCredentials()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .WithMethods("GET", "POST", "OPTIONS")  // Asegúrate de que 'OPTIONS' esté permitido
+                   .SetIsOriginAllowed(origin => true);
+        });
+});
 
 
 var app = builder.Build();
+
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";  // Usa 8080 como valor por defecto si no se define el puerto
+app.Urls.Add($"http://*:{port}");
 
 app.UseCors(c => c.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
