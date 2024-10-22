@@ -54,8 +54,10 @@ builder.Services.AddCors(options =>
         {
             builder.WithOrigins("https://malo-zeta.vercel.app/")
             .AllowCredentials()
-            .AllowAnyHeader()
-            .AllowAnyMethod();
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .WithMethods("GET", "POST", "OPTIONS")  // Asegúrate de que 'OPTIONS' esté permitido
+                   .SetIsOriginAllowed(origin => true);
         });
 });
 
