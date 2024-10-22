@@ -52,7 +52,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowOrigins",
         builder =>
         {
-            builder
+            builder.WithOrigins("https://malo-zeta.vercel.app/")
             .AllowCredentials()
             .AllowAnyHeader()
             .AllowAnyMethod();
