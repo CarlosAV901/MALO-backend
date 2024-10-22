@@ -11,6 +11,13 @@
         public DbSet<EmpresaDto> empresasDto { get; set; }
         public DbSet<ConsultaEmpresaPorIdDto> consultaEmpresaPorIdDtos { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<InsertarEmpresaDto>().HasNoKey();
+        }
+
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

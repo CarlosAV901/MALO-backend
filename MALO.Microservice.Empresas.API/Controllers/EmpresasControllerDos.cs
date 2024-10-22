@@ -33,7 +33,6 @@ namespace MALO.Microservice.Empresas.API.Controllers
         [ProducesResponseType(typeof(EmpresaDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        [Authorize]
         public async ValueTask<IActionResult> GetEmpresa()
         {
             var empresa = await _appController.EmpresaPresenter.GetEmpresa();
@@ -76,16 +75,16 @@ namespace MALO.Microservice.Empresas.API.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> AgregarEmpresa([FromBody] EmpresaDto empresaDto)
+        public async Task<IActionResult> AgregarEmpresa([FromBody] InsertarEmpresaDto insertarEmpresaDto)
         {
-            if (empresaDto == null || string.IsNullOrEmpty(empresaDto.Nombre))
+            if (insertarEmpresaDto == null || string.IsNullOrEmpty(insertarEmpresaDto.nombre))
             {
                 return BadRequest("El nombre de la empresa es requerido.");
             }
 
             try
             {
-                var resultado = await _appController.EmpresaPresenter.AddEmpresa(empresaDto);
+                var resultado = await _appController.EmpresaPresenter.AddEmpresa(insertarEmpresaDto);
                 return Ok(resultado);
             }
             catch (Exception ex)

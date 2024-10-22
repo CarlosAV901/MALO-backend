@@ -34,9 +34,9 @@ namespace MALO.Microservice.Empresas.Aplication.Presenters
             return await _unitRepository.EmpresaInfraestructure.GetEmpresaPorId(empresaId);
         }
 
-        public async Task<string> AddEmpresa(EmpresaDto empresaDto)
+        public async Task<string> AddEmpresa(InsertarEmpresaDto insertarEmpresaDto)
         {
-            return await _unitRepository.EmpresaInfraestructure.AddEmpresa(empresaDto);
+            return await _unitRepository.EmpresaInfraestructure.AddEmpresa(insertarEmpresaDto);
         }
 
         /// <summary>

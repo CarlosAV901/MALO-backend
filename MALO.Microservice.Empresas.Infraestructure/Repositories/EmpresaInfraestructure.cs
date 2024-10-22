@@ -36,9 +36,9 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
                 // Ejecutar el stored procedure
                 SqlParameter[] parameters =
                 {
-            resultadoBD,
-            NumError
-        };
+                    resultadoBD,
+                    NumError
+                };
                 string sqlQuery = "EXEC dbo.SP_ConsultarEmpresas @Resultado OUTPUT, @NumError OUTPUT";
                 var empresas = await _context.empresasDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
 
@@ -117,7 +117,7 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
         }
 
 
-        public async Task<string> AddEmpresa(EmpresaDto empresaDto)
+        public async Task<string> AddEmpresa(InsertarEmpresaDto insertarEmpresaDto)
         {
             try
             {
@@ -142,34 +142,48 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
                 {
                     ParameterName = "Nombre",
                     SqlDbType = SqlDbType.NVarChar,
-                    Value = empresaDto.Nombre
+                    Value = insertarEmpresaDto.nombre
                 };
 
                 var industriaParam = new SqlParameter
                 {
                     ParameterName = "Industria",
                     SqlDbType = SqlDbType.NVarChar,
-                    Value = (object)empresaDto.Industria ?? DBNull.Value
+                    Value = (object)insertarEmpresaDto.industria ?? DBNull.Value
                 };
 
                 var ubicacionParam = new SqlParameter
                 {
                     ParameterName = "Ubicacion",
                     SqlDbType = SqlDbType.NVarChar,
-                    Value = (object)empresaDto.Ubicacion ?? DBNull.Value
+                    Value = (object)insertarEmpresaDto.ubicacion ?? DBNull.Value
+                };
+                var contrasenaParam = new SqlParameter
+                {
+                    ParameterName = "Contrasena",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Value = insertarEmpresaDto.contrasena
+                };
+                var emailParam = new SqlParameter
+                {
+                    ParameterName = "Email",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Value = insertarEmpresaDto.email
                 };
 
                 // Ejecutar el procedimiento almacenado
                 SqlParameter[] parameters =
                 {
-            nombreParam,
-            industriaParam,
-            ubicacionParam,
-            resultadoBD,
-            numError
-        };
+                    nombreParam,
+                    industriaParam,
+                    ubicacionParam,
+                    contrasenaParam,
+                    emailParam,
+                    resultadoBD,
+                    numError
+                };
 
-                string sqlQuery = "EXEC dbo.SP_AgregarEmpresa @Nombre, @Industria, @Ubicacion, @Resultado OUTPUT, @NumError OUTPUT";
+                string sqlQuery = "EXEC dbo.SP_AgregarEmpresa @Nombre, @Industria, @Contrasena, @Email, @Ubicacion, @Resultado OUTPUT, @NumError OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
                 // Verifica el número de error
@@ -243,6 +257,13 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
                     Value = (object)empresaDto.Ubicacion ?? DBNull.Value
                 };
 
+                var emailParam = new SqlParameter
+                {
+                    ParameterName = "email",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Value = empresaDto.Email
+                };
+
                 // Ejecutar el procedimiento almacenado
                 SqlParameter[] parameters =
                 {
@@ -250,11 +271,12 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
                     nombreParam,
                     industriaParam,
                     ubicacionParam,
+                    emailParam,
                     resultadoBD,
                     numError
                 };
 
-                string sqlQuery = "EXEC dbo.SP_ActualizarEmpresaPorId @Id, @Nombre, @Industria, @Ubicacion, @Resultado OUTPUT, @NumError OUTPUT";
+                string sqlQuery = "EXEC dbo.SP_ActualizarEmpresaPorId @Id, @Nombre, @Industria, @Email, @Ubicacion, @Resultado OUTPUT, @NumError OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
                 // Verifica el número de error
