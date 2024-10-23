@@ -13,7 +13,7 @@
             .Configure<ConnectionsSettings>(connectionSettingsSection)
             .AddDbContext<ManosALaObraContextEmpresasDos>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DbConnection"),
+                options.UseSqlServer( Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ?? configuration.GetConnectionString("DbConnection"),
                 sqlServerOptionsAction: sqlOptions =>
                 {
                     sqlOptions.EnableRetryOnFailure(

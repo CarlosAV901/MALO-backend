@@ -68,15 +68,11 @@ var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";  // Usa 8080 co
 app.Urls.Add($"http://*:{port}");
 
 // Configure the HTTP request pipeline.
-if (Environment.GetEnvironmentVariable("ASPNETCORE_SWAGGER_UI_ACTIVE") == "On"
-    || app.Environment.IsDevelopment())
+if (Environment.GetEnvironmentVariable("ASPNETCORE_SWAGGER_UI_ACTIVE") == "On" || app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Environment.IsProduction())
 {
     app.UseSession();
     app.UseDeveloperExceptionPage();
-    // Enable middleware to serve generated Swagger as a JSON endpoint.
     app.UseSwagger();
-    // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-    // specifying the Swagger JSON endpoint.
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "GI.GestorInventarios.API");
@@ -87,18 +83,10 @@ if (Environment.GetEnvironmentVariable("ASPNETCORE_SWAGGER_UI_ACTIVE") == "On"
     });
 }
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "GI.GestorInventarios.API");
-        c.DefaultModelsExpandDepth(-1);
-        c.InjectStylesheet("./swagger/ui/custom.css");
-        c.DisplayRequestDuration();
-        c.RoutePrefix = string.Empty;
-    });
+    app.UseSwaggerUI();
 }
 
 app.UseCors("AllowOrigins");
