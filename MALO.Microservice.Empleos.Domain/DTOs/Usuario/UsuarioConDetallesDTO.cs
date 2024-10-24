@@ -11,9 +11,9 @@
         public string apellido { get; set; }
         public string telefono { get; set; }
         public string rol { get; set; }
-        public int estado_id { get; set; }
-        public int municipio_id { get; set; }
-        public int localidad_id { get; set; }
+        public string estado { get; set; }
+        public string municipio { get; set; }
+        public string localidad { get; set; }
         public string? Habilidades { get; set; }
         public string? Experiencias { get; set; }
         public string? ImagenPerfil { get; set; }

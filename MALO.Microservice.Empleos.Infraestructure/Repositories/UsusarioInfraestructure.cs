@@ -130,9 +130,9 @@
                 var contrasena = new SqlParameter { ParameterName = "contrasena", SqlDbType= SqlDbType.NVarChar, Value = usuarioInsertarDto.contrasena };
                 var fecha_nacimiento = new SqlParameter { ParameterName = "fecha_nacimiento" ,SqlDbType = SqlDbType.Date, Value = usuarioInsertarDto.fecha_nacimiento};
                 var telefono = new SqlParameter { ParameterName = "telefono", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.telefono };
-                var estado_id = new SqlParameter { ParameterName = "estado_id" , SqlDbType = SqlDbType.Int, Value = usuarioInsertarDto.estado_id };
-                var municipio_id = new SqlParameter { ParameterName = "municipio_id", SqlDbType = SqlDbType.Int, Value = usuarioInsertarDto.municipio_id };
-                var localidad_id = new SqlParameter { ParameterName = "localidad_id", SqlDbType = SqlDbType.Int, Value = usuarioInsertarDto.localidad_id };
+                var estado = new SqlParameter { ParameterName = "estado" , SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.estado };
+                var municipio = new SqlParameter { ParameterName = "municipio", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.municipio };
+                var localidad = new SqlParameter { ParameterName = "localidad", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.localidad };
                 var Usuario_id = new SqlParameter { ParameterName = "Usuario_id", SqlDbType = SqlDbType.UniqueIdentifier, Direction = ParameterDirection.Output };
                 var habilidad = new SqlParameter { ParameterName = "habilidad", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.habilidades };
                 var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.descripcion };
@@ -146,9 +146,9 @@
                     contrasena,
                     fecha_nacimiento,
                     telefono,
-                    estado_id,
-                    municipio_id,
-                    localidad_id,
+                    estado,
+                    municipio,
+                    localidad,
                     Usuario_id,
                     habilidad,
                     descripcion,
@@ -161,9 +161,9 @@
                     "@contrasena, " +
                     "@fecha_nacimiento," +
                     "@telefono, " +
-                    "@estado_id," +
-                    "@municipio_id," +
-                    "@localidad_id," +
+                    "@estado," +
+                    "@municipio," +
+                    "@localidad," +
                     "@Usuario_id OUTPUT," +
                     "@habilidad," +
                     "@descripcion," +
@@ -227,9 +227,9 @@
                 var apellido = new SqlParameter { ParameterName = "apellido", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.apellido ?? usuarioExistene.apellido };
                 var email = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.email ?? usuarioExistene.email };
                 var telefono = new SqlParameter { ParameterName = "telefono", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.telefono ?? usuarioExistene.email };
-                var estado_id = new SqlParameter { ParameterName = "estado_id", SqlDbType = SqlDbType.Int, Value = usuarioExistene.estado_id};
-                var municipio_id = new SqlParameter { ParameterName = "municipio_id", SqlDbType = SqlDbType.Int, Value = actualizarUsuarioDTO.municipio_id != 0 ? actualizarUsuarioDTO.municipio_id : usuarioExistene.municipio_id};
-                var localidad_id = new SqlParameter { ParameterName = "localidad_id", SqlDbType = SqlDbType.Int, Value = actualizarUsuarioDTO.municipio_id != 0 ? actualizarUsuarioDTO.localidad_id : usuarioExistene.localidad_id };
+                var estado = new SqlParameter { ParameterName = "estado", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.estado};
+                var municipio = new SqlParameter { ParameterName = "municipio", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.municipio };
+                var localidad = new SqlParameter { ParameterName = "localidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.localidad};
                 var habilidad = new SqlParameter { ParameterName = "habilidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.habilidades ?? usuarioExistene.Habilidades};
                 var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.descripcion ?? usuarioExistene.Experiencias };
                 var imagen_perfil = new SqlParameter { ParameterName = "imagen_perfil", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.imagen_perfil ?? usuarioExistene.ImagenPerfil};
@@ -241,15 +241,15 @@
                     apellido,
                     email,
                     telefono,
-                    estado_id,
-                    municipio_id,
-                    localidad_id,
+                    estado,
+                    municipio,
+                    localidad,
                     habilidad,
                     descripcion,
                     imagen_perfil
                 };
 
-                string sqlQuery = "EXEC sp_ActualizarUsuario @UsuarioId, @nombre, @apellido, @email, @telefono, @estado_id, @municipio_id, @localidad_id, @habilidad, @descripcion, @imagen_perfil";
+                string sqlQuery = "EXEC sp_ActualizarUsuario @UsuarioId, @nombre, @apellido, @email, @telefono, @estado, @municipio, @localidad, @habilidad, @descripcion, @imagen_perfil";
 
                 var dataSp = await _context.actualizarUsuarioDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
 
