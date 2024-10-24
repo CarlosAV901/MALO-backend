@@ -15,10 +15,6 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
 
         public DbSet<LoginDTO> loginDto { get; set; }
 
-        public DbSet<InsertarRolDTO> insertarRolDTOs {get; set;}
-
-        public DbSet<ObtenerRolesDTO> obtenerRolesDTO {get; set;}
-        public DbSet<ActualizarRolDTO> actualizarRolDTO {get; set;}
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,7 +24,6 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
             // Configurar UsuarioInsertarDto como una entidad sin clave
             modelBuilder.Entity<UsuarioInsertarDto>().HasNoKey();
 
-            modelBuilder.Entity<InsertarRolDTO>().HasNoKey();
 
             modelBuilder.Entity<LoginDTO>().HasNoKey();
         }

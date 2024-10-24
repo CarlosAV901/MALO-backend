@@ -16,5 +16,10 @@ namespace MALO.Microservice.Empresas.Aplication.Controllers
         }
 
         public IEmpresaPresenter EmpresaPresenter => new EmpresaPresenter(_unitRepository, _mapper);
+
+        public string GetJwtConfigValue(string key)
+        {
+            return _configuration[$"Jwt:{key}"];
+        }
     }
 }
