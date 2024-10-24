@@ -38,7 +38,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     resultadoBD,
                     NumError
                 };
-                string sqlQuery = "EXEC dbo.SP_ConsultarEmpleos @Resultado OUTPUT, @NumError OUTPUT";
+                string sqlQuery = "EXEC dbo.SP_ConsultarEmpleoConMultimedia @Resultado OUTPUT, @NumError OUTPUT";
                 var dataSP = await _context.empleoDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
                 return dataSP;
             }
