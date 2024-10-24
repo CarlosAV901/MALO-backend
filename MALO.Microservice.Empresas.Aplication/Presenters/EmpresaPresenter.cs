@@ -60,5 +60,10 @@ namespace MALO.Microservice.Empresas.Aplication.Presenters
             // Llama a la infraestructura para eliminar
             return await _unitRepository.EmpresaInfraestructure.DeleteEmpresa(empresaDto);
         }
+
+        public async Task<EmpresaDto> ValidarEmpresa(string email, string contrasena)
+        {
+            return await _unitRepository.EmpresaInfraestructure.ValidarEmpresa(email, contrasena);
+        }
     }
 }
