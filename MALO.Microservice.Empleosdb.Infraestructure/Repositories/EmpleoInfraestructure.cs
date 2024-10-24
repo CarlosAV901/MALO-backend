@@ -79,7 +79,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     NumError
                 };
 
-                string sqlQuery = "EXEC dbo.SP_ConsultarEmpleoId @Empleo_id, @Resultado = @Resultado OUTPUT, @NumError = @NumError OUTPUT";
+                string sqlQuery = "EXEC SP_ConsultarEmpleoConMultimediaPorId @Empleo_id, @Resultado = @Resultado OUTPUT, @NumError = @NumError OUTPUT";
                 var dataSP = await _context.empleoDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
                 return dataSP.FirstOrDefault();
             }
@@ -126,12 +126,6 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     SqlDbType = SqlDbType.UniqueIdentifier,
                     Value = request.empresa_id
                 };
-                var FechaPublicacion = new SqlParameter
-                {
-                    ParameterName = "Fecha_publicacion",
-                    SqlDbType = SqlDbType.Date,
-                    Value = request.fecha_publicacion
-                };
                 var Ubicacion = new SqlParameter
                 {
                     ParameterName = "Ubicacion",
@@ -151,22 +145,43 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     SqlDbType = SqlDbType.Money,
                     Value = request.salario_maximo
                 };
+                var multimediaNombre = new SqlParameter
+                {
+                    ParameterName = "multimediaNombre",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Value = request.multimediaNombre
+                };
+                var multimediaTipo = new SqlParameter
+                {
+                    ParameterName = "multimediaTipo",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Value = request.multimediaTipo
+                };
+                var multimediaContenido = new SqlParameter
+                {
+                    ParameterName = "multimediaContenido",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Value = request.multimediaContenido
+                };
+
 
                 SqlParameter[] parameters =
                 {
                     Titulo,
                     Descripcion,
                     EmpresaId,
-                    FechaPublicacion,
                     Ubicacion,
                     SalarioMinimo,
                     SalarioMaximo,
+                    multimediaNombre,
+                    multimediaTipo,
+                    multimediaContenido,
                     resultadoBD,
                     NumError
                 };
 
-                string sqlQuery = "EXEC dbo.SP_AgregarEmpleo @Titulo, @Descripcion, @Empresa_id, @Fecha_publicacion, " +
-                                  "@Ubicacion, @Salario_minimo, @Salario_maximo, @Resultado OUTPUT, @NumError OUTPUT";
+                string sqlQuery = "EXEC dbo.SP_InsertarEmpleoConMultimedia @Titulo, @Descripcion, @Empresa_id, " +
+                                  "@Ubicacion, @Salario_minimo, @Salario_maximo, @multimediaNombre, @multimediaTipo, @multimediaContenido ,@Resultado OUTPUT, @NumError OUTPUT";
 
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
