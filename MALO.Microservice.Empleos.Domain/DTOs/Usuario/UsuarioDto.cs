@@ -9,7 +9,7 @@ namespace MALO.Microservice.Empleos.Domain.DTOs.Usuario
         public string email { get; set; }
         public string contrasena { get; set; }
         public DateTime fecha_registro { get; set; }
-        public int rol_id { get; set; }
+        public string rol { get; set; }
         public DateTime fecha_nacimiento { get; set; }
         public string apellido { get; set; }
         public string telefono { get; set; }

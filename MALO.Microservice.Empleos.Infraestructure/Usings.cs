@@ -7,7 +7,6 @@ global using MALO.Microservice.Empleos.Aplication.Commons;
 global using MALO.Microservice.Empleos.Infraestructure.DataContexts;
 global using System.Data;
 global using Microsoft.Data.SqlClient;
-global using MALO.Microservice.Empleos.Domain.DTOs.Rol;
 global using MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure;
 global using MALO.Microservice.Empleos.Aplication.Interfaces.Persistance;
 global using MALO.Microservice.Empleos.Domain.ValueObjects;

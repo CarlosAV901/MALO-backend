@@ -8,5 +8,6 @@
         public string Email { get; set; }
         public string Industria { get; set; }
         public string Ubicacion { get; set; }
+        public string Rol {  get; set; }
     }
 }

@@ -8,5 +8,6 @@ namespace MALO.Microservice.Empresas.Domain.Interfaces.Services
         Task<string> AddEmpresa(InsertarEmpresaDto insertarEmpresaDto);
         Task<string> UpdateEmpresa(ActualizarEmpresaDto empresaDto);
         Task<string> DeleteEmpresa(EliminarEmpresaDto empresaDto);
+        Task<EmpresaDto> ValidarEmpresa(string email, string contrasena);
     }
 }

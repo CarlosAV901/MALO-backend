@@ -83,10 +83,10 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
 
                 SqlParameter[] parameters =
                 {
-            empresaIdParam,
-            resultadoBD,
-            numError
-        };
+                    empresaIdParam,
+                    resultadoBD,
+                    numError
+                };
 
                 // Ejecutar el stored procedure
                 string sqlQuery = "EXEC dbo.SP_ConsultarEmpresaPorId @EmpresaId, @Resultado OUTPUT, @NumError OUTPUT";
@@ -332,10 +332,10 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
                 // Ejecutar el procedimiento almacenado
                 SqlParameter[] parameters =
                 {
-            idParam,
-            resultadoBD,
-            numError
-        };
+                    idParam,
+                    resultadoBD,
+                    numError
+                };
 
                 string sqlQuery = "EXEC dbo.SP_EliminarEmpresaPorId @EmpresaId, @Resultado OUTPUT, @NumError OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
@@ -354,6 +354,41 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
             catch (SqlException ex)
             {
                 throw new Exception("Error al eliminar la empresa", ex);
+            }
+        }
+
+        public async Task<EmpresaDto> ValidarEmpresa(string email, string contrasena)
+        {
+            try
+            {
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.NVarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output};
+                var contrasenaEmpresa = new SqlParameter { ParameterName = "contrasena", SqlDbType = SqlDbType.NVarChar, Value = contrasena };
+                var emailEmpresa = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value = email };
+
+                SqlParameter[] parameters =
+                {
+                    emailEmpresa,
+                    contrasenaEmpresa,
+                    resultadoDb,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC dbo.SP_ValidarEmpresa @email, @contrasena, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSP = await _context.empresasDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                if((int)NumError.Value != 1)
+                {
+                    throw new Exception((string)resultadoDb.Value);
+                }
+
+                return dataSP.FirstOrDefault();
+
+
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error al validar a la empresa");
             }
         }
     }

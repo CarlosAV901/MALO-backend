@@ -10,6 +10,5 @@ namespace MALO.Microservice.Empleos.Aplication.Interfaces.Persistance
 
         IUsuarioInfraestructure usuarioInfraestructure { get; }
 
-        IRoleInfraestructure roleInfraestructure { get; }
     }
 }

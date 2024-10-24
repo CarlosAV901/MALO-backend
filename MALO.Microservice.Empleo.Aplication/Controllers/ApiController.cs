@@ -19,7 +19,6 @@ namespace MALO.Microservice.Empleos.Aplication.Controllers
 
         public IUserPresenter UserPresenter => new UserPresenter(_unitRepository, _mapper);
 
-        public IRolPresenter RolPresenter => new RolPresenters(_unitRepository, _mapper);
 
         // Implementación para obtener valores de configuración de JWT
         public string GetJwtConfigValue(string key)
