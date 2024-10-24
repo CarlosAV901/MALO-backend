@@ -44,7 +44,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
             {
             new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub, usuarioConDetallesDTO.UsuarioId.ToString()),
             new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email, usuarioConDetallesDTO.email),
-            new Claim("rol", usuarioConDetallesDTO.Rol.ToString())
+            new Claim("rol", usuarioConDetallesDTO.rol.ToString())
         };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appController.GetJwtConfigValue("Key")));

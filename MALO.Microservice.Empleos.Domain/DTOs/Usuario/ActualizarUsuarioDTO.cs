@@ -8,7 +8,6 @@
         public string? email { get; set; }
         public string? apellido { get; set; }
         public string? telefono { get; set; }
-        public int? rol_id { get; set; }
         public int? estado_id { get; set; }
         public int? municipio_id { get; set; }
         public int? localidad_id { get; set; }

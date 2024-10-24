@@ -34,8 +34,6 @@ namespace MALO.Microservice.Empleos.Infraestructure
         //
         public IUsuarioInfraestructure usuarioInfraestructure => new UsusarioInfraestructure(_context);
 
-        public IRoleInfraestructure roleInfraestructure => new RolesInfraestructure(_context);
-
 
         public async ValueTask<bool> Complete()
         {

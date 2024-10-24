@@ -10,8 +10,7 @@
         public DateTime fecha_nacimiento { get; set; }
         public string apellido { get; set; }
         public string telefono { get; set; }
-        public string Rol { get; set; }
-        public string RolDescripcion { get; set; }
+        public string rol { get; set; }
         public int estado_id { get; set; }
         public int municipio_id { get; set; }
         public int localidad_id { get; set; }

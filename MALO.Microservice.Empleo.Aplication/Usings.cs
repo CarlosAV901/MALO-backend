@@ -1,7 +1,6 @@
 ﻿global using MALO.Microservice.Empleos.Domain.Interfaces.Services;
 global using AutoMapper;
 global using MALO.Microservice.Empleos.Aplication.Interfaces.Persistance;
-global using MALO.Microservice.Empleos.Domain.DTOs.Rol;
 global using MALO.Microservice.Empleos.Aplication.Interfaces.Controllers;
 global using MALO.Microservice.Empleos.Aplication.Presenters;
 global using Microsoft.Extensions.Configuration;

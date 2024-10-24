@@ -10,7 +10,6 @@ namespace MALO.Microservice.Empleos.Domain.DTOs.Usuario
         public string contrasena { get; set; }
         public DateTime fecha_nacimiento { get; set; }
         public string telefono { get; set; }
-        public int rol_id { get; set; }
         public int estado_id { get; set; }
         public int municipio_id { get; set; }
         public int localidad_id { get; set; }
