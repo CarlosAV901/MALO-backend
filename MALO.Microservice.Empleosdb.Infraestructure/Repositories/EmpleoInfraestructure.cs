@@ -145,6 +145,12 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     SqlDbType = SqlDbType.Money,
                     Value = request.salario_maximo
                 };
+                var horaraio = new SqlParameter
+                {
+                    ParameterName = "horario",
+                    SqlDbType = SqlDbType.VarChar,
+                    Value = request.horario
+                };
                 var multimediaNombre = new SqlParameter
                 {
                     ParameterName = "multimediaNombre",
@@ -173,6 +179,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     Ubicacion,
                     SalarioMinimo,
                     SalarioMaximo,
+                    horaraio,
                     multimediaNombre,
                     multimediaTipo,
                     multimediaContenido,
@@ -181,7 +188,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 };
 
                 string sqlQuery = "EXEC dbo.SP_InsertarEmpleoConMultimedia @Titulo, @Descripcion, @Empresa_id, " +
-                                  "@Ubicacion, @Salario_minimo, @Salario_maximo, @multimediaNombre, @multimediaTipo, @multimediaContenido ,@Resultado OUTPUT, @NumError OUTPUT";
+                                  "@Ubicacion, @Salario_minimo, @Salario_maximo, @horario, @multimediaNombre, @multimediaTipo, @multimediaContenido ,@Resultado OUTPUT, @NumError OUTPUT";
 
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
@@ -230,18 +237,6 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     Size = 255,
                     Value = request.descripcion
                 };
-                var EmpresaId = new SqlParameter
-                {
-                    ParameterName = "Empresa_id",
-                    SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = request.empresa_id
-                };
-                var FechaPublicacion = new SqlParameter
-                {
-                    ParameterName = "Fecha_publicacion",
-                    SqlDbType = SqlDbType.Date,
-                    Value = request.fecha_publicacion
-                };
                 var Ubicacion = new SqlParameter
                 {
                     ParameterName = "Ubicacion",
@@ -261,23 +256,49 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     SqlDbType = SqlDbType.Money,
                     Value = request.salario_maximo
                 };
+                var horario = new SqlParameter
+                {
+                    ParameterName = "horario",
+                    SqlDbType = SqlDbType.VarChar,
+                    Value = request.horario
+                };
+                var multimediaNombre = new SqlParameter
+                {
+                    ParameterName = "multimediaNombre",
+                    SqlDbType = SqlDbType.VarChar,
+                    Value = request.multimediaNombre
+                };
+                var multimediaTipo = new SqlParameter
+                {
+                    ParameterName = "multimediaTipo",
+                    SqlDbType = SqlDbType.VarChar,
+                    Value = request.multimediaTipo
+                };
+                var multimediaContenido = new SqlParameter
+                {
+                    ParameterName = "multimediaContenido",
+                    SqlDbType = SqlDbType.VarChar,
+                    Value = request.multimediaContenido
+                };
 
                 SqlParameter[] parameters =
                 {
                     EmpleoId,
                     Titulo,
                     Descripcion,
-                    EmpresaId,
-                    FechaPublicacion,
                     Ubicacion,
                     SalarioMinimo,
                     SalarioMaximo,
+                    horario,
+                    multimediaNombre,
+                    multimediaTipo,
+                    multimediaContenido,
                     resultadoBD,
                     NumError
                 };
 
-                string sqlQuery = "EXEC dbo.SP_ActualizarEmpleo @Empleo_id, @Titulo, @Descripcion, @Empresa_id, @Fecha_publicacion, " +
-                                  "@Ubicacion, @Salario_minimo, @Salario_maximo, @Resultado OUTPUT, @NumError OUTPUT";
+                string sqlQuery = "EXEC SP_ActualizarEmpleoConMultimedia @Empleo_id, @Titulo, @Descripcion, " +
+                                  "@Ubicacion, @Salario_minimo, @Salario_maximo, @horario, @multimediaNombre, @multimediaTipo, @multimediaContenido, @Resultado OUTPUT, @NumError OUTPUT";
 
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
@@ -321,7 +342,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     NumError
                 };
 
-                string sqlQuery = "EXEC dbo.SP_EliminarEmpleoId @Empleo_id, @Resultado = @Resultado OUTPUT, @NumError = @NumError OUTPUT";
+                string sqlQuery = "EXEC SP_EliminarEmpleoConMultimedia @Empleo_id, @Resultado = @Resultado OUTPUT, @NumError = @NumError OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
                 return resultadoBD.Value.ToString();
