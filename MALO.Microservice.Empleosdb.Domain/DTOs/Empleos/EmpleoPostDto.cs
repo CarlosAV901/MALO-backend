@@ -14,6 +14,7 @@ namespace MALO.Microservice.Empleosdb.Domain.DTOs.Empleos
         public string ubicacion { get; set; }
         public decimal salario_minimo { get; set; }
         public decimal salario_maximo { get; set; }
+        public string horario { get; set; }
         public string multimediaNombre { get; set; }
         public string multimediaTipo { get; set; }
         public string multimediaContenido { get; set; }

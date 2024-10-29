@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace MALO.Microservice.Empleosdb.Domain.DTOs.Usuario
+﻿namespace MALO.Microservice.Empleosdb.Domain.DTOs.Usuario
 {
     public class EmpleosDto
     {
@@ -13,6 +11,7 @@ namespace MALO.Microservice.Empleosdb.Domain.DTOs.Usuario
         public string ubicacion { get; set; }
         public decimal salario_minimo { get; set; }
         public decimal salario_maximo { get; set; }
+        public string horario {  get; set; }
         public Guid multimediaId { get; set; }
         public string multimediaNombre { get; set; }
         public string multimediaTipo { get; set; }
