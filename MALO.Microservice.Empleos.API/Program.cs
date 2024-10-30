@@ -1,5 +1,8 @@
 
 
+using MALO.Microservice.Empleos.Infraestructure.Services;
+using MALO.Microservice.Empleos.Infraestructure.Settings;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -24,6 +27,10 @@ builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<GmailSettings>(builder.Configuration.GetSection("GmailSettings"));
+builder.Services.AddTransient<IMessage, EmailService>();
+
 
 //Configuracion JWT
 builder.Services.AddAuthentication(options =>
