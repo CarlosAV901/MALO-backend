@@ -12,6 +12,8 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
         public DbSet<UsuarioDto>usuarioDto {get; set;}
         public DbSet<UsuarioConDetallesDTO>usuarioDtoDetalles {get; set;}
         public DbSet<ActualizarUsuarioDTO> actualizarUsuarioDto { get; set;}
+        public DbSet<UsuarioInsertarDto> usuarioInsertarDtos {get; set;}
+        public DbSet<ConfirmarUsusarioDTO> confirmarUsusarioDTO {get; set;}
 
         public DbSet<LoginDTO> loginDto { get; set; }
 
@@ -23,6 +25,7 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
 
             // Configurar UsuarioInsertarDto como una entidad sin clave
             modelBuilder.Entity<UsuarioInsertarDto>().HasNoKey();
+            modelBuilder.Entity<ConfirmarUsusarioDTO>().HasNoKey();
 
 
             modelBuilder.Entity<LoginDTO>().HasNoKey();

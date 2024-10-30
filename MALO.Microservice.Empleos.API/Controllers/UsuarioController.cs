@@ -1,19 +1,25 @@
 ﻿
 
+using MALO.Microservice.Empleos.Infraestructure.Services;
+
 namespace MALO.Microservice.Empleos.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class UsuarioController : ApiController
     {
+        private readonly IMessage _emailService;
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="appController"></param>
-        public UsuarioController(IApiController appController) : base(appController)
+        public UsuarioController(IApiController appController, IMessage emailService) : base(appController)
         {
-
+            _emailService = emailService;
         }
+
+
 
 
 
@@ -103,10 +109,50 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [HttpPost("InsertarUsuario")]
         public async ValueTask<IActionResult> InsertarUsuario([FromBody] UsuarioInsertarDto usuarioInsertarDto)
         {
+
             var usuario = await _appController.UserPresenter.InsertarUsuario(usuarioInsertarDto);
-            return Ok(usuario);
+            
+
+            if (usuario == null)
+            {
+                return BadRequest("No se pudo registrar al usuario");
+            }
+
+
+            await _emailService.SendEmail(usuarioInsertarDto.email, usuarioInsertarDto.token);
+
+
+            return Ok("Usuario registrado. Revisa tu correo para confirmar la cuenta.");
 
         }
+
+
+        [HttpGet("confirmar")]
+        public async Task<IActionResult> ConfirmarCorreo([FromQuery] Guid token)
+        {
+            var resultado = _appController.UserPresenter.ConfirmarUsuario(token);
+
+
+            if(resultado == null)
+            {
+                return BadRequest("Enlace de confirmación inválido o ya utilizado.");
+            }
+
+
+            if(await resultado == "Correo confirmado correctamente")
+            {
+                
+                return Ok("Correo confirmado correctamente.");
+            }
+
+            
+            
+      
+            return BadRequest("Token inválido o expirado.");
+            
+            
+        }
+
 
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]

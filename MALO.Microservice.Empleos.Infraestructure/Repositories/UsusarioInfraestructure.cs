@@ -118,7 +118,7 @@
             }
         }
 
-        public async Task<UsuarioConDetallesDTO> InsertarUsuario(UsuarioInsertarDto usuarioInsertarDto)
+        public async Task<string> InsertarUsuario(UsuarioInsertarDto usuarioInsertarDto)
         {
             try
             {
@@ -137,6 +137,7 @@
                 var habilidad = new SqlParameter { ParameterName = "habilidad", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.habilidades };
                 var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.descripcion };
                 var imagen_perfil = new SqlParameter { ParameterName = "imagen_perfil", SqlDbType = SqlDbType.NVarChar, Value = usuarioInsertarDto.imagen_perfil };
+                var token = new SqlParameter { ParameterName = "token", SqlDbType = SqlDbType.UniqueIdentifier, Direction = ParameterDirection.Output };
 
                 SqlParameter[] parameters =
                 {
@@ -152,7 +153,8 @@
                     Usuario_id,
                     habilidad,
                     descripcion,
-                    imagen_perfil
+                    imagen_perfil,
+                    token
                 };
 
                 string sqlQuery = "EXEC dbo.sp_InsertarUsuario @nombre," +
@@ -167,17 +169,47 @@
                     "@Usuario_id OUTPUT," +
                     "@habilidad," +
                     "@descripcion," +
-                    "@imagen_perfil";
+                    "@imagen_perfil," +
+                    "@token OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
-                // Recuperar el ID generado desde el parámetro de salida
-                var idGenerado = (Guid)Usuario_id.Value;
+                usuarioInsertarDto.token = (Guid)token.Value;
 
-                return await ObtenerUsuarioPorId(idGenerado);
+
+                return "Usuario Insertado correctamente";
+
+
 
             }
             catch(SqlException ex){
                 throw;
+            }
+        }
+
+        public async Task<string> ConfirmarUsuario(Guid token)
+        {
+            try
+            {
+                var tokenParam = new SqlParameter { ParameterName = "token", SqlDbType = SqlDbType.UniqueIdentifier, Value = token };
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    tokenParam,
+                    resultadoDb,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC SP_ConfirmarUsuario @token, @Resultado OUTPUT, @NumError OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return "Correo confirmado correctamente";
+
+
+            }catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
