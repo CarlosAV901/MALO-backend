@@ -122,7 +122,10 @@ namespace MALO.Microservice.Empleos.API.Controllers
             await _emailService.SendEmail(usuarioInsertarDto.email, usuarioInsertarDto.token);
 
 
-            return Ok("Usuario registrado. Revisa tu correo para confirmar la cuenta.");
+            return Ok(new
+            {
+                message = "Usuario registrado. Revisa tu correo para confirmar la cuenta."
+            });
 
         }
 
@@ -142,11 +145,12 @@ namespace MALO.Microservice.Empleos.API.Controllers
             if(await resultado == "Correo confirmado correctamente")
             {
                 
-                return Ok("Correo confirmado correctamente.");
+                return Ok(new
+                {
+                    message = "Correo confirmado correctamente.",
+                    result = true
+                });
             }
-
-            
-            
       
             return BadRequest("Token inválido o expirado.");
             
