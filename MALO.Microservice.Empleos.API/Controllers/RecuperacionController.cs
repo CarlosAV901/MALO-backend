@@ -136,7 +136,8 @@ namespace MALO.Microservice.Empleos.API.Controllers
                 return Ok(new
                 {
                     message = "Token valido, puede continuar",
-                    result = true
+                    result = true,
+                    token_validado = token
                 });
             }
             else
