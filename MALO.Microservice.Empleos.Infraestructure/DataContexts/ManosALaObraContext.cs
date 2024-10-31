@@ -1,4 +1,6 @@
 ﻿
+using MALO.Microservice.Empleos.Domain.DTOs.Recuperacion;
+
 namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
 {
     public class ManosALaObraContext : DbContext
@@ -15,6 +17,9 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
         public DbSet<UsuarioInsertarDto> usuarioInsertarDtos {get; set;}
         public DbSet<ConfirmarUsusarioDTO> confirmarUsusarioDTO {get; set;}
 
+        public DbSet<RecuperacionDTO> recuperacionDTO { get; set;}
+        public DbSet<CambioContrasenaDTO> cambioContrasenaDTO { get; set;}
+
         public DbSet<LoginDTO> loginDto { get; set; }
 
         #endregion
@@ -26,6 +31,8 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
             // Configurar UsuarioInsertarDto como una entidad sin clave
             modelBuilder.Entity<UsuarioInsertarDto>().HasNoKey();
             modelBuilder.Entity<ConfirmarUsusarioDTO>().HasNoKey();
+            modelBuilder.Entity<RecuperacionDTO>().HasNoKey();
+            modelBuilder.Entity<CambioContrasenaDTO>().HasNoKey();
 
 
             modelBuilder.Entity<LoginDTO>().HasNoKey();
