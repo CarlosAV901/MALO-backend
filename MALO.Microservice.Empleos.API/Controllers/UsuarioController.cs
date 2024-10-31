@@ -117,8 +117,8 @@ namespace MALO.Microservice.Empleos.API.Controllers
                 return BadRequest("No se pudo registrar al usuario");
             }
 
-            //var verificationLink = $"https://malo-backend.onrender.com/api/usuario/confirmar?token={usuarioInsertarDto.token}";
-            var verificationLink = $"https://localhost:7181/api/usuario/confirmar?token={usuarioInsertarDto.token}";
+            var verificationLink = $"https://malo-backend.onrender.com/api/usuario/confirmar?token={usuarioInsertarDto.token}";
+            //var verificationLink = $"https://localhost:7181/api/usuario/confirmar?token={usuarioInsertarDto.token}";
             var subject = "Confirma tu cuenta";
             var body = $@"
                     <!DOCTYPE html>
