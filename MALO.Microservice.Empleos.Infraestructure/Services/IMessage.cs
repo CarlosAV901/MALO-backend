@@ -2,6 +2,6 @@
 {
     public interface IMessage
     {
-        Task SendEmail(string email, Guid token);
+        Task SendEmail(string email, string subject, string body);
     }
 }
