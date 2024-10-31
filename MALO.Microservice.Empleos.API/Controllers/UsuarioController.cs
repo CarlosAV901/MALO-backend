@@ -43,7 +43,6 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        [Authorize]
         public async ValueTask<IActionResult> ObtenerUsuarioPorId([FromBody] ObtenerUsuarioPorId request)
         {
             var usuario = await _appController.UserPresenter.ObtenerUsuarioPorId(request.Id);
@@ -70,7 +69,6 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        [Authorize]
         public async ValueTask<IActionResult> ObtenerUsuarios()
         {
             var usuario = await _appController.UserPresenter.ObtenerUsuarios();
@@ -109,7 +107,6 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpPost("InsertarUsuario")]
-        [Authorize]
         public async ValueTask<IActionResult> InsertarUsuario([FromBody] UsuarioInsertarDto usuarioInsertarDto)
         {
 
@@ -205,7 +202,6 @@ namespace MALO.Microservice.Empleos.API.Controllers
 
 
         [HttpGet("confirmar")]
-        [Authorize]
         public async Task<IActionResult> ConfirmarCorreo([FromQuery] Guid token)
         {
             var resultado = _appController.UserPresenter.ConfirmarUsuario(token);
