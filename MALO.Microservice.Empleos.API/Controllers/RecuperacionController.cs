@@ -20,7 +20,6 @@ namespace MALO.Microservice.Empleos.API.Controllers
         }
 
         [HttpPost("solicitar-recuperacion")]
-        [Authorize]
         public async Task<IActionResult> SolicitarRecuperacion([FromBody] RecuperacionDTO request)
         {
             var resulatdo = await _appController.RecuperacionPresenter.GenerarTokenRecuperacion(request.Email);
@@ -128,7 +127,6 @@ namespace MALO.Microservice.Empleos.API.Controllers
         }
 
         [HttpGet("verificar-token")]
-        [Authorize]
         public async Task<IActionResult> VerificarToken([FromQuery] Guid token)
         {
             bool esValido = await _appController.RecuperacionPresenter.VerificarToken(token);
@@ -148,7 +146,6 @@ namespace MALO.Microservice.Empleos.API.Controllers
         }
 
         [HttpPost("cambiar-contrasena")]
-        [Authorize]
         public async Task<IActionResult> ActualizarContrasena([FromBody] CambioContrasenaDTO request)
         {
             var resultado = await _appController.RecuperacionPresenter.ActualizarContrasena(request.token, request.nuevaContrasena);
