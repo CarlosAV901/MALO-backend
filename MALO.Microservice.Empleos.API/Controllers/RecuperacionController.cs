@@ -29,7 +29,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
                 return BadRequest("Error al solicitar la recuperacion");
             }
 
-            var verificationLink = $"https://malo-backend.onrender.com/api/recuperacion/solicitar-recuperacion?token={resulatdo}";
+            var verificationLink = $"https://malo-backend.onrender.com/api/recuperacion/verificar-token?token={resulatdo}";
             //var verificationLink = $"https://localhost:7181/api/recuperacion/verificar-token?token={resulatdo}";
             var subject = "Confirmación de Cambio de Contraseña";
             var body = $@"
