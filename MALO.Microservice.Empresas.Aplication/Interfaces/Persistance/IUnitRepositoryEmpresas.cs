@@ -7,5 +7,6 @@ namespace MALO.Microservice.Empresas.Aplication.Interfaces.Persistance
         bool HasChanges();
 
         IEmpresaInfraestructure EmpresaInfraestructure { get; }
+        IRecuperacionInfraestructure RecuperacionInfraestructure { get; }
     }
 }

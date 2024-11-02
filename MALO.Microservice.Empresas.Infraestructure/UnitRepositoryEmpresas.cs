@@ -34,6 +34,8 @@ namespace MALO.Microservice.Empresas.Infraestructure
         // Adaptación para empresas en lugar de usuarios
         public IEmpresaInfraestructure EmpresaInfraestructure => new EmpresaInfraestructure(_context);
 
+        public IRecuperacionInfraestructure RecuperacionInfraestructure => new RecuperacionInfraestructure(_context);
+
         public async ValueTask<bool> Complete()
         {
             return await _context.SaveChangesAsync() > 0;

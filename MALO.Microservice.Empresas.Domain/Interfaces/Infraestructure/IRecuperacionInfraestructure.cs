@@ -1,6 +1,6 @@
 ﻿
 
-namespace MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure
+namespace MALO.Microservice.Empresas.Domain.Interfaces.Infraestructure
 {
     public interface IRecuperacionInfraestructure
     {
