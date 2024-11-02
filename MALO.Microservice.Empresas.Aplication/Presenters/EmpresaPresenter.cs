@@ -65,5 +65,11 @@ namespace MALO.Microservice.Empresas.Aplication.Presenters
         {
             return await _unitRepository.EmpresaInfraestructure.ValidarEmpresa(email, contrasena);
         }
+
+        
+        public async Task<string> ConfirmarEmpresa(Guid token)
+        {
+            return await _unitRepository.EmpresaInfraestructure.ConfirmarEmpresa(token);
+        }
     }
 }
