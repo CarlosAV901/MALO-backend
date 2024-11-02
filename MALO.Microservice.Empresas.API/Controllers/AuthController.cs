@@ -28,6 +28,11 @@ namespace MALO.Microservice.Empresas.API.Controllers
                 return Unauthorized(new { message = "Correo o contraseña incorrectos" });
             }
 
+            if (!empresa.correo_confirmado)
+            {
+                return Unauthorized("Debe confirmar su correo antes de iniciar sesion.");
+            }
+
             // Generar JWT
             var token = GenerarTokenJWT(empresa);
 

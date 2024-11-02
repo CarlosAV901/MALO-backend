@@ -170,6 +170,8 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
                     SqlDbType = SqlDbType.NVarChar,
                     Value = insertarEmpresaDto.email
                 };
+                var token = new SqlParameter { ParameterName = "token", SqlDbType = SqlDbType.UniqueIdentifier, Direction = ParameterDirection.Output };
+                var empresaId = new SqlParameter { ParameterName = "EmpresaId", SqlDbType = SqlDbType.UniqueIdentifier, Direction = ParameterDirection.Output };
 
                 // Ejecutar el procedimiento almacenado
                 SqlParameter[] parameters =
@@ -180,26 +182,51 @@ namespace MALO.Microservice.Empresas.Infraestructure.Repositories
                     contrasenaParam,
                     emailParam,
                     resultadoBD,
-                    numError
+                    numError,
+                    token,
+                    empresaId
                 };
 
-                string sqlQuery = "EXEC dbo.SP_AgregarEmpresa @Nombre, @Industria, @Contrasena, @Email, @Ubicacion, @Resultado OUTPUT, @NumError OUTPUT";
+                string sqlQuery = "EXEC dbo.SP_AgregarEmpresa @Nombre, @Industria, @Contrasena, @Email, @Ubicacion, @Resultado OUTPUT, @NumError OUTPUT, @token OUTPUT, @EmpresaId OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
-                // Verifica el número de error
-                if (numError.Value != null && (int)numError.Value == 1)
-                {
-                    return resultadoBD.Value.ToString(); // Retornar el resultado exitoso
-                }
-                else
-                {
-                    // Manejo de errores basados en el resultado
-                    throw new Exception(resultadoBD.Value.ToString());
-                }
+                insertarEmpresaDto.token = (Guid)token.Value;
+
+                return "Empresa registrada correctamente";
             }
             catch (SqlException ex)
             {
                 throw new Exception("Error al agregar la empresa", ex);
+            }
+        }
+
+
+
+        public async Task<string> ConfirmarEmpresa(Guid token)
+        {
+            try
+            {
+                var tokenParam = new SqlParameter { ParameterName = "token", SqlDbType = SqlDbType.UniqueIdentifier, Value = token };
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    tokenParam,
+                    resultadoDb,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC SP_ConfirmarEmpresa @token, @Resultado OUTPUT, @NumError OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return "Correo confirmado correctamente";
+
+
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 

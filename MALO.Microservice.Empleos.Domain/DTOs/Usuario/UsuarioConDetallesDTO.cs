@@ -11,6 +11,7 @@
         public string apellido { get; set; }
         public string telefono { get; set; }
         public string rol { get; set; }
+        public bool correo_confirmado { get; set; }
         public string estado { get; set; }
         public string municipio { get; set; }
         public string localidad { get; set; }

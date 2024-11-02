@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MALO.Microservice.Empresas.Domain.DTOs.Empresa
 {
     public class InsertarEmpresaDto
@@ -13,5 +8,6 @@ namespace MALO.Microservice.Empresas.Domain.DTOs.Empresa
         public string ubicacion { get; set; }
         public string contrasena { get; set; }
         public string email { get; set; }
+        public Guid token { get; set; }
     }
 }
