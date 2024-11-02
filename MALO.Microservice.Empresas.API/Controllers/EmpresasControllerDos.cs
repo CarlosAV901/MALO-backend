@@ -93,8 +93,8 @@ namespace MALO.Microservice.Empresas.API.Controllers
                 return BadRequest("No se pudo registrar la empresa, intenta de nuevo");
             }
 
-            //var verificationLink = $"https://malo-backend.onrender.com/api/usuario/confirmar?token={insertarEmpresaDto.token}";
-            var verificationLink = $"https://localhost:8000/api/empresa/confirmar?token={insertarEmpresaDto.token}";
+            var verificationLink = $"https://malo-backend-empresas.onrender.com/api/empresa/confirmar?token={insertarEmpresaDto.token}";
+            //var verificationLink = $"https://localhost:8000/api/empresa/confirmar?token={insertarEmpresaDto.token}";
             var subject = "Confirma tu cuenta";
             var body = $@"
                     <!DOCTYPE html>
