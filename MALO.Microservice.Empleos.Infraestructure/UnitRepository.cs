@@ -36,6 +36,7 @@ namespace MALO.Microservice.Empleos.Infraestructure
 
         public IRecuperacionInfraestructure recuperacionInfraestructure => new RecuperacionInfraestructure(_context);
 
+        public IHabilidadInfraestructure habilidadInfraestructure => new HabilidadInfraestructure(_context);
 
         public async ValueTask<bool> Complete()
         {

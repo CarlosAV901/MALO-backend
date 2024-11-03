@@ -1,4 +1,5 @@
 ﻿
+using MALO.Microservice.Empleos.Domain.DTOs.Habilidad;
 using MALO.Microservice.Empleos.Domain.DTOs.Recuperacion;
 
 namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
@@ -20,6 +21,9 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
         public DbSet<RecuperacionDTO> recuperacionDTO { get; set;}
         public DbSet<CambioContrasenaDTO> cambioContrasenaDTO { get; set;}
 
+        public DbSet<InsertarHabilidadDTO> insertarHabilidadDTO {get; set;}
+        public DbSet<ObtenerHabilidadesDTO> obtenerHabilidadesDTO {get; set;}
+
         public DbSet<LoginDTO> loginDto { get; set; }
 
         #endregion
@@ -34,6 +38,7 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
             modelBuilder.Entity<RecuperacionDTO>().HasNoKey();
             modelBuilder.Entity<CambioContrasenaDTO>().HasNoKey();
 
+            modelBuilder.Entity<InsertarHabilidadDTO>().HasNoKey();
 
             modelBuilder.Entity<LoginDTO>().HasNoKey();
         }
