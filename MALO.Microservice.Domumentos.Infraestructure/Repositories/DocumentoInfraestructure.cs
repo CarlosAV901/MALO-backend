@@ -86,19 +86,13 @@ namespace MALO.Microservice.Documentos.Infraestructure.Repositories
                 var Contenido = new SqlParameter
                 {
                     ParameterName = "contenido",
-                    SqlDbType = SqlDbType.VarBinary,
+                    SqlDbType = SqlDbType.NVarChar,
                     Value = request.contenido
                 };
-                var FechaSubida = new SqlParameter
-                {
-                    ParameterName = "fecha_subida",
-                    SqlDbType = SqlDbType.DateTime,
-                    Value = request.fecha_Subida
-                };
 
-                SqlParameter[] parameters = { UsuarioId, Nombre, Tipo, Contenido, FechaSubida, resultadoBD, NumError };
+                SqlParameter[] parameters = { UsuarioId, Nombre, Tipo, Contenido, resultadoBD, NumError };
 
-                string sqlQuery = "EXEC dbo.SP_AgregarDocumento @usuario_id, @nombre, @tipo, @contenido, @fecha_subida, @Resultado OUTPUT, @NumError OUTPUT";
+                string sqlQuery = "EXEC dbo.SP_AgregarDocumento @usuario_id, @nombre, @tipo, @contenido, @Resultado OUTPUT, @NumError OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
                 return resultadoBD.Value.ToString();
