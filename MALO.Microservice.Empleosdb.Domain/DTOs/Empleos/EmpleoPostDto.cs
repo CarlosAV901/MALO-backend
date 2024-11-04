@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using Microsoft.AspNetCore.Http;
 
 namespace MALO.Microservice.Empleosdb.Domain.DTOs.Empleos
 {
@@ -16,7 +14,9 @@ namespace MALO.Microservice.Empleosdb.Domain.DTOs.Empleos
         public decimal salario_maximo { get; set; }
         public string horario { get; set; }
         public string multimediaNombre { get; set; }
-        public string multimediaTipo { get; set; }
-        public string multimediaContenido { get; set; }
+        public string? multimediaTipo { get; set; }
+        public string? multimediaContenido { get; set; }
+
+//        public IFormFile? archivo { get; set; }
     }
 }
