@@ -29,5 +29,10 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
         {
             return await _unitRepository.habilidadInfraestructure.InsertarHabilidad(descripcion);
         }
+
+        public async Task<ActualizarHabilidadDTO> ActualizarHabilidad(ActualizarHabilidadDTO actualizarHabilidadDTO)
+        {
+            return await _unitRepository.habilidadInfraestructure.ActualizarHabilidad(actualizarHabilidadDTO);
+        }
     }
 }

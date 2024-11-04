@@ -93,5 +93,36 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
             }
         }
 
+        public async Task<ActualizarHabilidadDTO> ActualizarHabilidad(ActualizarHabilidadDTO actualizarHabilidadDTO)
+        {
+            try
+            {
+                var idParam = new SqlParameter { ParameterName = "HabilidadID", SqlDbType = SqlDbType.Int, Value = actualizarHabilidadDTO.HabilidadID};
+                var descripcionParam = new SqlParameter { ParameterName = "NuevaDescripcion", Value = actualizarHabilidadDTO.descripcion};
+                var resultado = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.NVarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    idParam,
+                    descripcionParam,
+                    resultado,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC SP_ActualizarHabilidad @HabilidadID, @NuevaDescripcion, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSP = await _context.actualizarHabilidadDTO.FromSqlRaw(sqlQuery,parameters).ToListAsync();
+
+                Console.WriteLine(dataSP);
+
+                return dataSP.FirstOrDefault();
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
     }
 }

@@ -23,6 +23,7 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
 
         public DbSet<InsertarHabilidadDTO> insertarHabilidadDTO {get; set;}
         public DbSet<ObtenerHabilidadesDTO> obtenerHabilidadesDTO {get; set;}
+        public DbSet<ActualizarHabilidadDTO> actualizarHabilidadDTO { get; set;}
 
         public DbSet<LoginDTO> loginDto { get; set; }
 

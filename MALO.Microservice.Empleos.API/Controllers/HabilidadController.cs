@@ -40,6 +40,14 @@ namespace MALO.Microservice.Empleos.API.Controllers
             return Ok(habilidad);
         }
 
+        [HttpPost("actualizar-habilidad")]
+        public async Task<IActionResult> ActualizarHabilidad([FromBody] ActualizarHabilidadDTO request)
+        {
+            var habilidad = await _appController.HabilidadPresenter.ActualizarHabilidad(request);
+
+            return Ok(habilidad);
+        }
+
 
 
     }
