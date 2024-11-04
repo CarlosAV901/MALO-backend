@@ -1,4 +1,8 @@
 
+using MALO.Microservice.Documentos.Aplication.Services;
+using MALO.Microservice.Documentos.Domain.Interfaces.Helpers;
+using MALO.Microservice.Domumentos.Infraestructure.Helpers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -24,6 +28,8 @@ builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IFilesHelper, FilesHelper>();
+builder.Services.AddScoped<FileService>();
 
 var app = builder.Build();
 
