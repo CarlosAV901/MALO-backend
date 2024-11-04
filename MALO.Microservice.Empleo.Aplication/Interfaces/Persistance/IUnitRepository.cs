@@ -12,5 +12,7 @@ namespace MALO.Microservice.Empleos.Aplication.Interfaces.Persistance
 
         IRecuperacionInfraestructure recuperacionInfraestructure {  get; }
 
+        IHabilidadInfraestructure habilidadInfraestructure { get; }
+
     }
 }

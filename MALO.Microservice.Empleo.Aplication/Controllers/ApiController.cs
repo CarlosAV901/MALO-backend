@@ -21,6 +21,8 @@ namespace MALO.Microservice.Empleos.Aplication.Controllers
 
         public IRecuperacionPresenter RecuperacionPresenter => new RecuperacionPresenter(_unitRepository, _mapper);
 
+        public IHabilidadPresenter HabilidadPresenter => new HabilidadPresenter(_unitRepository, _mapper);
+
 
         // Implementación para obtener valores de configuración de JWT
         public string GetJwtConfigValue(string key)
