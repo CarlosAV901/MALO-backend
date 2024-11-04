@@ -1,4 +1,8 @@
 
+using MALO.Microservice.Documentos.Aplication.Services;
+using MALO.Microservice.Documentos.Domain.Interfaces.Helpers;
+using MALO.Microservice.Domumentos.Infraestructure.Helpers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -24,8 +28,27 @@ builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IFilesHelper, FilesHelper>();
+builder.Services.AddScoped<FileService>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigins",
+        builder =>
+        {
+            builder
+            .AllowCredentials()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .WithMethods("GET", "POST", "OPTIONS")  // Asegúrate de que 'OPTIONS' esté permitido
+                   .SetIsOriginAllowed(origin => true);
+        });
+});
 
 var app = builder.Build();
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";  // Usa 8080 como valor por defecto si no se define el puerto
+app.Urls.Add($"http://*:{port}");
+
 
 // Configure the HTTP request pipeline.
 if (Environment.GetEnvironmentVariable("ASPNETCORE_SWAGGER_UI_ACTIVE") == "On" || app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Environment.IsProduction())
@@ -53,7 +76,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowedOrigins");
+app.UseCors("AllowOrigins");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();

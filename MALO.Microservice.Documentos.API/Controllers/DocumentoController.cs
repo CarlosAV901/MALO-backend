@@ -1,19 +1,24 @@
 ﻿
 
 
+using MALO.Microservice.Documentos.Aplication.Services;
+using Microsoft.AspNetCore.Http;
+
 namespace MALO.Microservice.Documentos.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class DocumentoController : ApiController
     {
+
+        private readonly FileService _fileService;
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="appController"></param>
-        public DocumentoController(IApiController appController) : base(appController)
+        public DocumentoController(IApiController appController, FileService fileService) : base(appController)
         {
-
+            _fileService = fileService;
         }
 
         /// <summary>
@@ -43,13 +48,28 @@ namespace MALO.Microservice.Documentos.API.Controllers
         }
 
         [HttpPost("PostAgregarDoc")]
-        [Consumes(MediaTypeNames.Application.Json)]
-        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async ValueTask<IActionResult> PostAgregarDoc([FromBody] PostDocumentoDto request) 
+        public async ValueTask<IActionResult> PostAgregarDoc([FromForm] PostDocumentoDto request, [FromForm] IFormFile archivo) 
         {
+            string urlImagen = null;
+
+            if (archivo != null)
+            {
+                try
+                {
+                    urlImagen = await _fileService.SubirArchivo(archivo);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error al subir el archivo: {ex.Message}");
+                }
+            }
+
+            request.contenido = urlImagen;
+            request.tipo = archivo?.ContentType;
+
             return Ok(await _appController.DocumentoPresenter.PostAgregarDoc(request));
         }
 
