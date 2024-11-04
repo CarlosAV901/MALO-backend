@@ -4,8 +4,8 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+ENV DB_CONNECTION_STRING="Server=104.198.255.228;Database=Documentos_db;User Id=sqlserver;Password='a;6u{EN1XfeqX(lb';TrustServerCertificate=True;"
+
 
 
 # This stage is used to build the service project
@@ -30,4 +30,5 @@ RUN dotnet publish "./MALO.Microservice.Documentos.API.csproj" -c $BUILD_CONFIGU
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_URLS=http://*:$PORT
 ENTRYPOINT ["dotnet", "MALO.Microservice.Documentos.API.dll"]
