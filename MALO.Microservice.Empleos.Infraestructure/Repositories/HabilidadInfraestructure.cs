@@ -124,5 +124,32 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
             }
         }
 
+        public async Task<string> EliminarHabilidad(int id)
+        {
+            try
+            {
+                var idParam = new SqlParameter { ParameterName = "HabilidadID", SqlDbType = SqlDbType.Int, Value = id};
+                var resultado = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.NVarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    idParam,
+                    resultado,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC SP_EliminarHabilidad @HabilidadID, @Resultado OUTPUT, @NumError OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return "Habilidad eliminada correctamente";
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
     }
 }

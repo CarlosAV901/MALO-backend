@@ -48,6 +48,14 @@ namespace MALO.Microservice.Empleos.API.Controllers
             return Ok(habilidad);
         }
 
+        [HttpPost("eliminar-habilidad")]
+        public async Task<IActionResult> EliminarHabilidad([FromBody] ObtenerHabilidadPorId request)
+        {
+            var habilidad = await _appController.HabilidadPresenter.EliminarHabilidad(request.id);
+
+            return Ok(habilidad);
+        }
+
 
 
     }

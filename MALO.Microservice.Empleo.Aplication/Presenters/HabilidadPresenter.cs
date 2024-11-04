@@ -34,5 +34,10 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
         {
             return await _unitRepository.habilidadInfraestructure.ActualizarHabilidad(actualizarHabilidadDTO);
         }
+
+        public async Task<string> EliminarHabilidad(int id)
+        {
+            return await _unitRepository.habilidadInfraestructure.EliminarHabilidad(id);
+        }
     }
 }
