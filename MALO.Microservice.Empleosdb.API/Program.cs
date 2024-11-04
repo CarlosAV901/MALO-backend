@@ -1,3 +1,7 @@
+using MALO.Microservice.Empleosdb.Aplication.Services;
+using MALO.Microservice.Empleosdb.Domain.Interfaces.Helpers;
+using MALO.Microservice.Empleosdb.Infraestructure.Helpers;
+
 ;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +27,13 @@ builder.Services.AddApplicationServices(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen( c=>
+{
+    c.OperationFilter<SwaggerFileUploadFilter>();
+});
+
+builder.Services.AddScoped<IFilesHelper, FilesHelper>();
+builder.Services.AddScoped<FileService>();
 
 builder.Services.AddCors(options =>
 {

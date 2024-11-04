@@ -10,6 +10,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="FirebaseAdmin" Version="2.2.0" />
+		<PackageReference Include="FirebaseAuthentication.net" Version="3.7.2" />
+		<PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
 		<PackageReference Include="Google.Apis.Auth" Version="1.54.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
 		<PackageReference Include="Plugin.FirebaseStorage" Version="4.1.0" />

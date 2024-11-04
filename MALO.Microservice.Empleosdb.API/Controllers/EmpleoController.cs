@@ -1,14 +1,19 @@
 ﻿
+
+using MALO.Microservice.Empleosdb.Aplication.Services;
+
 namespace MALO.Microservice.Empleosdb.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class EmpleoController : ApiController
     {
-        /// <param name="appController"></param>
-        public EmpleoController(IApiController appController) : base(appController)
-        {
+        private readonly FileService _fileService;
 
+        /// <param name="appController"></param>
+        public EmpleoController(IApiController appController, FileService fileService) : base(appController)
+        {
+            _fileService = fileService;
         }
 
         ///
@@ -27,9 +32,27 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
         }
 
         [HttpPost("PostEmpleo")]
-        public async ValueTask<IActionResult> PostEmpleo([FromBody] EmpleoPostDto request)
+        public async ValueTask<IActionResult> PostEmpleo([FromForm] EmpleoPostDto request, [FromForm] IFormFile archivo)
         {
-            return Ok(await _appController.EmpleoPresenter.PostEmpleo(request));
+            string urlImagen = null;
+
+            if(archivo != null)
+            {
+                try
+                {
+                    urlImagen = await _fileService.SubirArchivo(archivo);
+                }catch (Exception ex)
+                {
+                    return BadRequest($"Error al subir el archivo: {ex.Message}");
+                }
+            }
+
+            request.multimediaContenido = urlImagen;
+            request.multimediaTipo = archivo?.ContentType;
+
+            var empleo = await _appController.EmpleoPresenter.PostEmpleo(request);
+
+            return Ok(empleo);
         }
 
         [HttpPost("UpdateEmpleoById")]
