@@ -90,7 +90,7 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
             }
         }
 
-        public async Task<string> ActualizarContrasena(Guid token, string nuevaContrasena)
+        public async Task<(string mensaje, int numError)> ActualizarContrasena(Guid token, string nuevaContrasena)
         {
             try
             {
@@ -110,9 +110,13 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 string sqlQuery = "EXEC dbo.SP_CambiarContrasena @token, @nuevaContrasena, @Resultado OUTPUT, @NumError OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
-                return "Contraseña actualizada correctamente";
+                string mensajeResultado = resultadoDb.Value.ToString();
+                int codigoError = (int)numError.Value;
 
-            }catch (SqlException ex)
+                return (mensajeResultado, codigoError);
+
+            }
+            catch (SqlException ex)
             {
                 throw;
             }

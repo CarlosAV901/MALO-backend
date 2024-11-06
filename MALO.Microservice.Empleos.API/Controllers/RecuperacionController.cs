@@ -130,18 +130,43 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [HttpPost("cambiar-contrasena/{token}")]
         public async Task<IActionResult> ActualizarContrasena([FromRoute] Guid token, [FromBody] CambioContrasenaDTO request)
         {
-            var resultado = await _appController.RecuperacionPresenter.ActualizarContrasena(token, request.nuevaContrasena);
-
-            if (resultado == null)
+            // Validar que la nueva contraseña no esté vacía ni sea nula
+            if (string.IsNullOrWhiteSpace(request.nuevaContrasena))
             {
-                return BadRequest("No se pudo cambiar la contraseña");
+                return BadRequest(new { message = "La nueva contraseña es obligatoria", result = false });
             }
-            return Ok(new
+
+            try
             {
-                message = "Contraseña cambiada correctamente",
-                result = true
-            });
+                // Llamar al método de infraestructura y obtener el mensaje y código de error
+                var (mensajeResultado, codigoError) = await _appController.RecuperacionPresenter.ActualizarContrasena(token, request.nuevaContrasena);
+
+                // Verificar el código de error y retornar la respuesta adecuada
+                switch (codigoError)
+                {
+                    case 0: // Contraseña actualizada correctamente
+                        return Ok(new { message = mensajeResultado, result = true });
+
+                    case 1: // Token inválido o no encontrado
+                        return NotFound(new { message = mensajeResultado, result = false });
+
+                    case 2: // Token expirado
+                        return BadRequest(new { message = mensajeResultado, result = false });
+
+                    case 3: // Error en el procedimiento
+                        return StatusCode(500, new { message = mensajeResultado, result = false });
+
+                    default: // Error no esperado
+                        return StatusCode(500, new { message = "Error inesperado al cambiar la contraseña", result = false });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores en la llamada a la infraestructura
+                return StatusCode(500, new { message = "Error interno del servidor: " + ex.Message, result = false });
+            }
         }
+
 
     }
 }
