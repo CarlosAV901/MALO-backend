@@ -1,5 +1,4 @@
 ﻿
-using MALO.Microservice.Empleosdb.Aplication.Services;
 
 namespace MALO.Microservice.Empleosdb.API.Controllers
 {
