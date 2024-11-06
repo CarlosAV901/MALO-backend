@@ -13,7 +13,18 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
         public DbSet<EmpleosDto> empleoDto {get; set;}
         public DbSet<MultimediaDto> multimediaDto {get; set;}
         public DbSet<AplicacionDto> aplicacionDto {get; set;}
+
+        public DbSet<ObtenerUsuariosPorEmpleosDTO> obtenerUsuariosPorEmpleosDTO {get; set;}
         #endregion
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configurar UsuarioInsertarDto como una entidad sin clave
+            modelBuilder.Entity<ObtenerUsuariosPorEmpleosDTO>().HasNoKey();
+        }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

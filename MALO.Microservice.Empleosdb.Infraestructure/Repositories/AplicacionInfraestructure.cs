@@ -10,6 +10,36 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             _context = context;
         }
 
+
+        public async Task<List<ObtenerUsuariosPorEmpleosDTO>> ObtenerUsuariosPorEmpleos(Guid id)
+        {
+            try
+            {
+                var resultadoBD = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var empleoId = new SqlParameter { ParameterName = "EmpleoID", SqlDbType = SqlDbType.UniqueIdentifier, Value = id };
+
+                SqlParameter[] parameters =
+                {
+                    resultadoBD,
+                    NumError,
+                    empleoId
+                };
+
+                string sqlQuery = "EXEC SP_ObtenerUsuariosPorEmpleo @EmpleoId, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSP = await _context.obtenerUsuariosPorEmpleosDTO.FromSqlRaw(sqlQuery,parameters).ToListAsync();
+
+                return dataSP;
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+
+
         public async Task<List<AplicacionDto>> GetAplicaciones()
         {
             try
