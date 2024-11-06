@@ -4,6 +4,7 @@ namespace MALO.Microservice.Empleosdb.Domain.Interfaces.Infraestructure
 {
     public interface IAplicacionInfraestructure
     {
+        Task<List<ObtenerUsuariosPorEmpleosDTO>> ObtenerUsuariosPorEmpleos(Guid id);
         Task<List<AplicacionDto>> GetAplicaciones();
         Task<AplicacionDto> GetAplicacionById([FromBody] AplicacionIdDto request);
         Task<AplicacionDto> GetAplicacionByEmpleo([FromBody] AplicacionEmpleoId request);

@@ -29,7 +29,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
                 return BadRequest("Error al solicitar la recuperacion");
             }
 
-            var verificationLink = $"https://malo-backend.onrender.com/api/recuperacion/verificar-token?token={resulatdo}";
+            var verificationLink = $"https://malo-zeta.vercel.app/auth/forgot-password/cambiar-contrasena?token={resulatdo}";
             //var verificationLink = $"https://localhost:7181/api/recuperacion/verificar-token?token={resulatdo}";
             var subject = "Confirmación de Cambio de Contraseña";
             var body = $@"
@@ -126,32 +126,13 @@ namespace MALO.Microservice.Empleos.API.Controllers
             return Ok(resulatdo); 
         }
 
-        [HttpGet("verificar-token")]
-        public async Task<IActionResult> VerificarToken([FromQuery] Guid token)
+
+        [HttpPost("cambiar-contrasena/{token}")]
+        public async Task<IActionResult> ActualizarContrasena([FromRoute] Guid token, [FromBody] CambioContrasenaDTO request)
         {
-            bool esValido = await _appController.RecuperacionPresenter.VerificarToken(token);
+            var resultado = await _appController.RecuperacionPresenter.ActualizarContrasena(token, request.nuevaContrasena);
 
-            if (esValido)
-            {
-                return Ok(new
-                {
-                    message = "Token valido, puede continuar",
-                    result = true,
-                    token_validado = token
-                });
-            }
-            else
-            {
-                return BadRequest("El token no es valido o ha expirado");
-            }
-        }
-
-        [HttpPost("cambiar-contrasena")]
-        public async Task<IActionResult> ActualizarContrasena([FromBody] CambioContrasenaDTO request)
-        {
-            var resultado = await _appController.RecuperacionPresenter.ActualizarContrasena(request.token, request.nuevaContrasena);
-
-            if(resultado == null)
+            if (resultado == null)
             {
                 return BadRequest("No se pudo cambiar la contraseña");
             }
@@ -161,5 +142,6 @@ namespace MALO.Microservice.Empleos.API.Controllers
                 result = true
             });
         }
+
     }
 }

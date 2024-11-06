@@ -29,7 +29,7 @@ namespace MALO.Microservice.Empresas.API.Controllers
                 return BadRequest("Error al solicitar la recuperacion");
             }
 
-            var verificationLink = $"https://malo-backend-empresas.onrender.com/api/recuperacion/verificar-token?token={resulatdo}";
+            var verificationLink = $"https://malo-zeta.vercel.app/auth/forgot-password/cambiar-contrasena?token={resulatdo}";
             //var verificationLink = $"https://localhost:8000/api/recuperacion/verificar-token?token={resulatdo}";
             var subject = "Confirmación de Cambio de Contraseña";
             var body = $@"
@@ -126,30 +126,11 @@ namespace MALO.Microservice.Empresas.API.Controllers
             return Ok(resulatdo);
         }
 
-        [HttpGet("verificar-token")]
-        public async Task<IActionResult> VerificarToken([FromQuery] Guid token)
-        {
-            bool esValido = await _appController.RecuperacionPresenter.VerificarToken(token);
 
-            if (esValido)
-            {
-                return Ok(new
-                {
-                    message = "Token valido, puede continuar",
-                    result = true,
-                    token_validado = token
-                });
-            }
-            else
-            {
-                return BadRequest("El token no es valido o ha expirado");
-            }
-        }
-
-        [HttpPost("cambiar-contrasena")]
-        public async Task<IActionResult> ActualizarContrasena([FromBody] CambioContrasenaDTO request)
+        [HttpPost("cambiar-contrasena/{token}")]
+        public async Task<IActionResult> ActualizarContrasena([FromRoute] Guid token, [FromBody] CambioContrasenaDTO request)
         {
-            var resultado = await _appController.RecuperacionPresenter.ActualizarContrasena(request.token, request.nuevaContrasena);
+            var resultado = await _appController.RecuperacionPresenter.ActualizarContrasena(token, request.nuevaContrasena);
 
             if (resultado == null)
             {

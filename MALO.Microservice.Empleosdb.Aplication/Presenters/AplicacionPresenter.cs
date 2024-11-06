@@ -6,11 +6,18 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
         private readonly IUnitRepository _unitRepository;
         private readonly IMapper _mapper;
 
+         
         public AplicacionPresenter(IUnitRepository unitRepository, IMapper mapper)
         {
             _unitRepository = unitRepository;
             _mapper = mapper;
         }
+
+        public async Task<List<ObtenerUsuariosPorEmpleosDTO>> ObtenerUsuariosPorEmpleos(Guid id)
+        {
+            return await _unitRepository.aplicacionInfraestructure.ObtenerUsuariosPorEmpleos(id);
+        }
+
 
         public async Task<List<AplicacionDto>> GetAplicaciones()
         {
