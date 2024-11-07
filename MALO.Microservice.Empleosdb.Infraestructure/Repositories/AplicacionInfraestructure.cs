@@ -54,14 +54,14 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 };
 
                 string sqlQuery = "EXEC SP_ContarAplicacionesPorEmpleo @EmpleoID, @Resultado OUTPUT, @NumError OUTPUT";
-                var dataSP = await _context.empleoIdDto.FromSqlRaw(sqlQuery,parameters).ToListAsync();
+                var dataSP = await _context.empleoIdDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
 
                 return dataSP.FirstOrDefault();
 
             }
             catch (SqlException ex) { throw; }
 
-
+        }
 
         public async Task<List<AplicacionDto>> GetAplicaciones()
         {
