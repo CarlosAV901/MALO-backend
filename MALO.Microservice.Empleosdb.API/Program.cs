@@ -51,8 +51,8 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
-//var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";  // Usa 8080 como valor por defecto si no se define el puerto
-//app.Urls.Add($"http://*:{port}");
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";  // Usa 8080 como valor por defecto si no se define el puerto
+app.Urls.Add($"http://*:{port}");
 
 // Configure the HTTP request pipeline.
 if (Environment.GetEnvironmentVariable("ASPNETCORE_SWAGGER_UI_ACTIVE") == "On" || app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Environment.IsProduction())
