@@ -29,7 +29,7 @@ namespace MALO.Microservice.Empresas.API.Controllers
                 return BadRequest("Error al solicitar la recuperacion");
             }
 
-            var verificationLink = $"https://malo-backend-empresas.onrender.com/api/recuperacion/verificar-token?token={resulatdo}";
+            var verificationLink = $"https://malo-zeta.vercel.app/auth/forgot-password/cambiar-contrasena?token={resulatdo}";
             //var verificationLink = $"https://localhost:8000/api/recuperacion/verificar-token?token={resulatdo}";
             var subject = "Confirmación de Cambio de Contraseña";
             var body = $@"
@@ -126,40 +126,45 @@ namespace MALO.Microservice.Empresas.API.Controllers
             return Ok(resulatdo);
         }
 
-        [HttpGet("verificar-token")]
-        public async Task<IActionResult> VerificarToken([FromQuery] Guid token)
-        {
-            bool esValido = await _appController.RecuperacionPresenter.VerificarToken(token);
 
-            if (esValido)
+        [HttpPost("cambiar-contrasena/{token}")]
+        public async Task<IActionResult> ActualizarContrasena([FromRoute] Guid token, [FromBody] CambioContrasenaDTO request)
+        {
+            // Validar que la nueva contraseña no esté vacía ni sea nula
+            if (string.IsNullOrWhiteSpace(request.nuevaContrasena))
             {
-                return Ok(new
+                return BadRequest(new { message = "La nueva contraseña es obligatoria", result = false });
+            }
+
+            try
+            {
+                // Llamar al método de infraestructura y obtener el mensaje y código de error
+                var (mensajeResultado, codigoError) = await _appController.RecuperacionPresenter.ActualizarContrasena(token, request.nuevaContrasena);
+
+                // Verificar el código de error y retornar la respuesta adecuada
+                switch (codigoError)
                 {
-                    message = "Token valido, puede continuar",
-                    result = true,
-                    token_validado = token
-                });
-            }
-            else
-            {
-                return BadRequest("El token no es valido o ha expirado");
-            }
-        }
+                    case 0: // Contraseña actualizada correctamente
+                        return Ok(new { message = mensajeResultado, result = true });
 
-        [HttpPost("cambiar-contrasena")]
-        public async Task<IActionResult> ActualizarContrasena([FromBody] CambioContrasenaDTO request)
-        {
-            var resultado = await _appController.RecuperacionPresenter.ActualizarContrasena(request.token, request.nuevaContrasena);
+                    case 1: // Token inválido o no encontrado
+                        return NotFound(new { message = mensajeResultado, result = false });
 
-            if (resultado == null)
-            {
-                return BadRequest("No se pudo cambiar la contraseña");
+                    case 2: // Token expirado
+                        return BadRequest(new { message = mensajeResultado, result = false });
+
+                    case 3: // Error en el procedimiento
+                        return StatusCode(500, new { message = mensajeResultado, result = false });
+
+                    default: // Error no esperado
+                        return StatusCode(500, new { message = "Error inesperado al cambiar la contraseña", result = false });
+                }
             }
-            return Ok(new
+            catch (Exception ex)
             {
-                message = "Contraseña cambiada correctamente",
-                result = true
-            });
+                // Manejo de errores en la llamada a la infraestructura
+                return StatusCode(500, new { message = "Error interno del servidor: " + ex.Message, result = false });
+            }
         }
     }
 }

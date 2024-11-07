@@ -1,6 +1,9 @@
 ﻿
 
+using MALO.Microservice.Empleos.Aplication.Services;
+using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
 using MALO.Microservice.Empleos.Infraestructure.Services;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 
 namespace MALO.Microservice.Empleos.API.Controllers
@@ -10,14 +13,16 @@ namespace MALO.Microservice.Empleos.API.Controllers
     public class UsuarioController : ApiController
     {
         private readonly IMessage _emailService;
+        private readonly FileService _fileService;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="appController"></param>
-        public UsuarioController(IApiController appController, IMessage emailService) : base(appController)
+        public UsuarioController(IApiController appController, IMessage emailService, FileService fileService) : base(appController)
         {
             _emailService = emailService;
+            _fileService = fileService;
         }
 
 
@@ -110,8 +115,9 @@ namespace MALO.Microservice.Empleos.API.Controllers
         public async ValueTask<IActionResult> InsertarUsuario([FromBody] UsuarioInsertarDto usuarioInsertarDto)
         {
 
+            
             var usuario = await _appController.UserPresenter.InsertarUsuario(usuarioInsertarDto);
-
+            
             if (usuario == null)
             {
                 return BadRequest("No se pudo registrar al usuario");
@@ -247,8 +253,24 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpPost("ActualizarUsuario")]
         [Authorize]
-        public async ValueTask<IActionResult> ActualizarUsuario([FromBody] ActualizarUsuarioDTO request)
+        public async ValueTask<IActionResult> ActualizarUsuario([FromForm] ActualizarUsuarioDTO request, [FromForm] IFormFile archivo)
         {
+            string urlImagen = null;
+
+            if (archivo != null)
+            {
+                try
+                {
+                    urlImagen = await _fileService.SubirArchivo(archivo);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error al subir el archivo: {ex.Message}");
+                }
+            }
+
+            request.imagen_perfil = urlImagen;
+
             var usuario = await _appController.UserPresenter.ActualizarUsuario(request.UsuarioId, request);
 
             return Ok(usuario);

@@ -7,7 +7,7 @@ namespace MALO.Microservice.Empleos.Domain.Interfaces.Services
 
         public Task<bool> VerificarToken(Guid token);
 
-        public Task<string> ActualizarContrasena(Guid token, string nuevaContrasena);
+        public Task<(string mensaje, int numError)> ActualizarContrasena(Guid token, string nuevaContrasena);
 
     }
 }
