@@ -1,5 +1,7 @@
 ﻿
 
+using Microsoft.Identity.Client;
+
 namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
 {
     public class ManosALaObraContext : DbContext
@@ -14,6 +16,8 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
         public DbSet<MultimediaDto> multimediaDto {get; set;}
         public DbSet<AplicacionDto> aplicacionDto {get; set;}
 
+        public DbSet<EmpleoIdDto> empleoIdDto {get; set;}
+
         public DbSet<ObtenerUsuariosPorEmpleosDTO> obtenerUsuariosPorEmpleosDTO {get; set;}
         #endregion
 
@@ -23,6 +27,7 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
 
             // Configurar UsuarioInsertarDto como una entidad sin clave
             modelBuilder.Entity<ObtenerUsuariosPorEmpleosDTO>().HasNoKey();
+            modelBuilder.Entity<EmpleoIdDto>().HasNoKey();
         }
 
 

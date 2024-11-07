@@ -22,7 +22,7 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
             return await _unitRepository.recuperacionInfraestructure.VerificarToken(token);
         }
 
-        public async Task<string> ActualizarContrasena(Guid token, string nuevaContrasena)
+        public async Task<(string mensaje, int numError)> ActualizarContrasena(Guid token, string nuevaContrasena)
         {
             return await _unitRepository.recuperacionInfraestructure.ActualizarContrasena(token, nuevaContrasena);
         }
