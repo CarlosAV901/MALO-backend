@@ -15,7 +15,7 @@ namespace MALO.Microservice.Empleos.Infraestructure
             .AddDbContext<ManosALaObraContext>(options =>
             {
                 options.UseSqlServer(
-                    Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ??
+                    Environment.GetEnvironmentVariable("DbConnection") ??
                     configuration.GetConnectionString("DbConnection"),
                 sqlServerOptionsAction: sqlOptions =>
                 {
