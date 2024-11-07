@@ -1,7 +1,4 @@
 ﻿
-
-using Microsoft.Identity.Client;
-
 namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
 {
     public class ManosALaObraContext : DbContext
@@ -14,8 +11,6 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
         public DbSet<RespuestaDB> respuestaDB { get; set; }
         public DbSet<EmpleosDto> empleoDto {get; set;}
         public DbSet<MultimediaDto> multimediaDto {get; set;}
-        public DbSet<AplicacionDto> aplicacionDto {get; set;}
-
 
 
         public DbSet<EmpleoIdDto> empleoIdDto {get; set;}
