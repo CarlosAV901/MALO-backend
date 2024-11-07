@@ -1,5 +1,6 @@
 ﻿
 
+using MALO.Microservice.Empleos.Aplication.Services;
 using MALO.Microservice.Empleos.Infraestructure.Services;
 using Newtonsoft.Json.Linq;
 
@@ -10,14 +11,16 @@ namespace MALO.Microservice.Empleos.API.Controllers
     public class UsuarioController : ApiController
     {
         private readonly IMessage _emailService;
+        private readonly FileService _fileService;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="appController"></param>
-        public UsuarioController(IApiController appController, IMessage emailService) : base(appController)
+        public UsuarioController(IApiController appController, IMessage emailService, FileService fileService) : base(appController)
         {
             _emailService = emailService;
+            _fileService = fileService;
         }
 
 
@@ -107,11 +110,27 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpPost("InsertarUsuario")]
-        public async ValueTask<IActionResult> InsertarUsuario([FromBody] UsuarioInsertarDto usuarioInsertarDto)
+        public async ValueTask<IActionResult> InsertarUsuario([FromForm] UsuarioInsertarDto usuarioInsertarDto, [FromForm] IFormFile archivo)
         {
 
-            var usuario = await _appController.UserPresenter.InsertarUsuario(usuarioInsertarDto);
+            string urlImagen = null;
 
+            if (archivo != null)
+            {
+                try
+                {
+                    urlImagen = await _fileService.SubirArchivo(archivo);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error al subir el archivo: {ex.Message}");
+                }
+            }
+
+            usuarioInsertarDto.imagen_perfil = urlImagen;
+
+            var usuario = await _appController.UserPresenter.InsertarUsuario(usuarioInsertarDto);
+            
             if (usuario == null)
             {
                 return BadRequest("No se pudo registrar al usuario");

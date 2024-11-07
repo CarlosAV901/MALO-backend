@@ -15,7 +15,7 @@ namespace MALO.Microservice.Empleos.Domain.DTOs.Usuario
         public string localidad { get; set; }
         public string habilidades { get; set; } 
         public string descripcion { get; set; }
-        public string imagen_perfil { get; set; }
+        public string? imagen_perfil { get; set; }
         public Guid token { get; set; }
     }
 }

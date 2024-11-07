@@ -1,5 +1,8 @@
 
 
+using MALO.Microservice.Empleos.Aplication.Services;
+using MALO.Microservice.Empleos.Domain.Interfaces.Helpers;
+using MALO.Microservice.Empleos.Infraestructure.Helpers;
 using MALO.Microservice.Empleos.Infraestructure.Services;
 using MALO.Microservice.Empleos.Infraestructure.Settings;
 
@@ -27,6 +30,11 @@ builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddScoped<IFilesHelper, FilesHelper>();
+builder.Services.AddScoped<FileService>();
+
 
 builder.Services.Configure<GmailSettings>(builder.Configuration.GetSection("GmailSettings"));
 builder.Services.AddTransient<IMessage, EmailService>();
