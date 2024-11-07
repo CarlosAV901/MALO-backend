@@ -262,7 +262,7 @@
                 var estado = new SqlParameter { ParameterName = "estado", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.estado};
                 var municipio = new SqlParameter { ParameterName = "municipio", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.municipio };
                 var localidad = new SqlParameter { ParameterName = "localidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.localidad};
-                var habilidad = new SqlParameter { ParameterName = "habilidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.habilidades ?? usuarioExistene.Habilidades};
+                var habilidad = new SqlParameter { ParameterName = "habilidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.habilidades ?? usuarioExistene.HabilidadesDescripciones};
                 var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.descripcion ?? usuarioExistene.Experiencias };
                 var imagen_perfil = new SqlParameter { ParameterName = "imagen_perfil", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.imagen_perfil ?? usuarioExistene.ImagenPerfil};
 
