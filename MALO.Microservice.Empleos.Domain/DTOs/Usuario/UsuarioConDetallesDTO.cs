@@ -15,7 +15,7 @@
         public string estado { get; set; }
         public string municipio { get; set; }
         public string localidad { get; set; }
-        public string? HabilidadesIds {  get; set; }
+        public string HabilidadesIds { get; set; }
         public string? HabilidadesDescripciones { get; set; }
         public string? Experiencias { get; set; }
         public string? ImagenPerfil { get; set; }
