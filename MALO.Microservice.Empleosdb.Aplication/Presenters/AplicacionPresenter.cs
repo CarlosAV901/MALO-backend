@@ -1,4 +1,6 @@
 ﻿
+using System.Security.AccessControl;
+
 namespace MALO.Microservice.Empleosdb.Aplication.Presenters
 {
     internal class AplicacionPresenter: IAplicacionPresenter
@@ -18,34 +20,24 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
             return await _unitRepository.aplicacionInfraestructure.ObtenerUsuariosPorEmpleos(id);
         }
 
+        public async Task<int> ContarAplicacionesPorEmpleo(Guid id)
+        {
+            return await _unitRepository.aplicacionInfraestructure.ContarAplicacionesPorEmpleo(id);
+        }
 
-        public async Task<List<AplicacionDto>> GetAplicaciones()
+        public async Task<List<ObtenerEmpleosPorUsuarioDTO>> ObtenerEmpleosPorUsuario(Guid id)
         {
-            return await _unitRepository.aplicacionInfraestructure.GetAplicaciones();
+            return await _unitRepository.aplicacionInfraestructure.ObtenerEmpleosPorUsuario(id);
         }
-        public async Task<AplicacionDto> GetAplicacionById([FromBody] AplicacionIdDto request)
+
+        public async Task<string> AplicarAEmpleo([FromBody] AplicarEmpleoDTO request)
         {
-            return await _unitRepository.aplicacionInfraestructure.GetAplicacionById(request);
+            return await _unitRepository.aplicacionInfraestructure.AplicarAEmpleo(request);
         }
-        public async Task<AplicacionDto> GetAplicacionByEmpleo([FromBody] AplicacionEmpleoId request)
+
+        public async Task<string> ElimarAplicacion([FromBody] AplicarEmpleoDTO request)
         {
-            return await _unitRepository.aplicacionInfraestructure.GetAplicacionByEmpleo(request);
-        }
-        public async Task<AplicacionDto> GetAplicacionByUsuario([FromBody] AplicacionUsuarioIdDto request)
-        {
-            return await _unitRepository.aplicacionInfraestructure.GetAplicacionByUsuario(request);
-        }
-        public async Task<string> PostAplicacion([FromBody] AplicacionPostDto request)
-        {
-            return await _unitRepository.aplicacionInfraestructure.PostAplicacion(request);
-        }
-        public async Task<string> UpdateAplicacionById([FromBody] AplicacionUpdateDto request)
-        {
-            return await _unitRepository.aplicacionInfraestructure.UpdateAplicacionById(request);
-        }
-        public async Task<string> DeleteAplicacionById([FromBody] AplicacionIdDto request)
-        {
-            return await _unitRepository.aplicacionInfraestructure.DeleteAplicacionById(request);
+            return await _unitRepository.aplicacionInfraestructure.ElimarAplicacion(request);
         }
     }
 }
