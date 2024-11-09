@@ -9,9 +9,18 @@
         #region Generic Dtos DB
         public DbSet<RespuestaDB> respuestaDB { get; set; }
         public DbSet<DocumentosDto>documentoDto {get; set;}
+        public DbSet<ActualizarDocumentoDTO> actualizarDocumentoDTO {get; set;}
 
-      
+
         #endregion
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configurar UsuarioInsertarDto como una entidad sin clave
+            modelBuilder.Entity<ActualizarDocumentoDTO>().HasNoKey();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

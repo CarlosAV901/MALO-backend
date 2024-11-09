@@ -84,5 +84,30 @@ namespace MALO.Microservice.Documentos.API.Controllers
             return Ok(await _appController.DocumentoPresenter.GetDocumentoId(request));
         }
 
+        [HttpPost("ActualizarDocumento")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> ActualizarDocumento([FromForm] ActualizarDocumentoDTO request, [FromForm] IFormFile archivo)
+        {
+            string urlImagen = null;
+
+            if (archivo != null)
+            {
+                try
+                {
+                    urlImagen = await _fileService.SubirArchivo(archivo);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error al subir el archivo: {ex.Message}");
+                }
+            }
+
+            request.contenido = urlImagen;
+
+            return Ok(await _appController.DocumentoPresenter.ActualizarDocumento(request));
+        }
+
     }
 }

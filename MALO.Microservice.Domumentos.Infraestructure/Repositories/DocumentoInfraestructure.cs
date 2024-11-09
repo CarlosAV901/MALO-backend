@@ -141,5 +141,43 @@ namespace MALO.Microservice.Documentos.Infraestructure.Repositories
                 throw;
             }
         }
+
+        public async Task<ActualizarDocumentoDTO> ActualizarDocumento([FromBody] ActualizarDocumentoDTO request)
+        {
+            try
+            {
+                var usuarioIdParam = new SqlParameter { ParameterName = "UsuarioId", SqlDbType = SqlDbType.UniqueIdentifier, Value = request.usuario_id };
+                var contenidoParam = new SqlParameter { ParameterName = "Contenido", SqlDbType = SqlDbType.NVarChar, Value = request.contenido };
+                var resultadoBD = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+                SqlParameter[] parameters =
+                {
+                    usuarioIdParam,
+                    contenidoParam,
+                    resultadoBD,
+                    NumError
+                };
+
+                string sqlQuqery = "EXEC SP_ActualizarDocumento @UsuarioId, @Contenido, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSP = await _context.actualizarDocumentoDTO.FromSqlRaw(sqlQuqery, parameters).ToListAsync();
+
+                return dataSP.FirstOrDefault();
+
+            }
+            catch (SqlException ex) { throw; }
+        }
+
     }
 }

@@ -31,5 +31,10 @@ namespace MALO.Microservice.Documentos.Aplication.Presenters
             return await _unitRepository.documentoInfraestructure.GetDocumentoId(request);
         }
 
+        public async Task<ActualizarDocumentoDTO> ActualizarDocumento([FromBody] ActualizarDocumentoDTO request)
+        {
+            return await _unitRepository.documentoInfraestructure.ActualizarDocumento(request);
+        }
+
     }
 }
