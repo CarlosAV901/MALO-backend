@@ -29,9 +29,9 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
         }
 
         [HttpPost("obtener-empleos-por-usuario")]
-        public async Task<IActionResult> ObtenerEmpleosPorUsuario([FromBody] EmpleoIdDto request)
+        public async Task<IActionResult> ObtenerEmpleosPorUsuario([FromBody] UsuarioIdDTO request)
         {
-            var empleos = await _appController.AplicacionPresenter.ObtenerEmpleosPorUsuario(request.EmpleoID);
+            var empleos = await _appController.AplicacionPresenter.ObtenerEmpleosPorUsuario(request.UsuarioID);
 
             return Ok(empleos);
         }
