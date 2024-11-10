@@ -81,7 +81,7 @@ namespace MALO.Microservice.Documentos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public async ValueTask<IActionResult> GetDocumentoId([FromBody] DocumentoIdDto request)
         {
-            return Ok(await _appController.DocumentoPresenter.GetDocumentoId(request));
+            return Ok(await _appController.DocumentoPresenter.GetDocumentoId(request.DocId));
         }
 
         [HttpPost("ActualizarDocumento")]
@@ -91,6 +91,17 @@ namespace MALO.Microservice.Documentos.API.Controllers
         public async Task<IActionResult> ActualizarDocumento([FromForm] ActualizarDocumentoDTO request, [FromForm] IFormFile archivo)
         {
             string urlImagen = null;
+
+            var usuarioDto = new UsuarioIdDTO { UsuarioId = request.usuario_id };
+
+            var documento = await _appController.DocumentoPresenter.ObtenerContenido(usuarioDto);
+            string archivoAnteriorUrl = documento;
+
+            if (!string.IsNullOrEmpty(archivoAnteriorUrl))
+            {
+                var nombreArchivoAnterior = Path.GetFileName(archivoAnteriorUrl);
+                await _fileService.EliminarArchivo(nombreArchivoAnterior);
+            }
 
             if (archivo != null)
             {

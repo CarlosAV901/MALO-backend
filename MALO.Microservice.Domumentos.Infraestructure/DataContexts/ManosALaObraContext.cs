@@ -10,6 +10,7 @@
         public DbSet<RespuestaDB> respuestaDB { get; set; }
         public DbSet<DocumentosDto>documentoDto {get; set;}
         public DbSet<ActualizarDocumentoDTO> actualizarDocumentoDTO {get; set;}
+        public DbSet<UsuarioIdDTO> usuarioIdDTO {get; set;}
 
 
         #endregion
@@ -20,6 +21,7 @@
 
             // Configurar UsuarioInsertarDto como una entidad sin clave
             modelBuilder.Entity<ActualizarDocumentoDTO>().HasNoKey();
+            modelBuilder.Entity<UsuarioIdDTO>().HasNoKey();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

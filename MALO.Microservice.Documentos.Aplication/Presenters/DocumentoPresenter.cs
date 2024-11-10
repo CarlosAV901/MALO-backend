@@ -26,11 +26,15 @@ namespace MALO.Microservice.Documentos.Aplication.Presenters
             return await _unitRepository.documentoInfraestructure.PostAgregarDoc(request);
         }
 
-        public async Task<DocumentosDto> GetDocumentoId([FromBody] DocumentoIdDto request)
+        public async Task<DocumentosDto> GetDocumentoId(Guid id)
         {
-            return await _unitRepository.documentoInfraestructure.GetDocumentoId(request);
+            return await _unitRepository.documentoInfraestructure.GetDocumentoId(id);
         }
 
+        public async Task<string> ObtenerContenido([FromBody] UsuarioIdDTO request)
+        {
+            return await _unitRepository.documentoInfraestructure.ObtenerContenido(request);
+        }
         public async Task<ActualizarDocumentoDTO> ActualizarDocumento([FromBody] ActualizarDocumentoDTO request)
         {
             return await _unitRepository.documentoInfraestructure.ActualizarDocumento(request);

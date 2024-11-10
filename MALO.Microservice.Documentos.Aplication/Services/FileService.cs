@@ -26,5 +26,10 @@ namespace MALO.Microservice.Documentos.Aplication.Services
             var urlImagen = await _filesHelper.SubirArchivo(stream, nombre);
             return urlImagen;
         }
+
+        public async Task EliminarArchivo(string nombreArchivo)
+        {
+            await _filesHelper.EliminarArchivo(nombreArchivo);
+        }
     }
 }
