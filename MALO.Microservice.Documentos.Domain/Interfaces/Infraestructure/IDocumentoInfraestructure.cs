@@ -11,6 +11,8 @@ namespace MALO.Microservice.Documentos.Domain.Interfaces.Infraestructure
         Task<List<DocumentosDto>> GetDocumentos();
         Task<string> PostAgregarDoc([FromBody] PostDocumentoDto request);
 
-        Task<DocumentosDto> GetDocumentoId([FromBody] DocumentoIdDto request);
+        Task<DocumentosDto> GetDocumentoId(Guid id);
+        Task<string> ObtenerContenido([FromBody] UsuarioIdDTO request);
+        Task<ActualizarDocumentoDTO> ActualizarDocumento([FromBody] ActualizarDocumentoDTO request);
     }
 }

@@ -1,6 +1,7 @@
 ﻿
 using Firebase.Storage;
 using MALO.Microservice.Documentos.Domain.Interfaces.Helpers;
+using System.Web;
 
 namespace MALO.Microservice.Domumentos.Infraestructure.Helpers
 {
@@ -29,6 +30,54 @@ namespace MALO.Microservice.Domumentos.Infraestructure.Helpers
 
             var downloadURL = await task;
             return downloadURL;
+        }
+
+        public async Task EliminarArchivo(string nombre)
+        {
+            try
+            {
+                string nombreArchivo = ObtenerNombreDesdeUrl(nombre);
+
+                Console.WriteLine($"Eliminando archivo: {nombreArchivo}");
+
+                var cancellation = new CancellationTokenSource();
+
+                // Imprime la ruta para verificar que sea la correcta
+                Console.WriteLine($"Eliminando archivo en ruta: {nombre}");
+
+                await new FirebaseStorage(_ruta)
+                    .Child("Documentos")
+                    .Child(nombreArchivo)
+                    .DeleteAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar el archivo: {ex.Message}");
+                throw;
+            }
+        }
+
+
+        // Método para extraer el nombre del archivo desde la URL
+        private string ObtenerNombreDesdeUrl(string url)
+        {
+            // Decodificar la URL primero para manejar caracteres especiales
+            string decodedUrl = Uri.UnescapeDataString(url);
+
+            // Buscar el índice del último '/' en la URL y extraer el nombre
+            int index = decodedUrl.LastIndexOf('/');
+            if (index >= 0)
+            {
+                string nombreConToken = decodedUrl.Substring(index + 1);
+                // Eliminar cualquier parámetro como "?alt=media&token=..."
+                int queryIndex = nombreConToken.IndexOf('?');
+                if (queryIndex >= 0)
+                {
+                    nombreConToken = nombreConToken.Substring(0, queryIndex);
+                }
+                return nombreConToken;
+            }
+            return string.Empty;
         }
 
     }

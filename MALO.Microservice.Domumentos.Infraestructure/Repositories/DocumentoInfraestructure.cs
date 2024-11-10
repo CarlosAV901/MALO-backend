@@ -1,4 +1,7 @@
 ﻿
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NPOI.SS.Util;
+
 namespace MALO.Microservice.Documentos.Infraestructure.Repositories
 {
     public class DocumentoInfraestructure : IDocumentoInfraestructure
@@ -104,7 +107,7 @@ namespace MALO.Microservice.Documentos.Infraestructure.Repositories
 
         }
 
-        public async Task<DocumentosDto> GetDocumentoId([FromBody] DocumentoIdDto request)
+        public async Task<DocumentosDto> GetDocumentoId(Guid id)
         {
             try
             {
@@ -123,17 +126,20 @@ namespace MALO.Microservice.Documentos.Infraestructure.Repositories
                     Direction = ParameterDirection.Output
                 };
 
-                var id = new SqlParameter
+                var idParam = new SqlParameter
                 {
                     ParameterName = "Documento_id",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = request.DocId
+                    Value = id
 
                 };
 
-                SqlParameter[] parameters = { id, resultadoBD, NumError };
+                SqlParameter[] parameters = { idParam, resultadoBD, NumError };
                 string sqlQuery = "EXEC dbo.SP_ConsultarDocumentoId @Documento_id, @Resultado OUTPUT, @NumError OUTPUT";
                 var dataSP = await _context.documentoDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                
+
                 return dataSP.FirstOrDefault();
             }
             catch (SqlException ex)
@@ -141,5 +147,83 @@ namespace MALO.Microservice.Documentos.Infraestructure.Repositories
                 throw;
             }
         }
+
+        public async Task<string> ObtenerContenido([FromBody] UsuarioIdDTO request)
+        {
+            try
+            {
+                var idUsuario = new SqlParameter { ParameterName = "UsuarioId", SqlDbType = SqlDbType.UniqueIdentifier, Value = request.UsuarioId };
+                var contenidoActual = new SqlParameter { ParameterName = "ContenidoActual", SqlDbType = SqlDbType.NVarChar, Size = 4000, Direction = ParameterDirection.Output };
+                var resultadoBD = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+                SqlParameter[] parameters = {
+                    idUsuario,
+                    contenidoActual,
+                    resultadoBD, 
+                    NumError 
+                };
+
+                string sqlQuery = "EXEC SP_ContenidoActual @UsuarioId, @ContenidoActual OUTPUT, @Resultado OUTPUT, @NumError OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return (string)contenidoActual.Value;
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<ActualizarDocumentoDTO> ActualizarDocumento([FromBody] ActualizarDocumentoDTO request)
+        {
+            try
+            {
+                var usuarioIdParam = new SqlParameter { ParameterName = "UsuarioId", SqlDbType = SqlDbType.UniqueIdentifier, Value = request.usuario_id };
+                var contenidoParam = new SqlParameter { ParameterName = "Contenido", SqlDbType = SqlDbType.NVarChar, Value = request.contenido };
+                var contenidoAnterior = new SqlParameter { ParameterName = "ContenidoActual", SqlDbType = SqlDbType.NVarChar, Direction = ParameterDirection.Output };
+                var resultadoBD = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+                SqlParameter[] parameters =
+                {
+                    usuarioIdParam,
+                    contenidoParam,
+                    resultadoBD,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC SP_ActualizarDocumento @UsuarioId, @Contenido, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSP = await _context.actualizarDocumentoDTO.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                return dataSP.FirstOrDefault();
+
+        }
+            catch (SqlException ex) { throw; }
+        }
+
     }
 }
