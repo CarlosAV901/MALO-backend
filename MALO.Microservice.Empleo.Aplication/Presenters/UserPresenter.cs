@@ -1,5 +1,8 @@
 ﻿
 
+using Microsoft.AspNetCore.Mvc;
+using NPOI.OpenXmlFormats.Dml;
+
 namespace MALO.Microservice.Empleos.Aplication.Presenters
 {
     public class UserPresenter : IUserPresenter
@@ -55,6 +58,11 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
         public async Task<UsuarioConDetallesDTO> ValidarUsuario(string email, string contrasena)
         {
             return await _unitRepository.usuarioInfraestructure.ValidarUsuario(email, contrasena);
+        }
+
+        public async Task<string> ObtenerContenido([FromBody] ObtenerUsuarioPorId request)
+        {
+            return await _unitRepository.usuarioInfraestructure.ObtenerContenido(request);
         }
     }
 }
