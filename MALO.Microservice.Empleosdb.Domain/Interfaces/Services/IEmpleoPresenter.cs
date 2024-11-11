@@ -8,5 +8,6 @@ namespace MALO.Microservice.Empleosdb.Domain.Interfaces.Services
         Task<string> PostEmpleo([FromBody] EmpleoPostDto request);
         Task<string> UpdateEmpleoId([FromBody] EmpleoUpdateDto request);
         Task<string> DeleteEmpleoId([FromBody] EmpleoRequestDto request);
+        Task<string> ObtenerContenido([FromBody] EmpleoRequestDto request);
     }
 }

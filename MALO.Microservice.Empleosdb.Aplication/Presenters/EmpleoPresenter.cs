@@ -38,5 +38,10 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
         {
             return await _unitRepository.empleoInfraestructure.DeleteEmpleoId(request);
         }
+
+        public async Task<string> ObtenerContenido([FromBody] EmpleoRequestDto request)
+        {
+            return await _unitRepository.empleoInfraestructure.ObtenerContenido(request);
+        }
     }
 }

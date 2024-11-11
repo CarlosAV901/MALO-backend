@@ -200,10 +200,49 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
+        public async Task<string> ObtenerContenido([FromBody] EmpleoRequestDto request)
+        {
+            try
+            {
+                var idUsuario = new SqlParameter { ParameterName = "EmpleoId", SqlDbType = SqlDbType.UniqueIdentifier, Value = request.EmpleoId };
+                var contenidoActual = new SqlParameter { ParameterName = "ContenidoActual", SqlDbType = SqlDbType.NVarChar, Size = 4000, Direction = ParameterDirection.Output };
+                var resultadoBD = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+                SqlParameter[] parameters = {
+                    idUsuario,
+                    contenidoActual,
+                    resultadoBD,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC SP_ContenidoActual @EmpleoId, @ContenidoActual OUTPUT, @Resultado OUTPUT, @NumError OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return (string)contenidoActual.Value;
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
         public async Task<string> UpdateEmpleoId([FromBody] EmpleoUpdateDto request)
         {
             try
             {
+
                 var resultadoBD = new SqlParameter
                 {
                     ParameterName = "Resultado",
