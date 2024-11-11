@@ -1,4 +1,7 @@
-﻿namespace MALO.Microservice.Empleos.Infraestructure.Repositories
+﻿using MALO.Microservice.Empleos.Domain.DTOs.Usuario;
+using Microsoft.AspNetCore.Mvc;
+
+namespace MALO.Microservice.Empleos.Infraestructure.Repositories
 {
     public class UsusarioInfraestructure: IUsuarioInfraestructure
     {
@@ -240,6 +243,45 @@
             }
         }
 
+        public async Task<string> ObtenerContenido([FromBody] ObtenerUsuarioPorId request)
+        {
+            try
+            {
+                var idUsuario = new SqlParameter { ParameterName = "UsuarioId", SqlDbType = SqlDbType.UniqueIdentifier, Value = request.Id };
+                var contenidoActual = new SqlParameter { ParameterName = "ContenidoActual", SqlDbType = SqlDbType.NVarChar, Size = 4000, Direction = ParameterDirection.Output };
+                var resultadoBD = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+                SqlParameter[] parameters = {
+                    idUsuario,
+                    contenidoActual,
+                    resultadoBD,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC SP_ContenidoActual @UsuarioId, @ContenidoActual OUTPUT, @Resultado OUTPUT, @NumError OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return (string)contenidoActual.Value;
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<ActualizarUsuarioDTO> ActualizarUsuario(Guid UsuarioId, ActualizarUsuarioDTO actualizarUsuarioDTO)
         {
             try
@@ -254,7 +296,7 @@
                 var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
                 var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
 
-                var usuarioIdParam = new SqlParameter { ParameterName = "UsuarioId", SqlDbType = SqlDbType.UniqueIdentifier, Value = UsuarioId };
+                var usuarioIdParam = new SqlParameter { ParameterName = "Usuario_Id", SqlDbType = SqlDbType.UniqueIdentifier, Value = UsuarioId };
                 var nombre = new SqlParameter { ParameterName = "nombre", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.nombre ?? usuarioExistene.nombre };
                 var apellido = new SqlParameter { ParameterName = "apellido", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.apellido ?? usuarioExistene.apellido };
                 var email = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.email ?? usuarioExistene.email };
@@ -281,7 +323,7 @@
                     imagen_perfil
                 };
 
-                string sqlQuery = "EXEC sp_ActualizarUsuario @UsuarioId, @nombre, @apellido, @email, @telefono, @estado, @municipio, @localidad, @habilidades, @descripcion, @imagen_perfil";
+                string sqlQuery = "EXEC sp_ActualizarUsuario @Usuario_Id, @nombre, @apellido, @email, @telefono, @estado, @municipio, @localidad, @habilidades, @descripcion, @imagen_perfil";
 
                 var dataSp = await _context.actualizarUsuarioDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
 

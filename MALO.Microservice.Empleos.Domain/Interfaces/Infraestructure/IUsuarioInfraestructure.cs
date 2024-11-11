@@ -1,4 +1,6 @@
-﻿namespace MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure
 {
     public interface IUsuarioInfraestructure
     {
@@ -49,6 +51,8 @@
         /// </summary>
         /// <returns></returns>
         Task<UsuarioConDetallesDTO> ValidarUsuario(string email, string caontrasena);
+
+        Task<string> ObtenerContenido([FromBody] ObtenerUsuarioPorId request);
 
     }
 }
