@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Mvc;
+
 namespace MALO.Microservice.Empleos.Domain.Interfaces.Services
 {
     public interface IUserPresenter
@@ -50,5 +52,7 @@ namespace MALO.Microservice.Empleos.Domain.Interfaces.Services
         /// </summary>
         /// <returns></returns>
         Task<UsuarioConDetallesDTO> ValidarUsuario(string email, string contrasena);
+
+        Task<string> ObtenerContenido([FromBody] ObtenerUsuarioPorId request);
     }
 }

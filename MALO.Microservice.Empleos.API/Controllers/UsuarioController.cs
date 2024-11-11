@@ -257,6 +257,17 @@ namespace MALO.Microservice.Empleos.API.Controllers
         {
             string urlImagen = null;
 
+            var usuarioDto = new ObtenerUsuarioPorId { Id = request.UsuarioId };
+
+            var documento = await _appController.UserPresenter.ObtenerContenido(usuarioDto);
+            string archivoAnteriorUrl = documento;
+
+            if (!string.IsNullOrEmpty(archivoAnteriorUrl))
+            {
+                var nombreArchivoAnterior = Path.GetFileName(archivoAnteriorUrl);
+                await _fileService.EliminarArchivo(nombreArchivoAnterior);
+            }
+
             if (archivo != null)
             {
                 try
