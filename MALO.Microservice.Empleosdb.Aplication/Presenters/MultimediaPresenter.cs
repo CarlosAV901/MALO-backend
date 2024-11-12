@@ -34,5 +34,6 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
         {
             return await _unitRepository.multimediaInfraestructure.DeleteMultimediaById(request);
         }
+
     }
 }

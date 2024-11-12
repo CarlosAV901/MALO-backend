@@ -137,6 +137,8 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
+        
+
         public async Task<string> UpdateMultimediaById([FromBody] MultimediaUpdateDto request)
         {
             try

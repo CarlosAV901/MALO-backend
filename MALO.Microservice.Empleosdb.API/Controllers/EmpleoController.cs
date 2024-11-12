@@ -56,8 +56,36 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
         }
 
         [HttpPost("UpdateEmpleoById")]
-        public async ValueTask<IActionResult> UpdateEmpleoId([FromBody] EmpleoUpdateDto request)
+        public async ValueTask<IActionResult> UpdateEmpleoId([FromForm] EmpleoUpdateDto request, [FromForm] IFormFile archivo)
         {
+
+            string urlImagen = null;
+
+            var empleoId = new EmpleoRequestDto { EmpleoId = request.Empleo_id };
+
+            var documento = await _appController.EmpleoPresenter.ObtenerContenido(empleoId);
+
+            if (!string.IsNullOrEmpty(documento))
+            {
+                var nombreArchivoAnterior = Path.GetFileName(documento);
+                await _fileService.EliminarArchivo(nombreArchivoAnterior);
+            }
+
+            if (archivo != null)
+            {
+                try
+                {
+                    urlImagen = await _fileService.SubirArchivo(archivo);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error al subir el archivo: {ex.Message}");
+                }
+            }
+
+            request.multimediaContenido = urlImagen;
+            request.multimediaTipo = archivo?.ContentType;
+
             return Ok(await _appController.EmpleoPresenter.UpdateEmpleoId(request));
         }
 
