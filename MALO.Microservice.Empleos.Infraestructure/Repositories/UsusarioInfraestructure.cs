@@ -273,7 +273,7 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 string sqlQuery = "EXEC SP_ContenidoActual @UsuarioId, @ContenidoActual OUTPUT, @Resultado OUTPUT, @NumError OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
-                return (string)contenidoActual.Value;
+                return contenidoActual.Value != DBNull.Value ? (string)contenidoActual.Value : null;
 
             }
             catch (SqlException ex)
