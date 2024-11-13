@@ -348,7 +348,6 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 var localidad = new SqlParameter { ParameterName = "localidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.localidad ?? usuarioExistene.localidad };
                 var habilidad = new SqlParameter { ParameterName = "habilidades", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.habilidades ?? usuarioExistene.HabilidadesDescripciones};
                 var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.descripcion ?? usuarioExistene.Experiencias };
-                var imagen_perfil = new SqlParameter { ParameterName = "imagen_perfil", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.imagen_perfil ?? usuarioExistene.ImagenPerfil};
 
                 SqlParameter[] parameters =
                 {
@@ -361,11 +360,10 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                     municipio,
                     localidad,
                     habilidad,
-                    descripcion,
-                    imagen_perfil
+                    descripcion
                 };
 
-                string sqlQuery = "EXEC sp_ActualizarUsuario @Usuario_Id, @nombre, @apellido, @email, @telefono, @estado, @municipio, @localidad, @habilidades, @descripcion, @imagen_perfil";
+                string sqlQuery = "EXEC sp_ActualizarUsuario @Usuario_Id, @nombre, @apellido, @email, @telefono, @estado, @municipio, @localidad, @habilidades, @descripcion";
 
                 var dataSp = await _context.actualizarUsuarioDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
 
