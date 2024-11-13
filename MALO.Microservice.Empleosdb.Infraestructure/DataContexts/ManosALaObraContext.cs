@@ -18,6 +18,8 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
         public DbSet<ObtenerUsuariosPorEmpleosDTO> obtenerUsuariosPorEmpleosDTO {get; set;}
         public DbSet<AplicarEmpleoDTO> aplicarEmpleoDTO {get; set;}
         public DbSet<ObtenerEmpleosPorUsuarioDTO> obtenerEmpleosPorUsuarioDTO {get; set;}
+
+        public DbSet<ActualizarMultimediaDTO> actualizarMultimediaDTO {get; set;}
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

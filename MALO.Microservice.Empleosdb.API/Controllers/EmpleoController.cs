@@ -56,14 +56,20 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
         }
 
         [HttpPost("UpdateEmpleoById")]
-        public async ValueTask<IActionResult> UpdateEmpleoId([FromForm] EmpleoUpdateDto request, [FromForm] IFormFile archivo)
+        public async ValueTask<IActionResult> UpdateEmpleoId([FromBody] EmpleoUpdateDto request)
         {
+            return Ok(await _appController.EmpleoPresenter.UpdateEmpleoId(request));
+        }
 
+        [HttpPost("ActualizarMultimedia")]
+        public async Task<IActionResult> ActualizarMultimedia([FromForm] ActualizarMultimediaDTO request, [FromForm] IFormFile archivo)
+        {
             string urlImagen = null;
 
-            var empleoId = new EmpleoRequestDto { EmpleoId = request.Empleo_id };
+            var usuarioDto = new EmpleoRequestDto { EmpleoId = request.EmpleoId };
 
-            var documento = await _appController.EmpleoPresenter.ObtenerContenido(empleoId);
+            var documento = await _appController.EmpleoPresenter.ObtenerContenido(usuarioDto);
+
 
             if (!string.IsNullOrEmpty(documento))
             {
@@ -83,10 +89,12 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
                 }
             }
 
-            request.multimediaContenido = urlImagen;
-            request.multimediaTipo = archivo?.ContentType;
+            request.contenido = urlImagen;
 
-            return Ok(await _appController.EmpleoPresenter.UpdateEmpleoId(request));
+
+            var empleo = await _appController.EmpleoPresenter.ActualizarMultimedia(request);
+
+            return Ok(empleo);
         }
 
         [HttpPost("DeleteEmpleoById")]
