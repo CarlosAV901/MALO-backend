@@ -55,5 +55,7 @@ namespace MALO.Microservice.Empleos.Domain.Interfaces.Services
         Task<UsuarioConDetallesDTO> ValidarUsuario(string email, string contrasena);
 
         Task<string> ObtenerContenido([FromBody] ObtenerUsuarioPorId request);
+
+        Task<UsuarioMultimediaDTO> ActualizarMultimedia([FromBody] UsuarioMultimediaDTO request);
     }
 }

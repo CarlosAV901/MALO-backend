@@ -26,6 +26,8 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
         public DbSet<ActualizarHabilidadDTO> actualizarHabilidadDTO { get; set;}
         public DbSet<NuevoTokenDTO> nuevoTokenDTO {get; set;}
 
+        public DbSet<UsuarioMultimediaDTO> usuarioMultimediaDTO {get; set;}
+
         public DbSet<LoginDTO> loginDto { get; set; }
 
         #endregion

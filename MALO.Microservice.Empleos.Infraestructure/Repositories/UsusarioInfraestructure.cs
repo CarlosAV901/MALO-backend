@@ -375,7 +375,38 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
             {
                 throw;
             }
-        } 
+        }
+
+        public async Task<UsuarioMultimediaDTO> ActualizarMultimedia([FromBody] UsuarioMultimediaDTO request)
+        {
+            try
+            {
+                var usuarioId = new SqlParameter { ParameterName = "UsuarioId", SqlDbType = SqlDbType.UniqueIdentifier, Value = request.UsuarioId };
+                var contenido = new SqlParameter { ParameterName = "contenido", SqlDbType = SqlDbType.NVarChar, Value = request.contenido };
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    usuarioId,
+                    contenido,
+                    resultadoDb,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC sp_ActualizarMultimedia @UsuarioId, @contenido, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSp = await _context.usuarioMultimediaDTO.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                return dataSp.FirstOrDefault();
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+
+        }
 
         public async Task<UsuarioConDetallesDTO> ValidarUsuario(string email, string contrasena)
         {

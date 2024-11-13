@@ -55,5 +55,7 @@ namespace MALO.Microservice.Empleos.Domain.Interfaces.Infraestructure
 
         Task<string> ObtenerContenido([FromBody] ObtenerUsuarioPorId request);
 
+        Task<UsuarioMultimediaDTO> ActualizarMultimedia([FromBody] UsuarioMultimediaDTO request);
+
     }
 }
