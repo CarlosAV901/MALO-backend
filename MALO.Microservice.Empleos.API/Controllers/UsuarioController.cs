@@ -123,7 +123,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
                 return BadRequest("No se pudo registrar al usuario");
             }
 
-            var verificationLink = $"https://malo-backend.onrender.com/confirmar?token={usuarioInsertarDto.token}";
+            var verificationLink = $"https://malo-backend.onrender.com/api/usuario/confirmar?token={usuarioInsertarDto.token}";
             //var verificationLink = $"https://localhost:7181/api/usuario/confirmar?token={usuarioInsertarDto.token}";
             var subject = "Confirma tu cuenta";
             var body = $@"
@@ -208,7 +208,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
 
 
 
-        [HttpGet("confirmar{token}")]
+        [HttpGet("confirmar")]
         public async Task<IActionResult> ConfirmarCorreo([FromQuery] Guid token)
         {
             
@@ -321,6 +321,42 @@ namespace MALO.Microservice.Empleos.API.Controllers
             await _emailService.SendEmail(request.Email, subject, body);
 
             return Ok(resulatdo);
+        }
+
+        [HttpPost("ActualizarMultimedia")]
+        public async Task<IActionResult> ActualizarMultimedia([FromForm] UsuarioMultimediaDTO request, [FromForm] IFormFile archivo)
+        {
+            string urlImagen = null;
+
+            var usuarioDto = new ObtenerUsuarioPorId { Id = request.UsuarioId };
+
+            var documento = await _appController.UserPresenter.ObtenerContenido(usuarioDto);
+
+
+            if (!string.IsNullOrEmpty(documento))
+            {
+                var nombreArchivoAnterior = Path.GetFileName(documento);
+                await _fileService.EliminarArchivo(nombreArchivoAnterior);
+            }
+
+            if (archivo != null)
+            {
+                try
+                {
+                    urlImagen = await _fileService.SubirArchivo(archivo);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error al subir el archivo: {ex.Message}");
+                }
+            }
+
+            request.contenido = urlImagen;
+
+
+            var empleo = await _appController.UserPresenter.ActualizarMultimedia(request);
+
+            return Ok(empleo);
         }
 
 
