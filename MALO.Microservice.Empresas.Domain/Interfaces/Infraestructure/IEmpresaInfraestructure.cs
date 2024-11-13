@@ -9,6 +9,6 @@ namespace MALO.Microservice.Empresas.Domain.Interfaces.Infraestructure
         Task<string> UpdateEmpresa(ActualizarEmpresaDto empresaDto);
         Task<string> DeleteEmpresa(EliminarEmpresaDto empresaDto);
         Task<EmpresaDto> ValidarEmpresa(string email, string contrasena);
-        Task<string> ConfirmarEmpresa(Guid token);
+        Task<(string mensaje, int numError)> ConfirmarEmpresa(Guid token);
     }
 }

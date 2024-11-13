@@ -223,7 +223,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
                 case 2: // Token inválido o no encontrado
                     return NotFound(new { message = mensajeResultado, result = false });
                 case 3: // Token expirado
-                    return NotFound(new { message = mensajeResultado, result = false });
+                    return Redirect("https://malo-zeta.vercel.app/auth/expired-token");
                 case 4: // Error en el procedimiento
                     return StatusCode(500, new { message = mensajeResultado, result = false });
 
