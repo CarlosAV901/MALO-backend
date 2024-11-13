@@ -43,5 +43,10 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
         {
             return await _unitRepository.empleoInfraestructure.ObtenerContenido(request);
         }
+
+        public async Task<ActualizarMultimediaDTO> ActualizarMultimedia([FromBody] ActualizarMultimediaDTO request)
+        {
+            return await _unitRepository.empleoInfraestructure.ActualizarMultimedia(request);
+        }
     }
 }

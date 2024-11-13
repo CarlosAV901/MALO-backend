@@ -238,6 +238,36 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 throw;
             }
         }
+
+        public async Task<ActualizarMultimediaDTO> ActualizarMultimedia([FromBody] ActualizarMultimediaDTO request)
+        {
+            try
+            {
+                var empleoId = new SqlParameter { ParameterName = "EmpleoId", SqlDbType = SqlDbType.UniqueIdentifier, Value = request.EmpleoId };
+                var contenido = new SqlParameter { ParameterName = "contenido", SqlDbType = SqlDbType.NVarChar, Value = request.contenido };
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    empleoId,
+                    contenido,
+                    resultadoDb,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC sp_ActualizarMultimedia @EmpleoId, @contenido, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSp = await _context.actualizarMultimediaDTO.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                return dataSp.FirstOrDefault();
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<string> UpdateEmpleoId([FromBody] EmpleoUpdateDto request)
         {
             try
@@ -301,25 +331,6 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     SqlDbType = SqlDbType.VarChar,
                     Value = request.horario
                 };
-                var multimediaNombre = new SqlParameter
-                {
-                    ParameterName = "multimediaNombre",
-                    SqlDbType = SqlDbType.VarChar,
-                    Value = request.multimediaNombre
-                };
-                var multimediaTipo = new SqlParameter
-                {
-                    ParameterName = "multimediaTipo",
-                    SqlDbType = SqlDbType.VarChar,
-                    Value = request.multimediaTipo
-                };
-                var multimediaContenido = new SqlParameter
-                {
-                    ParameterName = "multimediaContenido",
-                    SqlDbType = SqlDbType.VarChar,
-                    Value = request.multimediaContenido
-                };
-
                 SqlParameter[] parameters =
                 {
                     EmpleoId,
@@ -329,15 +340,12 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                     SalarioMinimo,
                     SalarioMaximo,
                     horario,
-                    multimediaNombre,
-                    multimediaTipo,
-                    multimediaContenido,
                     resultadoBD,
                     NumError
                 };
 
                 string sqlQuery = "EXEC SP_ActualizarEmpleoConMultimedia @Empleo_id, @Titulo, @Descripcion, " +
-                                  "@Ubicacion, @Salario_minimo, @Salario_maximo, @horario, @multimediaNombre, @multimediaTipo, @multimediaContenido, @Resultado OUTPUT, @NumError OUTPUT";
+                                  "@Ubicacion, @Salario_minimo, @Salario_maximo, @horario, @Resultado OUTPUT, @NumError OUTPUT";
 
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
