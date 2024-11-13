@@ -189,74 +189,74 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
             }
         }
 
-        public async Task<(string mensaje, int numError)> ConfirmarUsuario(Guid token)
-        {
-            try
-            {
-                var tokenParam = new SqlParameter { ParameterName = "token", SqlDbType = SqlDbType.UniqueIdentifier, Value = token };
-                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
-                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+        //public async Task<(string mensaje, int numError)> ConfirmarUsuario(Guid token)
+        //{
+        //    try
+        //    {
+        //        var tokenParam = new SqlParameter { ParameterName = "token", SqlDbType = SqlDbType.UniqueIdentifier, Value = token };
+        //        var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+        //        var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
 
-                SqlParameter[] parameters =
-                {
-                    tokenParam,
-                    resultadoDb,
-                    NumError
-                };
+        //        SqlParameter[] parameters =
+        //        {
+        //            tokenParam,
+        //            resultadoDb,
+        //            NumError
+        //        };
 
-                string sqlQuery = "EXEC SP_ConfirmarUsuario @token, @Resultado OUTPUT, @NumError OUTPUT";
-                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+        //        string sqlQuery = "EXEC SP_ConfirmarUsuario @token, @Resultado OUTPUT, @NumError OUTPUT";
+        //        await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
-                string mensajeResultado = resultadoDb.Value.ToString();
-                int codigoError = (int)NumError.Value;
+        //        string mensajeResultado = resultadoDb.Value.ToString();
+        //        int codigoError = (int)NumError.Value;
 
-                return (mensajeResultado, codigoError);
+        //        return (mensajeResultado, codigoError);
 
-            }
-            catch (SqlException ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        public async Task<Guid> GenerarNuevoToken(string email)
-        {
-            try
-            {
-                var emailParam = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value = email };
-                var tokenParam = new SqlParameter { ParameterName = "token", SqlDbType = SqlDbType.UniqueIdentifier, Direction = ParameterDirection.Output };
-                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.NVarChar, Size = 100, Direction = ParameterDirection.Output };
-                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+        //public async Task<Guid> GenerarNuevoToken(string email)
+        //{
+        //    try
+        //    {
+        //        var emailParam = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value = email };
+        //        var tokenParam = new SqlParameter { ParameterName = "token", SqlDbType = SqlDbType.UniqueIdentifier, Direction = ParameterDirection.Output };
+        //        var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.NVarChar, Size = 100, Direction = ParameterDirection.Output };
+        //        var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
 
-                SqlParameter[] parameters =
-                {
-                    emailParam,
-                    tokenParam,
-                    resultadoDb,
-                    NumError
-                };
+        //        SqlParameter[] parameters =
+        //        {
+        //            emailParam,
+        //            tokenParam,
+        //            resultadoDb,
+        //            NumError
+        //        };
 
-                string sqlQuery = "EXEC dbo.SP_GenerarNuevoToken @email, @Resultado OUTPUT, @NumError OUTPUT, @token OUTPUT";
-                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+        //        string sqlQuery = "EXEC dbo.SP_GenerarNuevoToken @email, @Resultado OUTPUT, @NumError OUTPUT, @token OUTPUT";
+        //        await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
-                if ((int)NumError.Value != 0)
-                {
-                    throw new Exception((string)resultadoDb.Value);
-                }
+        //        if ((int)NumError.Value != 0)
+        //        {
+        //            throw new Exception((string)resultadoDb.Value);
+        //        }
 
-                // Verifica si el token es DBNull antes de hacer la conversión
-                if (tokenParam.Value == DBNull.Value)
-                {
-                    throw new Exception("Error al generar el token de recuperación.");
-                }
+        //        // Verifica si el token es DBNull antes de hacer la conversión
+        //        if (tokenParam.Value == DBNull.Value)
+        //        {
+        //            throw new Exception("Error al generar el token de recuperación.");
+        //        }
 
-                return (Guid)tokenParam.Value;
+        //        return (Guid)tokenParam.Value;
 
-            }
-            catch (SqlException ex)
-            {
-                throw;
-            }
-        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        throw;
+        //    }
+        //}
 
 
         public async Task<string> EliminarUsuario(Guid usuarioId)
