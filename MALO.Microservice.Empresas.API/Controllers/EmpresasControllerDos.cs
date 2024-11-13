@@ -184,28 +184,116 @@ namespace MALO.Microservice.Empresas.API.Controllers
         [HttpGet("confirmar")]
         public async Task<IActionResult> ConfirmarCorreo([FromQuery] Guid token)
         {
-            var resultado = _appController.EmpresaPresenter.ConfirmarEmpresa(token);
+            var (mensajeResultado, codigoError) = await _appController.EmpresaPresenter.ConfirmarEmpresa(token);
 
-
-            if (resultado == null)
+            switch (codigoError)
             {
-                return BadRequest("Enlace de confirmación inválido o ya utilizado.");
+                case 0:
+                    return Redirect("https://malo-zeta.vercel.app/auth/login");
+                case 1: // Contraseña actualizada correctamente
+                    return Redirect("https://malo-zeta.vercel.app/auth/cuenta-confirmada");
+                case 2: // Token inválido o no encontrado
+                    return NotFound(new { message = mensajeResultado, result = false });
+                case 3: // Token expirado
+                    return Redirect("https://malo-zeta.vercel.app/auth/expired-token");
+                case 4: // Error en el procedimiento
+                    return StatusCode(500, new { message = mensajeResultado, result = false });
+
+                default: // Error no esperado
+                    return StatusCode(500, new { message = "Error inesperado", result = false });
             }
 
+        }
 
-            if (await resultado == "Correo confirmado correctamente")
+
+        [HttpPost("generar-nuevo-token")]
+        public async Task<IActionResult> GenerarNuevoToken([FromBody] NuevoTokenDTO request)
+        {
+            var resulatdo = await _appController.RecuperacionPresenter.GenerarTokenRecuperacion(request.email);
+
+            if (resulatdo == null)
             {
-
-                return Ok(new
-                {
-                    message = "Correo confirmado correctamente.",
-                    result = true
-                });
+                return BadRequest("Error al solicitar la recuperacion");
             }
 
-            return BadRequest("Token inválido o expirado.");
+            var generateTokenLink = $"https://malo-backend-empresas.onrender.com/api/empresa/confirmar?token={resulatdo}";
+            //var verificationLink = $"https://localhost:7181/api/recuperacion/verificar-token?token={resulatdo}";
+            var subject = "Confirma tu cuenta";
+            var body = $@"
+                        <!DOCTYPE html>
+                        <html lang=""es"">
+                        <head>
+                            <meta charset=""UTF-8"">
+                            <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+                            <title>Generación de Nuevo Token de Confirmación</title>
+                            <style>
+                            body {{
+                                font-family: Arial, sans-serif;
+                                background-color: #f4f4f4;
+                                margin: 0;
+                                padding: 20px;
+                            }}
+                            .container {{
+                                max-width: 600px;
+                                margin: auto;
+                                background: white;
+                                padding: 20px;
+                                border-radius: 5px;
+                                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                            }}
+                            .header {{
+                                text-align: center;
+                                margin-bottom: 20px;
+                            }}
+                            .header img {{
+                                max-width: 100%;
+                                height: auto;
+                            }}
+                            .content {{
+                                margin: 20px 0;
+                                text-align: center;
+                            }}
+                            .button {{
+                                display: inline-block;
+                                padding: 10px 20px;
+                                background-color: #007BFF;
+                                color: white;
+                                text-decoration: none;
+                                border-radius: 5px;
+                                margin-top: 20px;
+                            }}
+                            .footer {{
+                                text-align: center;
+                                font-size: 12px;
+                                color: #666;
+                                margin-top: 30px;
+                            }}
+                            </style>
+                        </head>
+                        <body>
+                            <div class=""container"">
+                            <div class=""header"">
+                                <img src='https://malo-zeta.vercel.app/malo_logo_azul.png' alt=""Malo logo"" />
+                            </div>
+                            <div class=""content"">
+                                <h2>¿Necesitas un nuevo token de confirmación?</h2>
+                                <p>Hemos recibido tu solicitud para generar un nuevo token de confirmación.</p>
+                                <a href='{generateTokenLink}' class=""button"">Confirmar mi cuenta</a>
+                                <p>Si no solicitaste un nuevo token, ignora este mensaje.</p>
+                            </div>
+                            <div class=""footer"">
+                                <p>Atentamente,</p>
+                                <p>El equipo de Manos a la Obra</p>
+                            </div>
+                            </div>
+                        </body>
+                        </html>";
 
 
+
+            await _emailService.SendEmail(request.email, subject, body);
+
+            return Ok(resulatdo);
         }
 
 

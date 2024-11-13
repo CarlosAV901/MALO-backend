@@ -67,7 +67,7 @@ namespace MALO.Microservice.Empresas.Aplication.Presenters
         }
 
         
-        public async Task<string> ConfirmarEmpresa(Guid token)
+        public async Task<(string mensaje, int numError)> ConfirmarEmpresa(Guid token)
         {
             return await _unitRepository.EmpresaInfraestructure.ConfirmarEmpresa(token);
         }
