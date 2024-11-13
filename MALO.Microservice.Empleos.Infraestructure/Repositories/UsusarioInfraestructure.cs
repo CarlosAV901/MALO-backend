@@ -189,6 +189,34 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
             }
         }
 
+        public async Task<string> ConfirmarUsuario(Guid token)
+        {
+            try
+            {
+                var tokenParam = new SqlParameter { ParameterName = "token", SqlDbType = SqlDbType.UniqueIdentifier, Value = token };
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    tokenParam,
+                    resultadoDb,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC SP_ConfirmarUsuario @token, @Resultado OUTPUT, @NumError OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return "Correo confirmado correctamente";
+
+
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         //public async Task<(string mensaje, int numError)> ConfirmarUsuario(Guid token)
         //{
         //    try
