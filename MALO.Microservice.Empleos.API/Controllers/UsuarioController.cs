@@ -208,7 +208,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
 
 
 
-        [HttpGet("confirmar/{token}")]
+        [HttpGet("confirmar{token}")]
         public async Task<IActionResult> ConfirmarCorreo([FromQuery] Guid token)
         {
             
@@ -342,34 +342,34 @@ namespace MALO.Microservice.Empleos.API.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [HttpPost("ActualizarUsuario")]
         [Authorize]
-        public async ValueTask<IActionResult> ActualizarUsuario([FromForm] ActualizarUsuarioDTO request, [FromForm] IFormFile archivo)
+        public async ValueTask<IActionResult> ActualizarUsuario([FromBody] ActualizarUsuarioDTO request)
         {
-            string urlImagen = null;
+            //string urlImagen = null;
 
-            var usuarioDto = new ObtenerUsuarioPorId { Id = request.UsuarioId };
+            //var usuarioDto = new ObtenerUsuarioPorId { Id = request.UsuarioId };
 
-            var documento = await _appController.UserPresenter.ObtenerContenido(usuarioDto);
+            //var documento = await _appController.UserPresenter.ObtenerContenido(usuarioDto);
             
 
-            if (!string.IsNullOrEmpty(documento))
-            {
-                var nombreArchivoAnterior = Path.GetFileName(documento);
-                await _fileService.EliminarArchivo(nombreArchivoAnterior);
-            }
+            //if (!string.IsNullOrEmpty(documento))
+            //{
+            //    var nombreArchivoAnterior = Path.GetFileName(documento);
+            //    await _fileService.EliminarArchivo(nombreArchivoAnterior);
+            //}
 
-            if (archivo != null)
-            {
-                try
-                {
-                    urlImagen = await _fileService.SubirArchivo(archivo);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest($"Error al subir el archivo: {ex.Message}");
-                }
-            }
+            //if (archivo != null)
+            //{
+            //    try
+            //    {
+            //        urlImagen = await _fileService.SubirArchivo(archivo);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        return BadRequest($"Error al subir el archivo: {ex.Message}");
+            //    }
+            //}
 
-            request.imagen_perfil = urlImagen;
+
 
             var usuario = await _appController.UserPresenter.ActualizarUsuario(request.UsuarioId, request);
 
