@@ -189,7 +189,7 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
             }
         }
 
-        public async Task<string> ConfirmarUsuario(Guid token)
+        public async Task<(string mensaje, int numError)> ConfirmarUsuario(Guid token)
         {
             try
             {
@@ -207,12 +207,54 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 string sqlQuery = "EXEC SP_ConfirmarUsuario @token, @Resultado OUTPUT, @NumError OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
-                return "Correo confirmado correctamente";
+                string mensajeResultado = resultadoDb.Value.ToString();
+                int codigoError = (int)NumError.Value;
 
+                return (mensajeResultado, codigoError);
 
-            }catch (SqlException ex)
+            }
+            catch (SqlException ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+        public async Task<Guid> GenerarNuevoToken(string email)
+        {
+            try
+            {
+                var emailParam = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value = email };
+                var tokenParam = new SqlParameter { ParameterName = "token", SqlDbType = SqlDbType.UniqueIdentifier, Direction = ParameterDirection.Output };
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.NVarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    emailParam,
+                    tokenParam,
+                    resultadoDb,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC dbo.SP_GenerarNuevoToken @email, @Resultado OUTPUT, @NumError OUTPUT, @token OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                if ((int)NumError.Value != 0)
+                {
+                    throw new Exception((string)resultadoDb.Value);
+                }
+
+                // Verifica si el token es DBNull antes de hacer la conversión
+                if (tokenParam.Value == DBNull.Value)
+                {
+                    throw new Exception("Error al generar el token de recuperación.");
+                }
+
+                return (Guid)tokenParam.Value;
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
             }
         }
 
@@ -286,56 +328,57 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
         {
             try
             {
-                var usuarioExistene = await ObtenerUsuarioPorId(UsuarioId);
-
-                if (usuarioExistene == null)
+                var usuarioExistente = await ObtenerUsuarioPorId(UsuarioId);
+                if (usuarioExistente == null)
                 {
                     throw new Exception("El usuario no existe en la base de datos");
                 }
 
-                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
-                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var parameters = new List<SqlParameter>
+        {
+            new SqlParameter("@Usuario_Id", SqlDbType.UniqueIdentifier) { Value = UsuarioId }
+        };
+                if (!string.IsNullOrEmpty(actualizarUsuarioDTO.nombre))
+                    parameters.Add(new SqlParameter("@nombre", SqlDbType.NVarChar) { Value = actualizarUsuarioDTO.nombre });
 
-                var usuarioIdParam = new SqlParameter { ParameterName = "Usuario_Id", SqlDbType = SqlDbType.UniqueIdentifier, Value = UsuarioId };
-                var nombre = new SqlParameter { ParameterName = "nombre", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.nombre ?? usuarioExistene.nombre };
-                var apellido = new SqlParameter { ParameterName = "apellido", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.apellido ?? usuarioExistene.apellido };
-                var email = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.email ?? usuarioExistene.email };
-                var telefono = new SqlParameter { ParameterName = "telefono", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.telefono ?? usuarioExistene.telefono };
-                var estado = new SqlParameter { ParameterName = "estado", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.estado ?? usuarioExistene.estado };
-                var municipio = new SqlParameter { ParameterName = "municipio", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.municipio ?? usuarioExistene.municipio };
-                var localidad = new SqlParameter { ParameterName = "localidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.localidad ?? usuarioExistene.localidad };
-                var habilidad = new SqlParameter { ParameterName = "habilidades", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.habilidades ?? usuarioExistene.HabilidadesDescripciones};
-                var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.descripcion ?? usuarioExistene.Experiencias };
-                var imagen_perfil = new SqlParameter { ParameterName = "imagen_perfil", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.imagen_perfil ?? usuarioExistene.ImagenPerfil};
+                if (!string.IsNullOrEmpty(actualizarUsuarioDTO.apellido))
+                    parameters.Add(new SqlParameter("@apellido", SqlDbType.NVarChar) { Value = actualizarUsuarioDTO.apellido });
 
-                SqlParameter[] parameters =
-                {
-                    usuarioIdParam,
-                    nombre,
-                    apellido,
-                    email,
-                    telefono,
-                    estado,
-                    municipio,
-                    localidad,
-                    habilidad,
-                    descripcion,
-                    imagen_perfil
-                };
+                if (!string.IsNullOrEmpty(actualizarUsuarioDTO.email))
+                    parameters.Add(new SqlParameter("@email", SqlDbType.NVarChar) { Value = actualizarUsuarioDTO.email });
+
+                if (!string.IsNullOrEmpty(actualizarUsuarioDTO.telefono))
+                    parameters.Add(new SqlParameter("@telefono", SqlDbType.NVarChar) { Value = actualizarUsuarioDTO.telefono });
+
+                if (!string.IsNullOrEmpty(actualizarUsuarioDTO.estado))
+                    parameters.Add(new SqlParameter("@estado", SqlDbType.NVarChar) { Value = actualizarUsuarioDTO.estado });
+
+                if (!string.IsNullOrEmpty(actualizarUsuarioDTO.municipio))
+                    parameters.Add(new SqlParameter("@municipio", SqlDbType.NVarChar) { Value = actualizarUsuarioDTO.municipio });
+
+                if (!string.IsNullOrEmpty(actualizarUsuarioDTO.localidad))
+                    parameters.Add(new SqlParameter("@localidad", SqlDbType.NVarChar) { Value = actualizarUsuarioDTO.localidad });
+
+                if (!string.IsNullOrEmpty(actualizarUsuarioDTO.habilidades))
+                    parameters.Add(new SqlParameter("@habilidades", SqlDbType.NVarChar) { Value = actualizarUsuarioDTO.habilidades });
+
+                if (!string.IsNullOrEmpty(actualizarUsuarioDTO.descripcion))
+                    parameters.Add(new SqlParameter("@descripcion", SqlDbType.NVarChar) { Value = actualizarUsuarioDTO.descripcion });
+
+                if (!string.IsNullOrEmpty(actualizarUsuarioDTO.imagen_perfil))
+                    parameters.Add(new SqlParameter("@imagen_perfil", SqlDbType.NVarChar) { Value = actualizarUsuarioDTO.imagen_perfil });
 
                 string sqlQuery = "EXEC sp_ActualizarUsuario @Usuario_Id, @nombre, @apellido, @email, @telefono, @estado, @municipio, @localidad, @habilidades, @descripcion, @imagen_perfil";
-
-                var dataSp = await _context.actualizarUsuarioDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+                var dataSp = await _context.actualizarUsuarioDto.FromSqlRaw(sqlQuery, parameters.ToArray()).ToListAsync();
 
                 return dataSp.FirstOrDefault();
 
-
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 throw;
             }
-        } 
+        }
 
         public async Task<UsuarioConDetallesDTO> ValidarUsuario(string email, string contrasena)
         {
