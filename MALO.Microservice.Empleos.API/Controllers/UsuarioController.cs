@@ -208,7 +208,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
 
 
 
-        [HttpGet("confirmar/{token}")]
+        [HttpGet("confirmar{token}")]
         public async Task<IActionResult> ConfirmarCorreo([FromQuery] Guid token)
         {
             
