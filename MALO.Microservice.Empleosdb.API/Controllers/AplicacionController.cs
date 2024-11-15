@@ -20,6 +20,15 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
             return Ok(usuario);
         }
 
+        [HttpPost("contar-aplicaciones-empleos-por-fecha")]
+        public async Task<IActionResult> ObtenerConteoAplicacionesFecha([FromBody] EmpleoIdDto request)
+        {
+            var aplcacion =  await _appController.AplicacionPresenter.ObtenerConteoAplicacionesFecha(request);
+
+            return Ok(aplcacion);
+        }
+
+
         [HttpPost("contar-aplicaciones-por-empleo")]
         public async Task<IActionResult> ContarAplicionesPorEmpleo([FromBody] EmpleoIdDto request)
         {
@@ -55,6 +64,7 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
                 result = true
             });
         }
+
 
     }
 }

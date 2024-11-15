@@ -200,6 +200,74 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             }
         }
 
+        public async Task<(string mensaje, int numError)> ResgistrarVisualizacion([FromBody] RegistrarVisualizacionDTO request)
+        {
+            try
+            {
+                var usuarioId = new SqlParameter { ParameterName = "usuario_id", SqlDbType = SqlDbType.UniqueIdentifier, Value = request.usuario_id };
+                var empleoId = new SqlParameter { ParameterName = "empleo_id", SqlDbType = SqlDbType.UniqueIdentifier, Value = request.empleo_id };
+                var resultadoBD = new SqlParameter
+                {
+                    ParameterName = "Resultado",
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+                SqlParameter[] parameters =
+                {
+                    usuarioId,
+                    empleoId,
+                    resultadoBD,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC sp_RegistrarVisualizacion @usuario_id, @empleo_id, @Resultado OUTPUT, @NumError OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery,parameters);
+
+                string mensajeResultado = resultadoBD.Value.ToString();
+                int codigoError = (int)NumError.Value;
+
+                return (mensajeResultado, codigoError);
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<int> ObtenerVisualizacionesPorEmpleo([FromBody] EmpleoIdDto request)
+        {
+            try
+            {
+                var empleoId = new SqlParameter { ParameterName = "empleo_id", SqlDbType = SqlDbType.UniqueIdentifier, Value = request.EmpleoID };
+                var totalVisualizaciones = new SqlParameter { ParameterName = "totalVisualizaciones", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    empleoId,
+                    totalVisualizaciones
+                };
+
+                string sqlQuery = "EXEC sp_ObtenerVisualizacionesPorEmpleo @empleo_id, @totalVisualizaciones OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return (int)totalVisualizaciones.Value;
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<string> ObtenerContenido([FromBody] EmpleoRequestDto request)
         {
             try

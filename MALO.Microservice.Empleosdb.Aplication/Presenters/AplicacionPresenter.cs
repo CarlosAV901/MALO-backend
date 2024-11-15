@@ -39,5 +39,10 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
         {
             return await _unitRepository.aplicacionInfraestructure.ElimarAplicacion(request);
         }
+
+        public async Task<List<AplicacionesPorFechaDTO>> ObtenerConteoAplicacionesFecha([FromBody] EmpleoIdDto request)
+        {
+            return await _unitRepository.aplicacionInfraestructure.ObtenerConteoAplicacionesFecha(request);
+        }
     }
 }

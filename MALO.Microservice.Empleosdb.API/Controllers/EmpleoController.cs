@@ -1,6 +1,7 @@
 ﻿
 
 using MALO.Microservice.Empleosdb.Aplication.Services;
+using NPOI.OpenXmlFormats.Spreadsheet;
 
 namespace MALO.Microservice.Empleosdb.API.Controllers
 {
@@ -53,6 +54,29 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
             var empleo = await _appController.EmpleoPresenter.PostEmpleo(request);
 
             return Ok(empleo);
+        }
+
+        [HttpPost("RegitrarVisualizacion")]
+        public async Task<IActionResult> RegistrarVisualizacion([FromBody] RegistrarVisualizacionDTO request)
+        {
+            var(mensajeResultado, codigoError) = await _appController.EmpleoPresenter.ResgistrarVisualizacion(request);
+
+            return Ok(new
+            {
+                mensaje = mensajeResultado,
+                codigo = codigoError
+            });
+        }
+
+        [HttpPost("ObtenerVisualizacionesPorEmpleo")]
+        public async Task<IActionResult> ObtenerVisualizacionesPorEmpleo([FromBody] EmpleoIdDto request)
+        {
+            var visualizaciones = await _appController.EmpleoPresenter.ObtenerVisualizacionesPorEmpleo(request);
+
+            return Ok(new
+            {
+                visualizacionesTotales = visualizaciones
+            });
         }
 
         [HttpPost("UpdateEmpleoById")]

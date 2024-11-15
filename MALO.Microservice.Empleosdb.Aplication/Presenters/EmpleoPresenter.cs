@@ -48,5 +48,15 @@ namespace MALO.Microservice.Empleosdb.Aplication.Presenters
         {
             return await _unitRepository.empleoInfraestructure.ActualizarMultimedia(request);
         }
+
+        public async Task<(string mensaje, int numError)> ResgistrarVisualizacion([FromBody] RegistrarVisualizacionDTO request)
+        {
+            return await _unitRepository.empleoInfraestructure.ResgistrarVisualizacion(request);
+        }
+
+        public async Task<int> ObtenerVisualizacionesPorEmpleo([FromBody] EmpleoIdDto request)
+        {
+            return await _unitRepository.empleoInfraestructure.ObtenerVisualizacionesPorEmpleo(request);
+        }
     }
 }
