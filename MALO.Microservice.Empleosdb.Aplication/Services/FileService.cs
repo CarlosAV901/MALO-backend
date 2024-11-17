@@ -30,5 +30,11 @@ namespace MALO.Microservice.Empleosdb.Aplication.Services
         {
             await _filesHelper.EliminarArchivo(nombreArchivo);
         }
+
+        public async Task<bool> ArchivoExiste(string nombreArchivo)
+        {
+            return await _filesHelper.ArchivoExiste(nombreArchivo);
+        }
+
     }
 }
