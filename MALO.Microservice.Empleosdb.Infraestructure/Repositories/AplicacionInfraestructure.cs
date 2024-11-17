@@ -147,5 +147,25 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
             catch (SqlException ex) { throw; }
         }
 
+        public async Task<List<AplicacionesPorFechaDTO>> ObtenerConteoAplicacionesFecha([FromBody] EmpleoIdDto request)
+        {
+            try
+            {
+                var empleoId = new SqlParameter { ParameterName = "EmpleoId", SqlDbType= SqlDbType.UniqueIdentifier, Value = request.EmpleoID};
+
+                SqlParameter[] parameters =
+                {
+                    empleoId
+                };
+
+                string sqlQuery = "EXEC SP_ObtenerConteoAplicacionesPorFecha @EmpleoId";
+                var dataSp = await _context.aplicacionesPorFechaDTO.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                return dataSp;
+
+            }
+            catch (SqlException ex) { throw; }
+        }
+
     }
 }

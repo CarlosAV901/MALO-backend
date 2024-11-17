@@ -24,6 +24,9 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
         public DbSet<InsertarHabilidadDTO> insertarHabilidadDTO {get; set;}
         public DbSet<ObtenerHabilidadesDTO> obtenerHabilidadesDTO {get; set;}
         public DbSet<ActualizarHabilidadDTO> actualizarHabilidadDTO { get; set;}
+        public DbSet<NuevoTokenDTO> nuevoTokenDTO {get; set;}
+
+        public DbSet<UsuarioMultimediaDTO> usuarioMultimediaDTO {get; set;}
 
         public DbSet<LoginDTO> loginDto { get; set; }
 
@@ -42,6 +45,8 @@ namespace MALO.Microservice.Empleos.Infraestructure.DataContexts
             modelBuilder.Entity<InsertarHabilidadDTO>().HasNoKey();
 
             modelBuilder.Entity<LoginDTO>().HasNoKey();
+
+            modelBuilder.Entity<NuevoTokenDTO>().HasNoKey();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

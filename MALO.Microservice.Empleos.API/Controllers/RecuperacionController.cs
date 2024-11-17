@@ -115,7 +115,7 @@ namespace MALO.Microservice.Empleos.API.Controllers
                             </div>
                             <div class=""footer"">
                               <p>Atentamente,</p>
-                              <p>El equipo de {{yourCompanyName}}</p> </div>
+                              <p>El equipo de Manos a la Obra</p> </div>
                           </div>
                         </body>
                         </html>";

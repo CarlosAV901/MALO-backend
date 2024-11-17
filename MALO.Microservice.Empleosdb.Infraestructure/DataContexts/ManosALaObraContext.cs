@@ -18,6 +18,11 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
         public DbSet<ObtenerUsuariosPorEmpleosDTO> obtenerUsuariosPorEmpleosDTO {get; set;}
         public DbSet<AplicarEmpleoDTO> aplicarEmpleoDTO {get; set;}
         public DbSet<ObtenerEmpleosPorUsuarioDTO> obtenerEmpleosPorUsuarioDTO {get; set;}
+        public DbSet<AplicacionesPorFechaDTO> aplicacionesPorFechaDTO {get; set;}
+
+        public DbSet<ActualizarMultimediaDTO> actualizarMultimediaDTO {get; set;}
+
+        public DbSet<RegistrarVisualizacionDTO> registrarVisualizacionDTO {get; set;}
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,6 +35,8 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.DataContexts
             modelBuilder.Entity<ObtenerEmpleosPorUsuarioDTO>().HasNoKey();
             modelBuilder.Entity<UsuarioIdDTO>().HasNoKey();
             modelBuilder.Entity<AplicarEmpleoDTO>().HasNoKey();
+            modelBuilder.Entity<AplicacionesPorFechaDTO>().HasNoKey();
+            modelBuilder.Entity<RegistrarVisualizacionDTO>().HasNoKey();
         }
 
 

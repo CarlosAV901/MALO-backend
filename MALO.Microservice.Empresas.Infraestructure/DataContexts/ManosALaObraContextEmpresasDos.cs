@@ -15,6 +15,8 @@ namespace MALO.Microservice.Empresas.Infraestructure.DataContexts
         public DbSet<RecuperacionDTO> recuperacionDto {  get; set; }
         public DbSet<CambioContrasenaDTO> cambioContrasenaDTO { get; set; }
 
+        public DbSet<NuevoTokenDTO> nuevoTokenDTO { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -22,6 +24,7 @@ namespace MALO.Microservice.Empresas.Infraestructure.DataContexts
             modelBuilder.Entity<InsertarEmpresaDto>().HasNoKey();
             modelBuilder.Entity<CambioContrasenaDTO>().HasNoKey();
             modelBuilder.Entity<RecuperacionDTO>().HasNoKey();
+            modelBuilder.Entity<NuevoTokenDTO>().HasNoKey();    
         }
 
         #endregion

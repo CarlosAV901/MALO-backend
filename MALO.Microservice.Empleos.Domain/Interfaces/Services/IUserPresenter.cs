@@ -33,7 +33,8 @@ namespace MALO.Microservice.Empleos.Domain.Interfaces.Services
         /// Consulta un registro de la tabla CE_User
         /// </summary>
         /// <returns></returns>
-        Task<string> ConfirmarUsuario(Guid token);
+        Task<(string mensaje, int numError)> ConfirmarUsuario(Guid token);
+        Task<Guid> GenerarNuevoToken(string email);
 
         /// <summary>
         /// Consulta un registro de la tabla CE_User
@@ -54,5 +55,7 @@ namespace MALO.Microservice.Empleos.Domain.Interfaces.Services
         Task<UsuarioConDetallesDTO> ValidarUsuario(string email, string contrasena);
 
         Task<string> ObtenerContenido([FromBody] ObtenerUsuarioPorId request);
+
+        Task<UsuarioMultimediaDTO> ActualizarMultimedia([FromBody] UsuarioMultimediaDTO request);
     }
 }

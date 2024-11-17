@@ -14,5 +14,8 @@ namespace MALO.Microservice.Empleosdb.Domain.Interfaces.Infraestructure
         Task<string> UpdateEmpleoId([FromBody] EmpleoUpdateDto request);
         Task<string> DeleteEmpleoId([FromBody] EmpleoRequestDto request);
         Task<string> ObtenerContenido([FromBody] EmpleoRequestDto request);
+        Task<ActualizarMultimediaDTO> ActualizarMultimedia([FromBody] ActualizarMultimediaDTO request);
+        Task<(string mensaje, int numError)> ResgistrarVisualizacion([FromBody] RegistrarVisualizacionDTO request);
+        Task<int> ObtenerVisualizacionesPorEmpleo([FromBody] EmpleoIdDto request);
     }
 }

@@ -95,12 +95,15 @@ namespace MALO.Microservice.Documentos.API.Controllers
             var usuarioDto = new UsuarioIdDTO { UsuarioId = request.usuario_id };
 
             var documento = await _appController.DocumentoPresenter.ObtenerContenido(usuarioDto);
-            string archivoAnteriorUrl = documento;
+            string firebaseDomain = "https://firebasestorage.googleapis.com/";
 
-            if (!string.IsNullOrEmpty(archivoAnteriorUrl))
+            if (!string.IsNullOrEmpty(documento) && documento.StartsWith(firebaseDomain))
             {
-                var nombreArchivoAnterior = Path.GetFileName(archivoAnteriorUrl);
-                await _fileService.EliminarArchivo(nombreArchivoAnterior);
+                var nombreArchivoAnterior = Path.GetFileName(documento);
+                if (await _fileService.ArchivoExiste(nombreArchivoAnterior))
+                {
+                    await _fileService.EliminarArchivo(nombreArchivoAnterior);
+                }
             }
 
             if (archivo != null)

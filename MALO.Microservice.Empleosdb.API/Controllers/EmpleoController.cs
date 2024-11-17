@@ -1,6 +1,7 @@
 ﻿
 
 using MALO.Microservice.Empleosdb.Aplication.Services;
+using NPOI.OpenXmlFormats.Spreadsheet;
 
 namespace MALO.Microservice.Empleosdb.API.Controllers
 {
@@ -55,20 +56,54 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
             return Ok(empleo);
         }
 
-        [HttpPost("UpdateEmpleoById")]
-        public async ValueTask<IActionResult> UpdateEmpleoId([FromForm] EmpleoUpdateDto request, [FromForm] IFormFile archivo)
+        [HttpPost("RegitrarVisualizacion")]
+        public async Task<IActionResult> RegistrarVisualizacion([FromBody] RegistrarVisualizacionDTO request)
         {
+            var(mensajeResultado, codigoError) = await _appController.EmpleoPresenter.ResgistrarVisualizacion(request);
 
+            return Ok(new
+            {
+                mensaje = mensajeResultado,
+                codigo = codigoError
+            });
+        }
+
+        [HttpPost("ObtenerVisualizacionesPorEmpleo")]
+        public async Task<IActionResult> ObtenerVisualizacionesPorEmpleo([FromBody] EmpleoIdDto request)
+        {
+            var visualizaciones = await _appController.EmpleoPresenter.ObtenerVisualizacionesPorEmpleo(request);
+
+            return Ok(new
+            {
+                visualizacionesTotales = visualizaciones
+            });
+        }
+
+        [HttpPost("UpdateEmpleoById")]
+        public async ValueTask<IActionResult> UpdateEmpleoId([FromBody] EmpleoUpdateDto request)
+        {
+            return Ok(await _appController.EmpleoPresenter.UpdateEmpleoId(request));
+        }
+
+        [HttpPost("ActualizarMultimedia")]
+        public async Task<IActionResult> ActualizarMultimedia([FromForm] ActualizarMultimediaDTO request, [FromForm] IFormFile archivo)
+        {
             string urlImagen = null;
 
-            var empleoId = new EmpleoRequestDto { EmpleoId = request.Empleo_id };
+            var usuarioDto = new EmpleoRequestDto { EmpleoId = request.EmpleoId };
 
-            var documento = await _appController.EmpleoPresenter.ObtenerContenido(empleoId);
+            var documento = await _appController.EmpleoPresenter.ObtenerContenido(usuarioDto);
 
-            if (!string.IsNullOrEmpty(documento))
+            string firebaseDomain = "https://firebasestorage.googleapis.com/";
+
+
+            if (!string.IsNullOrEmpty(documento) && documento.StartsWith(firebaseDomain))
             {
                 var nombreArchivoAnterior = Path.GetFileName(documento);
-                await _fileService.EliminarArchivo(nombreArchivoAnterior);
+                if (await _fileService.ArchivoExiste(nombreArchivoAnterior))
+                {
+                    await _fileService.EliminarArchivo(nombreArchivoAnterior);
+                }
             }
 
             if (archivo != null)
@@ -83,10 +118,12 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
                 }
             }
 
-            request.multimediaContenido = urlImagen;
-            request.multimediaTipo = archivo?.ContentType;
+            request.contenido = urlImagen;
 
-            return Ok(await _appController.EmpleoPresenter.UpdateEmpleoId(request));
+
+            var empleo = await _appController.EmpleoPresenter.ActualizarMultimedia(request);
+
+            return Ok(empleo);
         }
 
         [HttpPost("DeleteEmpleoById")]

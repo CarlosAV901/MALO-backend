@@ -40,9 +40,14 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
             return await _unitRepository.usuarioInfraestructure.InsertarUsuario(usuarioInsertarDto);
         }
 
-        public async Task<string> ConfirmarUsuario(Guid token)
+        public async Task<(string mensaje, int numError)> ConfirmarUsuario(Guid token)
         {
             return await _unitRepository.usuarioInfraestructure.ConfirmarUsuario(token);
+        }
+
+        public async Task<Guid> GenerarNuevoToken(string email)
+        {
+            return await _unitRepository.usuarioInfraestructure.GenerarNuevoToken(email);
         }
 
         public async Task<string> EliminarUsuario(Guid id)
@@ -63,6 +68,11 @@ namespace MALO.Microservice.Empleos.Aplication.Presenters
         public async Task<string> ObtenerContenido([FromBody] ObtenerUsuarioPorId request)
         {
             return await _unitRepository.usuarioInfraestructure.ObtenerContenido(request);
+        }
+
+        public async Task<UsuarioMultimediaDTO> ActualizarMultimedia([FromBody] UsuarioMultimediaDTO request)
+        {
+            return await _unitRepository.usuarioInfraestructure.ActualizarMultimedia(request);
         }
     }
 }

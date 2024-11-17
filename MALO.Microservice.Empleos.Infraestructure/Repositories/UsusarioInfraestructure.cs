@@ -189,7 +189,7 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
             }
         }
 
-        public async Task<string> ConfirmarUsuario(Guid token)
+        public async Task<(string mensaje, int numError)> ConfirmarUsuario(Guid token)
         {
             try
             {
@@ -207,12 +207,54 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 string sqlQuery = "EXEC SP_ConfirmarUsuario @token, @Resultado OUTPUT, @NumError OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
 
-                return "Correo confirmado correctamente";
+                string mensajeResultado = resultadoDb.Value.ToString();
+                int codigoError = (int)NumError.Value;
 
+                return (mensajeResultado, codigoError);
 
-            }catch (SqlException ex)
+            }
+            catch (SqlException ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+        public async Task<Guid> GenerarNuevoToken(string email)
+        {
+            try
+            {
+                var emailParam = new SqlParameter { ParameterName = "email", SqlDbType = SqlDbType.NVarChar, Value = email };
+                var tokenParam = new SqlParameter { ParameterName = "token", SqlDbType = SqlDbType.UniqueIdentifier, Direction = ParameterDirection.Output };
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.NVarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    emailParam,
+                    tokenParam,
+                    resultadoDb,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC dbo.SP_GenerarNuevoToken @email, @Resultado OUTPUT, @NumError OUTPUT, @token OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                if ((int)NumError.Value != 0)
+                {
+                    throw new Exception((string)resultadoDb.Value);
+                }
+
+                // Verifica si el token es DBNull antes de hacer la conversión
+                if (tokenParam.Value == DBNull.Value)
+                {
+                    throw new Exception("Error al generar el token de recuperación.");
+                }
+
+                return (Guid)tokenParam.Value;
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
             }
         }
 
@@ -306,7 +348,6 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                 var localidad = new SqlParameter { ParameterName = "localidad", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.localidad ?? usuarioExistene.localidad };
                 var habilidad = new SqlParameter { ParameterName = "habilidades", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.habilidades ?? usuarioExistene.HabilidadesDescripciones};
                 var descripcion = new SqlParameter { ParameterName = "descripcion", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.descripcion ?? usuarioExistene.Experiencias };
-                var imagen_perfil = new SqlParameter { ParameterName = "imagen_perfil", SqlDbType = SqlDbType.NVarChar, Value = actualizarUsuarioDTO.imagen_perfil ?? usuarioExistene.ImagenPerfil};
 
                 SqlParameter[] parameters =
                 {
@@ -319,11 +360,10 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
                     municipio,
                     localidad,
                     habilidad,
-                    descripcion,
-                    imagen_perfil
+                    descripcion
                 };
 
-                string sqlQuery = "EXEC sp_ActualizarUsuario @Usuario_Id, @nombre, @apellido, @email, @telefono, @estado, @municipio, @localidad, @habilidades, @descripcion, @imagen_perfil";
+                string sqlQuery = "EXEC sp_ActualizarUsuario @Usuario_Id, @nombre, @apellido, @email, @telefono, @estado, @municipio, @localidad, @habilidades, @descripcion";
 
                 var dataSp = await _context.actualizarUsuarioDto.FromSqlRaw(sqlQuery, parameters).ToListAsync();
 
@@ -335,7 +375,38 @@ namespace MALO.Microservice.Empleos.Infraestructure.Repositories
             {
                 throw;
             }
-        } 
+        }
+
+        public async Task<UsuarioMultimediaDTO> ActualizarMultimedia([FromBody] UsuarioMultimediaDTO request)
+        {
+            try
+            {
+                var usuarioId = new SqlParameter { ParameterName = "UsuarioId", SqlDbType = SqlDbType.UniqueIdentifier, Value = request.UsuarioId };
+                var contenido = new SqlParameter { ParameterName = "contenido", SqlDbType = SqlDbType.NVarChar, Value = request.contenido };
+                var resultadoDb = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    usuarioId,
+                    contenido,
+                    resultadoDb,
+                    NumError
+                };
+
+                string sqlQuery = "EXEC sp_ActualizarMultimedia @UsuarioId, @contenido, @Resultado OUTPUT, @NumError OUTPUT";
+                var dataSp = await _context.usuarioMultimediaDTO.FromSqlRaw(sqlQuery, parameters).ToListAsync();
+
+                return dataSp.FirstOrDefault();
+
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+
+
+        }
 
         public async Task<UsuarioConDetallesDTO> ValidarUsuario(string email, string contrasena)
         {
