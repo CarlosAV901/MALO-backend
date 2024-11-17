@@ -17,6 +17,8 @@ namespace MALO.Microservice.Domumentos.Infraestructure.Helpers
         public async Task<string> SubirArchivo(Stream archivo, string nombre)
         {
             var cancellation = new CancellationTokenSource();
+            var nombreImagen = Path.GetFileName(nombre);
+            var nombreArchivo = $"_{Guid.NewGuid()}_{nombreImagen}";
 
             var task = new FirebaseStorage(
                 _ruta,
@@ -25,7 +27,7 @@ namespace MALO.Microservice.Domumentos.Infraestructure.Helpers
                     ThrowOnCancel = true
                 })
                 .Child("Documentos")
-                .Child(nombre)
+                .Child(nombreArchivo)
                 .PutAsync(archivo, cancellation.Token);
 
             var downloadURL = await task;
@@ -54,6 +56,35 @@ namespace MALO.Microservice.Domumentos.Infraestructure.Helpers
             {
                 Console.WriteLine($"Error al eliminar el archivo: {ex.Message}");
                 throw;
+            }
+        }
+
+        public async Task<bool> ArchivoExiste(string nombre)
+        {
+            try
+            {
+                var cancellation = new CancellationTokenSource();
+                string nombreArchivo = ObtenerNombreDesdeUrl(nombre);
+
+                Console.WriteLine($"Eliminando archivo: {nombreArchivo}");
+
+                // Intentar acceder al archivo en Firebase
+                var task = new FirebaseStorage(_ruta)
+                    .Child("Documentos")
+                    .Child(nombreArchivo)
+                    .GetDownloadUrlAsync();
+
+                // Intentar obtener la URL para verificar su existencia
+                var downloadUrl = await task;
+
+                Console.WriteLine($"El archivo existe: {downloadUrl}");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Si se produce un error, asumimos que el archivo no existe
+                Console.WriteLine($"El archivo no existe o hubo un error al verificar: {ex.Message}");
+                return false;
             }
         }
 

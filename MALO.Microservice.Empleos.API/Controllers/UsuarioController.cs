@@ -331,12 +331,16 @@ namespace MALO.Microservice.Empleos.API.Controllers
             var usuarioDto = new ObtenerUsuarioPorId { Id = request.UsuarioId };
 
             var documento = await _appController.UserPresenter.ObtenerContenido(usuarioDto);
+            string firebaseDomain = "https://firebasestorage.googleapis.com/";
 
 
-            if (!string.IsNullOrEmpty(documento))
+            if (!string.IsNullOrEmpty(documento) && documento.StartsWith(firebaseDomain))
             {
                 var nombreArchivoAnterior = Path.GetFileName(documento);
-                await _fileService.EliminarArchivo(nombreArchivoAnterior);
+                if (await _fileService.ArchivoExiste(nombreArchivoAnterior))
+                {
+                    await _fileService.EliminarArchivo(nombreArchivoAnterior);
+                }
             }
 
             if (archivo != null)
