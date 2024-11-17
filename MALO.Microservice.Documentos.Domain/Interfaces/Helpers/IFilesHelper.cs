@@ -5,5 +5,6 @@ namespace MALO.Microservice.Documentos.Domain.Interfaces.Helpers
     {
         Task<string> SubirArchivo(Stream archivo, string nombre);
         Task EliminarArchivo(string nombre);
+        Task<bool> ArchivoExiste(string nombreArchivo);
     }
 }
