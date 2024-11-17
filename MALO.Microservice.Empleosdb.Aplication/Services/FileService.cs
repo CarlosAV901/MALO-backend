@@ -1,7 +1,6 @@
 ﻿using MALO.Microservice.Empleosdb.Domain.Interfaces.Helpers;
 using Microsoft.AspNetCore.Http;
 
-
 namespace MALO.Microservice.Empleosdb.Aplication.Services
 {
     public class FileService
