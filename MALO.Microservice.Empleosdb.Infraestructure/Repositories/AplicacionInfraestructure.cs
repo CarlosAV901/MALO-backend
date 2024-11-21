@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Identity.Client;
+using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Operators;
 
 namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
@@ -60,6 +61,30 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
 
                 string sqlQuery = "EXEC SP_ContarAplicacionesPorEmpleo @EmpleoID, @TotalAplicantes OUTPUT, @Resultado OUTPUT, @NumError OUTPUT";
                 await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+
+                return (int)total.Value;
+
+            }
+            catch (SqlException ex) { throw; }
+        }
+
+        public async Task<int> TotalAplicaciones()
+        {
+            try
+            {
+                var resultadoBD = new SqlParameter { ParameterName = "Resultado", SqlDbType = SqlDbType.VarChar, Size = 100, Direction = ParameterDirection.Output };
+                var NumError = new SqlParameter { ParameterName = "NumError", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+                var total = new SqlParameter { ParameterName = "TotalAplicantes", SqlDbType = SqlDbType.Int, Direction = ParameterDirection.Output };
+
+                SqlParameter[] parameters =
+                {
+                    resultadoBD,
+                    NumError,
+                    total
+                };
+
+                var sqlQuery = "EXEC SP_ContarAplicaciones @TotalAplicantes OUTPUT, @Resultado OUTPUT, @NumError OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync (sqlQuery, parameters);
 
                 return (int)total.Value;
 
