@@ -40,5 +40,10 @@ namespace MALO.Microservice.Documentos.Aplication.Presenters
             return await _unitRepository.documentoInfraestructure.ActualizarDocumento(request);
         }
 
+        public async Task<bool> ConsultarUsuarioId(Guid id)
+        {
+            return await _unitRepository.documentoInfraestructure.ConsultarUsuarioId(id);
+        }
+
     }
 }
