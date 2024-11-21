@@ -28,7 +28,9 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
             return Ok(aplcacion);
         }
 
-        [HttpGet("total-aplicaciones")]
+
+
+        [HttpPost("total-aplicaciones")]
         public async Task<IActionResult> TotalAplicaciones()
         {
             var aplicaciones = await _appController.AplicacionPresenter.TotalAplicaciones();
