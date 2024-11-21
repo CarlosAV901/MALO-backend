@@ -10,6 +10,7 @@ namespace MALO.Microservice.Empleosdb.Domain.Interfaces.Services
         Task<string> AplicarAEmpleo([FromBody] AplicarEmpleoDTO request);
         Task<string> ElimarAplicacion([FromBody] AplicarEmpleoDTO request);
         Task<List<AplicacionesPorFechaDTO>> ObtenerConteoAplicacionesFecha([FromBody] EmpleoIdDto request);
+        Task<int> TotalAplicaciones();
 
     }
 }
