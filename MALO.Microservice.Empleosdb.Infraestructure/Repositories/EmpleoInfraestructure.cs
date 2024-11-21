@@ -110,14 +110,12 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 {
                     ParameterName = "Titulo",
                     SqlDbType = SqlDbType.VarChar,
-                    Size = 255,
                     Value = request.titulo
                 };
                 var Descripcion = new SqlParameter
                 {
                     ParameterName = "Descripcion",
-                    SqlDbType = SqlDbType.VarChar,
-                    Size = 255,
+                    SqlDbType = SqlDbType.NVarChar,
                     Value = request.descripcion
                 };
                 var EmpresaId = new SqlParameter
@@ -370,15 +368,13 @@ namespace MALO.Microservice.Empleosdb.Infraestructure.Repositories
                 var Descripcion = new SqlParameter
                 {
                     ParameterName = "Descripcion",
-                    SqlDbType = SqlDbType.VarChar,
-                    Size = 255,
+                    SqlDbType = SqlDbType.NVarChar,
                     Value = request.descripcion
                 };
                 var Ubicacion = new SqlParameter
                 {
                     ParameterName = "Ubicacion",
                     SqlDbType = SqlDbType.VarChar,
-                    Size = 255,
                     Value = request.ubicacion
                 };
                 var SalarioMinimo = new SqlParameter
