@@ -28,6 +28,8 @@ namespace MALO.Microservice.Empleosdb.API.Controllers
             return Ok(aplcacion);
         }
 
+
+
         [HttpPost("total-aplicaciones")]
         public async Task<IActionResult> TotalAplicaciones()
         {
