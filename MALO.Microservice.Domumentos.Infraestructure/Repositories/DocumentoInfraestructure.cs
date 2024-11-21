@@ -148,6 +148,59 @@ namespace MALO.Microservice.Documentos.Infraestructure.Repositories
             }
         }
 
+        public async Task<bool> ConsultarUsuarioId(Guid id)
+        {
+            try
+            {
+                var resultadoBD = new SqlParameter
+                {
+                    ParameterName = "Resultado", // Cambiado de "TipoError" a "Resultado"
+                    SqlDbType = SqlDbType.VarChar,
+                    Size = 100,
+                    Direction = ParameterDirection.Output
+                };
+                var NumError = new SqlParameter
+                {
+                    ParameterName = "NumError", // Cambiado de "Mensaje" a "NumError"
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+                var idParam = new SqlParameter
+                {
+                    ParameterName = "Usuario_id",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value = id
+
+                };
+
+                SqlParameter[] parameter =
+                {
+                    resultadoBD,
+                    NumError,
+                    idParam
+                };
+
+                string sqlQuery = "EXEC SP_ConsultarDocumentoPorUsuarioId @Usuario_id, @Resultado OUTPUT, @NumError OUTPUT";
+                await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameter);
+
+                var error = (int)NumError.Value;
+
+                if(error == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            } catch (SqlException ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<string> ObtenerContenido([FromBody] UsuarioIdDTO request)
         {
             try

@@ -14,5 +14,6 @@ namespace MALO.Microservice.Documentos.Domain.Interfaces.Infraestructure
         Task<DocumentosDto> GetDocumentoId(Guid id);
         Task<string> ObtenerContenido([FromBody] UsuarioIdDTO request);
         Task<ActualizarDocumentoDTO> ActualizarDocumento([FromBody] ActualizarDocumentoDTO request);
+        Task<bool> ConsultarUsuarioId(Guid id);
     }
 }

@@ -84,6 +84,19 @@ namespace MALO.Microservice.Documentos.API.Controllers
             return Ok(await _appController.DocumentoPresenter.GetDocumentoId(request.DocId));
         }
 
+        [HttpPost("ObtenerUsuarioId")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> ObtenerUsuarioId([FromBody] UsuarioIdDTO request)
+        {
+            var usuario = await _appController.DocumentoPresenter.ConsultarUsuarioId(request.UsuarioId);
+
+            return Ok(usuario);
+        }
+
         [HttpPost("ActualizarDocumento")]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
